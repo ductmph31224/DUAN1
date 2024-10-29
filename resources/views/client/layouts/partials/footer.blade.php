@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="footer-mid-menu">
                                         <ul>
-                                            <li><a href="about.html">About us</a></li>
+                                            <li><a href="{{route('about')}}">About us</a></li>
                                             <li><a href="#">Prices drop </a></li>
                                             <li><a href="#">New products</a></li>
                                             <li><a href="#">Best sales</a></li>
@@ -47,10 +47,10 @@
                                     </div>
                                     <div class="footer-mid-menu">
                                         <ul>
-                                            <li><a href="contact.html">Contact us</a></li>
+                                            <li><a href="{{route('contact')}}">Contact us</a></li>
                                             <li><a href="#">Sitemap</a></li>
                                             <li><a href="#">Stores</a></li>
-                                            <li><a href="register.html">My account </a></li>
+                                            <li><a href="{{route('register')}}">My account </a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="footer-mid-menu">
                                         <ul>
-                                            <li><a href="contact.html">Addresses</a></li>
+                                            <li><a href="{{route('contact')}}">Addresses</a></li>
                                             <li><a href="#">Credit slips </a></li>
                                             <li><a href="#"> Orders</a></li>
                                             <li><a href="#">Personal info</a></li>
