@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('client.index');
+    return view('admin.index');
 })->name('index');
 
 Route::get('/login',function(){
@@ -84,3 +84,47 @@ Route::get('/shop-list',function(){
 Route::get('/forgot-password',function(){
     return view('client.layouts.partials.forgot-password');
 })->name('forgot-password');
+
+// Route::get('/admin',function(){
+//     return view('admin.index');
+// })->name('admin');
+
+Route::get('/404',function(){
+    return view('admin.layouts.partials.404');
+})->name('404');
+Route::get('/blank',function(){
+    return view('admin.layouts.partials.blank');
+})->name('blank');
+Route::get('/buttons',function(){
+    return view('admin.layouts.partials.buttons');
+})->name('buttons');
+Route::get('/cards',function(){
+    return view('admin.layouts.partials.cards');
+})->name('cards');
+Route::get('/charts',function(){
+    return view('admin.layouts.partials.charts');
+})->name('charts');
+Route::get('/forgot-password',function(){
+    return view('admin.layouts.partials.forgot-password');
+})->name('forgot-password');
+Route::get('/login',function(){
+    return view('admin.layouts.partials.login');
+})->name('login');
+Route::get('/register',function(){
+    return view('admin.layouts.partials.register');
+})->name('register');
+Route::get('/tables',function(){
+    return view('admin.layouts.partials.tables');
+})->name('tables');
+Route::get('/utilities-animation',function(){
+    return view('admin.layouts.partials.utilities-animation');
+})->name('utilities-animation');
+Route::get('/utilities-border',function(){
+    return view('admin.layouts.partials.utilities-border');
+})->name('utilities-border');
+Route::get('/utilities-color',function(){
+    return view('admin.layouts.partials.utilities-color');
+})->name('utilities-color');
+Route::get('/utilities-other',function(){
+    return view('admin.layouts.partials.utilities-other');
+})->name('utilities-other');
