@@ -41,7 +41,7 @@
                                         </label>
                                     </p>
                                     <p class="lost-password">
-                                        <a href="#">Lost your password?</a>
+                                        <a href="{{route('forgot-password')}}">Lost your password?</a>
                                     </p>
                                 </form>
                             </div>

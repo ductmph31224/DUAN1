@@ -42,7 +42,7 @@
                             <input id="rememberme" type="checkbox" name="rememberme" value="forever">
                             <span>Remember me</span>
                         </div>
-                        <a href="#">Lost your password?</a>
+                        <a href="{{route('forgot-password')}}">Lost your password?</a>
                     </div>
                 </div>
             </div>

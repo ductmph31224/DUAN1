@@ -80,3 +80,7 @@ Route::get('/product-detail',function(){
 Route::get('/shop-list',function(){
     return view('client.layouts.partials.shop-list');
 })->name('shop-list');
+
+Route::get('/forgot-password',function(){
+    return view('client.layouts.partials.forgot-password');
+})->name('forgot-password');
