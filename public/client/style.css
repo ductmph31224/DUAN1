@@ -4,10 +4,10 @@
     Version: 2
 
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-	
+
     1. Template Default CSS (body, link color, section etc)
 	2. Header-area
 		2.1 Header top area
@@ -43,7 +43,7 @@
 	27. Checkout
 	28. Wishlist
 	29. 404 page
-	
+
 
 -----------------------------------------------------------------------------------*/
 
@@ -55,6 +55,46 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Rufina:400,700');
 
 html,
+.single-register input {
+
+    border-radius: 0; /* Bỏ bo góc */
+    height: 40px; /* Đặt chiều cao cho ô nhập liệu */
+    padding: 20px; /* Khoảng cách bên trong cho ô nhập liệu */
+    width: 100%; /* Đảm bảo ô nhập liệu chiếm 100% chiều rộng */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển đổi cho màu nền */
+    font-family: 'Rufina', serif;
+}
+
+.single-register input:focus {
+    background-color: #f8f8f8; /* Màu nền khi ô nhập liệu được chọn */
+    outline: none; /* Tắt đường viền mặc định */
+}
+
+.single-register label {
+    font-weight: bold; /* Chữ đậm cho label */
+    margin-bottom: 8px; /* Khoảng cách dưới cho label */
+}
+
+.custom-button {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 1px solid #d1d3d8;
+    display: inline-block;
+    padding: 10px 43px;
+    margin-top: 10px;
+    color:white;
+    background-color: #000;
+    text-transform: capitalize;
+    text-decoration: none;
+
+    transition: .3s;
+    font-family: 'Rufina', serif;
+    font-weight: 400;
+}
+.custom-button:hover {
+    background-color: #ff7f50; /* Màu cam khi hover */
+    color: #ffffff; /* Chữ trắng khi hover */
+}
+
 body {
     height: 100%;
 }
@@ -955,7 +995,7 @@ body {
     padding: 30px 20px;
     position: absolute;
     z-index: 6;
-    width: 910px;
+    width: 200px;
     opacity: 0;
     transform: scaleY(0);
     transform-origin: 0 0 0;
@@ -973,12 +1013,13 @@ body {
     float: left;
     width: 25%;
     padding-right: 20px;
+    white-space: nowrap;
 }
 
 .menu-area ul li .mega-menu span a.title {
     border-bottom: 1px solid #e5e5e5;
     color: #393939;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 20px;
     margin-bottom: 12px;
@@ -988,7 +1029,7 @@ body {
 
 .menu-area ul li .mega-menu span a {
     display: block;
-    color: #777;
+    color: #080000;
     font-size: 14px;
     line-height: 30px;
     text-transform: capitalize;
@@ -1024,6 +1065,9 @@ body {
 .menu-area ul li .mega-menu-3 span {
     width: 50%;
 }
+
+
+
 
 .menu-area ul li .sub-menu {
     background: #fff;
