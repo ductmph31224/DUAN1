@@ -29,7 +29,7 @@
                 @endif --}}
                 </div>
                 <div class="offset-lg-3 col-lg-6 col-md-12 col-12">
-                   <form action="{{route('loginUser')}}" method="post">
+                   <form style="margin-bottom: 70px" action="{{route('loginUser')}}" method="post">
                     @csrf
 
                     <div class="login-form">
@@ -39,12 +39,15 @@
                         </div>
                         <div class="single-login">
                             <label>Nhập Passwords <span>*</span></label>
-                            <input type="text" name="password" />
+                            <input type="password" name="password" />
                         </div>
-                        <button type="submit" class="btn btn-danger">Đăng Nhập</button>
-                        <a href="{{route('khoiphucmatkhau')}}">Bạn Quên password?</a>
+                        <div class="single-login single-login-2">
+                            <button type="submit" class="custom-button">Đăng nhập</button>
+                        </div>
                         <div>
-                            <a href="{{route('dangky')}}">Bạn Chưa Có Tài Khoản?</a>
+                            <a href="{{route('khoiphucmatkhau')}}">Bạn quên mật khẩu??</a>
+                            <div></div>
+                            <a href="{{route('dangky')}}">Bạn chưa có tài khoản</a>
                         </div>
                     </div>
                    </form>
