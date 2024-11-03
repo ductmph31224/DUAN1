@@ -37,6 +37,6 @@ Route::get('/',[UserController::class,'indexUser'] )->name('index');
 route::get('admin',[AdminController::class,'indexAdmin'])->name('indexAdmin');
 
 
-
+// Route::view('/checkout','client.layouts.partials.forgot-password');
 
 

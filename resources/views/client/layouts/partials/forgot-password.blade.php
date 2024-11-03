@@ -7,8 +7,8 @@
             <div class="col-lg-12">
                 <div class="breadcrumbs-menu">
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#" class="active">Forgot Password</a></li>
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#" class="active">quên mật khẩu</a></li>
                     </ul>
                 </div>
             </div>
@@ -23,21 +23,20 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="login-title text-center mb-30">
-                    <h2>Forgot Your Password?</h2>
-                    <p>Please enter your email address. You will receive a link to create a new password via email.</p>
+                    <h2>Quên mật khẩu?</h2>
                 </div>
             </div>
             <div class="offset-lg-3 col-lg-6 col-md-12 col-12">
-                <div class="login-form">
-                    <div class="single-login">
-                        <label>Địa Chỉ Email<span>*</span></label>
-                        <input type="email" required />
+                <form action="#">
+                    <div class="login-form">
+                        <div class="single-login">
+                            <label>Địa Chỉ Email<span>*</span></label>
+                            <input type="email" required />
+                        </div>
+                        <button style="margin-bottom: 20px" class="custom-button">Xác Nhận Tại Đây</button>
+                        <p>Bạn đã nhớ mật khẩu chưa? <a href="{{route('login')}}">Đăng Nhập Tại Đây</a></p>
                     </div>
-                    <div class="single-login single-login-2">
-                        <button type="submit">Xác Nhận Qua Email</button>
-                    </div>
-                    <p>Bạn đã nhớ mật khẩu chưa? <a href="{{route('login')}}">Đăng Nhập Tại Đây</a></p>
-                </div>
+                </form>
             </div>
         </div>
     </div>
