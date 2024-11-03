@@ -37,7 +37,6 @@
                         <p>Bạn đã nhớ mật khẩu chưa? <a href="{{route('login')}}">Đăng Nhập Tại Đây</a></p>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
