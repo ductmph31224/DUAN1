@@ -28,6 +28,7 @@
                 </div>
             </div>
             <div class="offset-lg-3 col-lg-6 col-md-12 col-12">
+               <form action="{{route('sendResetLinkEmail')}}" method="post">
                 <div class="login-form">
                     <div class="single-login">
                         <label>Địa Chỉ Email<span>*</span></label>
@@ -38,6 +39,7 @@
                     </div>
                     <p>Bạn đã nhớ mật khẩu chưa? <a href="{{route('login')}}">Đăng Nhập Tại Đây</a></p>
                 </div>
+               </form>
             </div>
         </div>
     </div>

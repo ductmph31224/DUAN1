@@ -30,9 +30,23 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="account-area text-end">
                             <ul>
-                                <li><a href="{{route('ShowFormMyAcc')}}">Tài Khoản Của Tôi</a></li>
+                                <li><a href="{{ route('ShowFormMyAcc') }}">Tài Khoản Của Tôi</a></li>
                                 <li><a href="">Checkout</a></li>
-                                <li><a href="{{route('login')}}">đăng nhập</a></li>
+                                <li>
+                                    {{-- thay đổi nút đăng nhập và đăng xuất --}}
+                                    @if (Auth::check())
+                                        <span>{{ Auth::user()->name }}</span>
+                                        <a href="{{ route('loguot') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            <form id="logout-form" action="{{ route('loguot') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                    @else
+                                    {{-- hiển thị dòng đăng nhập nếu chưa đăng nhâp --}}
+                                    <a href="{{ route('login') }}">đăng nhập</a>
+                                    @endif
+
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -115,7 +129,8 @@
                         <div class="menu-area">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="{{route('index')}}  ">Home<i class="fa fa-angle-down"></i></a>
+                                    <li class="active"><a href="{{ route('index') }}  ">Home<i
+                                                class="fa fa-angle-down"></i></a>
                                     </li>
                                     <li><a href="">Book<i class="fa fa-angle-down"></i></a>
                                         <div class="mega-menu">
@@ -185,8 +200,7 @@
                                             </span>
                                         </div>
                                     </li>
-                                    <li><a href="">children’s books<i
-                                                class="fa fa-angle-down"></i></a>
+                                    <li><a href="">children’s books<i class="fa fa-angle-down"></i></a>
                                         <div class="mega-menu mega-menu-2">
                                             <span>
                                                 <a href="#" class="title">Tops</a>
