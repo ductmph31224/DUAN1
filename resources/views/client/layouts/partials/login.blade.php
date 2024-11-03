@@ -22,28 +22,33 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="login-title text-center mb-30">
-                        <h2>Login</h2>
-                        <p>doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo<br>inventore veritatis et quasi
-                            architecto beat</p>
-                    </div>
+                        <h2>Đăng Nhập</h2>
+                    {{-- </div>
+                    @if (session('success'))
+                    <div>{{ session('success') }}</div>
+                @endif --}}
                 </div>
                 <div class="offset-lg-3 col-lg-6 col-md-12 col-12">
+                   <form action="{{route('loginUser')}}" method="post">
+                    @csrf
+
                     <div class="login-form">
                         <div class="single-login">
-                            <label>Username or email<span>*</span></label>
-                            <input type="text" />
+                            <label>Nhập email<span>*</span></label>
+                            <input type="text" name="email" />
                         </div>
                         <div class="single-login">
-                            <label>Passwords <span>*</span></label>
-                            <input type="text" />
+                            <label>Nhập Passwords <span>*</span></label>
+                            <input type="text" name="password" />
                         </div>
-                        <div class="single-login single-login-2">
-                            <a href="#">login</a>
-                            <input id="rememberme" type="checkbox" name="rememberme" value="forever">
-                            <span>Remember me</span>
+                        <button type="submit" class="btn btn-danger">Đăng Nhập</button>
+                        <a href="{{route('khoiphucmatkhau')}}">Bạn Quên password?</a>
+                        <div>
+                            <a href="{{route('dangky')}}">Bạn Chưa Có Tài Khoản?</a>
                         </div>
-                        <a href="">Lost your password?</a>
                     </div>
+                   </form>
+
                 </div>
             </div>
         </div>
