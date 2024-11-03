@@ -30,7 +30,7 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="account-area text-end">
                             <ul>
-                                <li><a href="">My Account</a></li>
+                                <li><a href="{{route('ShowFormMyAcc')}}">Tài Khoản Của Tôi</a></li>
                                 <li><a href="">Checkout</a></li>
                                 <li><a href="{{route('login')}}">đăng nhập</a></li>
                             </ul>

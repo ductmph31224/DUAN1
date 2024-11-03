@@ -30,13 +30,13 @@
             <div class="offset-lg-3 col-lg-6 col-md-12 col-12">
                 <div class="login-form">
                     <div class="single-login">
-                        <label>Email Address<span>*</span></label>
+                        <label>Địa Chỉ Email<span>*</span></label>
                         <input type="email" required />
                     </div>
                     <div class="single-login single-login-2">
-                        <button type="submit">Send Password Reset Link</button>
+                        <button type="submit">Xác Nhận Qua Email</button>
                     </div>
-                    <p>Remembered your password? <a href="login.html">Login here</a></p>
+                    <p>Bạn đã nhớ mật khẩu chưa? <a href="{{route('login')}}">Đăng Nhập Tại Đây</a></p>
                 </div>
             </div>
         </div>
