@@ -25,7 +25,11 @@ Route::post('/Checklogin', [AuthController::class, 'Login'])->name('loginUser');
 Route::get('/dang-ky',[AuthController::class,'ShowFrom_dangky'])->name('dangky');
 Route::Post('/dang-ky',[AuthController::class,'dangky'])->name('dangkyUser');
 //route khôi phục mật khẩu
-route::get('/Khoi-phuc-mat-khau',[AuthController::class,'ShowFormForpassWork'])->name('khoiphucmatkhau');
+route::get('/Khoi-phuc-mat-khau', [ForgotPasswordController::class, 'ShowFormForpassWork'])->name('khoiphucmatkhau');
+route::post('checkform',[ForgotPasswordController::class,'sendResetLinkEmail'])->name('sendResetLinkEmail');
+// route nội dung email
+//route::get('email',[ForgotPasswordController::class,'resesst'])->name('resesst');
+
 //show form thông tin tài khoản
 route::get('My-acc',[AuthController::class,'ShowFormMyAcc'])->name('ShowFormMyAcc');
 
@@ -34,8 +38,14 @@ Route::get('/',[UserController::class,'indexUser'] )->name('index');
 
 
 //route admin
-route::get('admin',[AdminController::class,'indexAdmin'])->name('indexAdmin');
-
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => ['auth', 'isAdmin']
+], function () {
+    // Giao diện admin
+    Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
+    // Các route khác cho admin
+});
 
 // Route::view('/checkout','client.layouts.partials.forgot-password');
 
