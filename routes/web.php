@@ -30,7 +30,7 @@ Route::Post('/dang-ky', [AuthController::class, 'dangky'])->name('dangkyUser');
 route::get('/Khoi-phuc-mat-khau', [ForgotPasswordController::class, 'ShowFormForpassWork'])->name('khoiphucmatkhau');
 route::post('checkform',[ForgotPasswordController::class,'sendResetLinkEmail'])->name('sendResetLinkEmail');
 // route nội dung email
-route::get('email',[ForgotPasswordController::class,'resesst'])->name('resesst');
+//route::get('email',[ForgotPasswordController::class,'resesst'])->name('resesst');
 
 //show form thông tin tài khoản
 route::get('My-acc', [AuthController::class, 'ShowFormMyAcc'])->name('ShowFormMyAcc');

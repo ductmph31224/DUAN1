@@ -20,7 +20,7 @@ class AuthController extends Controller
         // Thực hiện xác thực đầu vào
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8'
+            'password' => 'required|min:6|max:10'
         ],[
             'email.required' => 'Vui lòng nhập email.',
             'email.email' => 'Email không đúng định dạng.',
