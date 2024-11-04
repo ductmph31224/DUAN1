@@ -1,16 +1,15 @@
 @extends('client.layouts.master')
 @section('content')
-    <!-- breadcrumbs-area-start -->
-    <div class="breadcrumbs-area mb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumbs-menu">
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#" class="active">Forgot Password</a></li>
-                        </ul>
-                    </div>
+ <!-- breadcrumbs-area-start -->
+ <div class="breadcrumbs-area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumbs-menu">
+                    <ul>
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#" class="active">quên mật khẩu</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -48,7 +47,6 @@
                             <p>Bạn đã nhớ mật khẩu chưa? <a href="{{ route('login') }}">Đăng Nhập Tại Đây</a></p>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

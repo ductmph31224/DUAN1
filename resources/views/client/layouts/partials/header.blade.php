@@ -4,49 +4,15 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="language-area">
-                            <ul>
-                                <li><img src="/client/img/flag/1.jpg" alt="flag" /><a href="#">English<i
-                                            class="fa fa-angle-down"></i></a>
-                                    <div class="header-sub">
-                                        <ul>
-                                            <li><a href="#"><img src="/client/img/flag/2.jpg"
-                                                        alt="flag" />france</a></li>
-                                            <li><a href="#"><img src="/client/img/flag/3.jpg"
-                                                        alt="flag" />croatia</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a href="#">USD $<i class="fa fa-angle-down"></i></a>
-                                    <div class="header-sub dolor">
-                                        <ul>
-                                            <li><a href="#">EUR €</a></li>
-                                            <li><a href="#">USD $</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
+
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="account-area text-end">
                             <ul>
-                                <li><a href="{{ route('ShowFormMyAcc') }}">Tài Khoản Của Tôi</a></li>
-                                <li><a href="">Checkout</a></li>
-                                <li>
-                                    {{-- thay đổi nút đăng nhập và đăng xuất --}}
-                                    @if (Auth::check())
-                                        <span>{{ Auth::user()->name }}</span>
-                                        <a href="{{ route('loguot') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                            <form id="logout-form" action="{{ route('loguot') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
-                                    @else
-                                    {{-- hiển thị dòng đăng nhập nếu chưa đăng nhâp --}}
-                                    <a href="{{ route('login') }}">đăng nhập</a>
-                                    @endif
-
-                                </li>
+                                <li><a href="{{route('ShowFormMyAcc')}}">Tài Khoản Của Tôi</a></li>
+                                <li><a href="">Thanh toán</a></li>
+                                <li><a href="{{route('login')}}">đăng nhập</a></li>
                             </ul>
                         </div>
                     </div>
@@ -61,7 +27,7 @@
                     <div class="col-lg-3 col-md-5 col-12">
                         <div class="header-search">
                             <form action="#">
-                                <input type="text" placeholder="Search entire store here..." />
+                                <input type="text" placeholder="Tìm kiếm..." />
                                 <a href="#"><i class="fa fa-search"></i></a>
                             </form>
                         </div>
@@ -74,8 +40,7 @@
                     <div class="col-lg-3 col-md-3 col-12">
                         <div class="my-cart">
                             <ul>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i>My Cart</a>
-                                    <span>2</span>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i>Giỏ Hàng</a>
                                     <div class="mini-cart-sub">
                                         <div class="cart-product">
                                             <div class="single-cart">
@@ -109,8 +74,8 @@
                                             <h5>Total <span>£12.00</span></h5>
                                         </div>
                                         <div class="cart-bottom">
-                                            <a class="view-cart" href="">view cart</a>
-                                            <a href="">Check out</a>
+                                            <a class="view-cart" href="">Xem giỏ hàng</a>
+                                            <a href="">Thanh toán</a>
                                         </div>
                                     </div>
                                 </li>
@@ -129,101 +94,24 @@
                         <div class="menu-area">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="{{ route('index') }}  ">Home<i
+                                    <li class="active"><a href="{{route('index')}}  ">Trang chủ</a>
+                                    </li>
+                                    <li><a href="">Thể loại<i class="fa fa-angle-down"></i></a>
+
+                                        <div class="mega-menu">
+                                            <span>
+                                                <a href="">Tình cảm</a>
+                                                <a href="">Trinh thám</a>
+                                                <a href="">Khoa học viễn tưởng</a>
+                                                <a href="">Huyền bí /Kinh dị</a>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li><a href="">Bán chạy nhất<i class="fa fa-angle-down"></i></a>
+
+                                    </li>
+                                    <li><a href="">Mới phát hành<i
                                                 class="fa fa-angle-down"></i></a>
-                                    </li>
-                                    <li><a href="">Book<i class="fa fa-angle-down"></i></a>
-                                        <div class="mega-menu">
-                                            <span>
-                                                <a href="#" class="title">Jackets</a>
-                                                <a href="">Tops & Tees</a>
-                                                <a href="">Polo Short Sleeve</a>
-                                                <a href="">Graphic T-Shirts</a>
-                                                <a href="">Jackets & Coats</a>
-                                                <a href="">Fashion Jackets</a>
-                                            </span>
-                                            <span>
-                                                <a href="#" class="title">weaters</a>
-                                                <a href="">Crochet</a>
-                                                <a href="">Sleeveless</a>
-                                                <a href="">Stripes</a>
-                                                <a href="">Sweaters</a>
-                                                <a href="">hoodies</a>
-                                            </span>
-                                            <span>
-                                                <a href="#" class="title">Bottoms</a>
-                                                <a href="">Heeled sandals</a>
-                                                <a href="">Polo Short Sleeve</a>
-                                                <a href="">Flat sandals</a>
-                                                <a href="">Short Sleeve</a>
-                                                <a href="">Long Sleeve</a>
-                                            </span>
-                                            <span>
-                                                <a href="#" class="title">Jeans Pants</a>
-                                                <a href="">Polo Short Sleeve</a>
-                                                <a href="">Sleeveless</a>
-                                                <a href="">Graphic T-Shirts</a>
-                                                <a href="">Hoodies</a>
-                                                <a href="">Jackets</a>
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <li><a href="">Audio books<i class="fa fa-angle-down"></i></a>
-                                        <div class="mega-menu">
-                                            <span>
-                                                <a href="#" class="title">Shirts</a>
-                                                <a href="">Tops & Tees</a>
-                                                <a href="">Sweaters </a>
-                                                <a href="">Hoodies</a>
-                                                <a href="">Jackets & Coats</a>
-                                            </span>
-                                            <span>
-                                                <a href="#" class="title">Tops & Tees</a>
-                                                <a href="">Long Sleeve </a>
-                                                <a href="">Short Sleeve</a>
-                                                <a href="">Polo Short Sleeve</a>
-                                                <a href="">Sleeveless</a>
-                                            </span>
-                                            <span>
-                                                <a href="#" class="title">Jackets</a>
-                                                <a href="">Sweaters</a>
-                                                <a href="">Hoodies</a>
-                                                <a href="">Wedges</a>
-                                                <a href="">Vests</a>
-                                            </span>
-                                            <span>
-                                                <a href="#" class="title">Jeans Pants</a>
-                                                <a href="">Polo Short Sleeve</a>
-                                                <a href="">Sleeveless</a>
-                                                <a href="">Graphic T-Shirts</a>
-                                                <a href="">Hoodies</a>
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <li><a href="">children’s books<i class="fa fa-angle-down"></i></a>
-                                        <div class="mega-menu mega-menu-2">
-                                            <span>
-                                                <a href="#" class="title">Tops</a>
-                                                <a href="">Shirts</a>
-                                                <a href="">Florals</a>
-                                                <a href="">Crochet</a>
-                                                <a href="">Stripes</a>
-                                            </span>
-                                            <span>
-                                                <a href="#" class="title">Bottoms</a>
-                                                <a href="">Shorts</a>
-                                                <a href="">Dresses</a>
-                                                <a href="">Trousers</a>
-                                                <a href="">Jeans</a>
-                                            </span>
-                                            <span>
-                                                <a href="#" class="title">Shoes</a>
-                                                <a href="">Heeled sandals</a>
-                                                <a href="">Flat sandals</a>
-                                                <a href="">Wedges</a>
-                                                <a href="">Ankle boots</a>
-                                            </span>
-                                        </div>
                                     </li>
                                     <li><a href="#">blog<i class="fa fa-angle-down"></i></a>
                                         <div class="sub-menu sub-menu-2">
@@ -233,7 +121,7 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
+                                    <li><a href="#">Trang<i class="fa fa-angle-down"></i></a>
                                         <div class="sub-menu sub-menu-2">
                                             <ul>
                                                 <li><a href="">shop</a></li>
@@ -259,7 +147,7 @@
                             </nav>
                         </div>
                         <div class="safe-area">
-                            <a href="">sales off</a>
+                            <a href="">Giảm giá</a>
                         </div>
                     </div>
                 </div>

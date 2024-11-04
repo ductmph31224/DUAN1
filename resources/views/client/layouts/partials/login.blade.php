@@ -23,48 +23,35 @@
                 <div class="col-lg-12">
                     <div class="login-title text-center mb-30">
                         <h2>Đăng Nhập</h2>
-                    </div>
+                    {{-- </div>
+                    @if (session('success'))
+                    <div>{{ session('success') }}</div>
+                @endif --}}
                 </div>
                 <div class="offset-lg-3 col-lg-6 col-md-12 col-12">
-                   <form action="{{route('loginUser')}}" method="post">
+                   <form style="margin-bottom: 70px" action="{{route('loginUser')}}" method="post">
                     @csrf
-                    <div class="login-form">
-                        {{-- Hiển thị lỗi đăng nhập chung --}}
-                        @if ($errors->has('login_error'))
-                            <div class="alert alert-danger">
-                                {{ $errors->first('login_error') }}
-                            </div>
-                        @endif
 
+                    <div class="login-form">
                         <div class="single-login">
                             <label>Nhập email<span>*</span></label>
-                            <input type="text" name="email" value="{{ old('email') }}" />
-                            {{-- Hiển thị lỗi cho trường email --}}
-                            @if ($errors->has('email'))
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('email') }}
-                                </div>
-                            @endif
+                            <input type="text" name="email" />
                         </div>
-
                         <div class="single-login">
-                            <label>Nhập Password <span>*</span></label>
+                            <label>Nhập Passwords <span>*</span></label>
                             <input type="password" name="password" />
-                            {{-- Hiển thị lỗi cho trường password --}}
-                            @if ($errors->has('password'))
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('password') }}
-                                </div>
-                            @endif
                         </div>
-
-                        <button type="submit" class="btn btn-danger">Đăng Nhập</button>
-                        <a href="{{route('khoiphucmatkhau')}}">Bạn Quên password?</a>
+                        <div class="single-login single-login-2">
+                            <button type="submit" class="custom-button">Đăng nhập</button>
+                        </div>
                         <div>
-                            <a href="{{route('dangky')}}">Bạn Chưa Có Tài Khoản?</a>
+                            <a href="{{route('khoiphucmatkhau')}}">Bạn quên mật khẩu??</a>
+                            <div></div>
+                            <a href="{{route('dangky')}}">Bạn chưa có tài khoản</a>
                         </div>
                     </div>
                    </form>
+
                 </div>
             </div>
         </div>
