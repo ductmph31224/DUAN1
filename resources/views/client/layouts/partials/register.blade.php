@@ -41,7 +41,7 @@
                             </div>
                             <div class="single-register">
                                 <label>Số Điện Thoại<span>*</span></label>
-                                <input type="text" name="phone" class="form-control" required placeholder="Nhập số điện thoại" />
+                                <input type="number" name="phone" class="form-control" required placeholder="Nhập số điện thoại" />
                             </div>
                             <div class="single-register">
                                 <label>Địa Chỉ<span>*</span></label>

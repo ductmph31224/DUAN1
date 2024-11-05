@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Client\UserController;
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
 ->as('admins.')
 ->group( function () {
     // Giao diện admin
+    Route::resource('users', AdminUserController::class);//Route người dùng
     Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
     // Các route khác cho admin
     Route::prefix('products')
@@ -71,9 +73,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
 });
 
 Route::view('/myacc','client.layouts.partials.my-account');
-Route::get('/change',function(){
-return view('client.layouts.partials.change-account');
-})->name('change');
+
+
 
 
 

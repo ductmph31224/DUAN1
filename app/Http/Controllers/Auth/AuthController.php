@@ -16,8 +16,7 @@ class AuthController extends Controller
     }
     public function Login(Request $request)
     {
-        // dd($request); die;
-        // Thực hiện xác thực đầu vào
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6|max:10'
@@ -35,7 +34,7 @@ class AuthController extends Controller
 
             $userRole = Auth::user()->role;
 
-            if ($userRole === 'admin') {
+            if ($userRole == 'admin') {
                 return redirect()->route('indexAdmin');
             }
             return redirect()->route('index');
