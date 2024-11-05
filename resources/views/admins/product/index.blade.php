@@ -12,7 +12,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <h5 class="card-title mb-0 align-content-center">Danh sách Product</h5>
-                            <a href="{{route('admins.products.create')}}" class="btn btn-success"><i
+                            <a href="{{ route('admins.products.create') }}" class="btn btn-success"><i
                                     data-feather="plus-square"></i>Thêm mới</a>
                         </div><!-- end card header -->
 
@@ -35,39 +35,37 @@
                                             <th scope="col">hanh dong</th>
                                         </tr>
                                     </thead>
-                                    <tbody>    
+                                    <tbody>
 
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>12</td>
-                                                <td>
-                                                   12
-                                                </td>
-                                                <td>12</td>
-                                                <td>12</td>
-                                                <td>12</td>
-                                                <td>12</td>
-                                                <td>12</td>
-                                                <td>12</td>
-                                                <td>12</td>
-                                                <td>12</td>
-                                                <td>
-                                                    <a href=""><i
-                                                            class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
-                                                    <form action=""
-                                                        method="POST" class="d-inline"
-                                                        onsubmit="return comfirm('ban muon xoa a')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="border-0 bg-white ">
-                                                            <i
-                                                                class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
-                                                        </button>
-                                                    </form>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>12</td>
+                                            <td>
+                                                12
+                                            </td>
+                                            <td>12</td>
+                                            <td>12</td>
+                                            <td>12</td>
+                                            <td>12</td>
+                                            <td>12</td>
+                                            <td>12</td>
+                                            <td>12</td>
+                                            <td>12</td>
+                                            <td>
+                                                <a href=""><i
+                                                        class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                                <form action="" method="POST" class="d-inline"
+                                                    onsubmit="return comfirm('ban muon xoa a')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-white ">
+                                                        <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                                                    </button>
+                                                </form>
 
-                                                </td>
-                                            </tr>
-                                       
+                                            </td>
+                                        </tr>
+
 
                                     </tbody>
                                 </table>

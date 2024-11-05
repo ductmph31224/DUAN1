@@ -26,13 +26,13 @@
 
                 <li class="menu-title">Menu</li>
                     <li>
-                        <a class='tp-link' href='#'>
+                        <a class='tp-link' href='{{route('admins.users.index')}}'>
                             <i data-feather="users"></i>
                             <span> Users </span>
                         </a>
                      </li>
-               
-             
+
+
                 <li class="menu-title">Pages</li>
                 <li>
                     <a class='tp-link' href='{{route('admins.categories.index')}}'>
@@ -45,13 +45,13 @@
                         <i data-feather="align-center"></i>
                         <span> Product </span>
                     </a>
-                </li>  
+                </li>
                 <li>
                     <a class='tp-link' href='#'>
                         <i data-feather="shopping-bag"></i>
                         <span> Don hang </span>
                     </a>
-                </li>              
+                </li>
             </ul>
         </div>
         <!-- End Sidebar -->
