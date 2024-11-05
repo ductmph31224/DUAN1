@@ -47,6 +47,9 @@ Route::group([
     // Các route khác cho admin
 });
 
-// Route::view('/checkout','client.layouts.partials.forgot-password');
+Route::view('/myacc','client.layouts.partials.my-account');
+Route::get('/change',function(){
+return view('client.layouts.partials.change-account');
+})->name('change');
 
 
