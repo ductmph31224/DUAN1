@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Client\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Client\UserController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,13 +41,33 @@ Route::get('/',[UserController::class,'indexUser'] )->name('index');
 
 
 //route admin
-Route::group([
-    'prefix' => 'admin',
-    'middleware' => ['auth', 'isAdmin']
-], function () {
+Route::middleware(['auth', 'isAdmin'])->prefix('admins')
+->as('admins.')
+->group( function () {
     // Giao diện admin
     Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
     // Các route khác cho admin
+    Route::prefix('products')
+    ->as('products.')
+    ->group(function(){
+        Route::get('/',[ProductController::class,'index'])->name('index');
+        Route::get('create',[ProductController::class,'create'])->name('create');
+        Route::post('store',[ProductController::class,'store'])->name('store');
+        Route::get('{id}/edit',[ProductController::class,'edit'])->name('edit');
+        Route::put('update/{id}',[ProductController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[ProductController::class,'destroy'])->name('destroy');
+    });
+
+     Route::prefix('categories')
+    ->as('categories.')
+    ->group(function(){
+        Route::get('/',[CategoryController::class,'index'])->name('index');
+        Route::get('create',[CategoryController::class,'create'])->name('create');
+        Route::post('store',[CategoryController::class,'store'])->name('store');
+        Route::get('{id}/edit',[CategoryController::class,'edit'])->name('edit');
+        Route::put('update/{id}',[CategoryController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[CategoryController::class,'destroy'])->name('destroy');
+    });
 });
 
 Route::view('/myacc','client.layouts.partials.my-account');
