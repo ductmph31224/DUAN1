@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('so_luong');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('publisher_id')->constrained('publishers')->onDelete('cascade');
+            $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
             $table->double('gia_san_pham');
             $table->double('gia_khuyen_mai')->nullable();
             $table->text('mo_ta')->nullable();
