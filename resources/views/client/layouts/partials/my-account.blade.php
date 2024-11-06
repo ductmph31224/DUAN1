@@ -182,7 +182,7 @@
                                                                 placeholder="Địa chỉ Email " />
                                                         </div>
                                                         <div class="single-input-item">
-                                                            <a class="btn btn-sqr" href="{{ route('change') }}">Thay đổi mật khẩu</a>
+                                                            <a class="btn btn-sqr" href="{{route('myacc')}}">Thay đổi mật khẩu</a>
                                                         </div>
                                                     </form>
                                                 </div>

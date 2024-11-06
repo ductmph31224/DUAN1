@@ -46,7 +46,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
 ->as('admins.')
 ->group( function () {
     // Giao diện admin
-    Route::resource('users', AdminUserController::class);//Route người dùng
+   //Route người dùng
+   Route::resource('users', AdminUserController::class);
     Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
     // Các route khác cho admin
     Route::prefix('products')
@@ -72,7 +73,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
     });
 });
 
-Route::view('/myacc','client.layouts.partials.my-account');
+
 
 
 
