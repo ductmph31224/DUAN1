@@ -16,6 +16,7 @@ class Product extends Model
         'so_luong',
         'category_id',
         'publisher_id',
+        'author_id',
         'gia_san_pham',
         'gia_khuyen_mai',
         'mo_ta',
@@ -32,6 +33,10 @@ class Product extends Model
         return $this->belongsTo(Publisher::class);
     }
 
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
     public function reviews()
     {
         return $this->hasMany(Review::class);
