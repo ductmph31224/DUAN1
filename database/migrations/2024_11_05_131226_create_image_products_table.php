@@ -1,9 +1,9 @@
 <?php
 
 use App\Models\Product;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('imgage_products', function (Blueprint $table) {
+        Schema::create('image_products', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Product::class)->constrained();
             $table->string('image');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('imgage_products');
+        Schema::dropIfExists('image_products');
     }
 };

@@ -58,7 +58,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
         Route::delete('destroy/{id}',[ProductController::class,'destroy'])->name('destroy');
     });
 
-     Route::prefix('categories')
+    Route::prefix('categories')
     ->as('categories.')
     ->group(function(){
         Route::get('/',[CategoryController::class,'index'])->name('index');

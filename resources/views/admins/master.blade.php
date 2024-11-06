@@ -23,7 +23,6 @@
 
     <!-- Icons -->
     <link href="{{ asset('admins/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    @yield('css')
 </head>
 
 <!-- body start -->
@@ -70,7 +69,7 @@
     <script src="{{ asset('admins/libs/apexcharts/apexcharts.min.js') }}"></script>
 
     <!-- for basic area chart -->
-    <script src="{{ asset('admins/apexcharts.com/samples/stock-prices.js')}}"></script>
+    {{-- <script src="{{ asset('admins/apexcharts.com/samples/stock-prices.js')}}"></script> --}}
 
     <!-- Widgets Init Js -->
     {{-- <script src="{{ asset('admins/js/pages/analytics-dashboard.init.js') }}"></script> --}}
