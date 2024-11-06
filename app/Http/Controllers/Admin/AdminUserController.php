@@ -36,10 +36,10 @@ class AdminUserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'password' => $request->password,
+            'password' =>Hash::make($request->password),
             'role' => $request->role
         ]);
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('admins.users.index')->with('success', 'User created successfully.');
     }
 
     public function show(User $user)
