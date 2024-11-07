@@ -47,6 +47,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
         // Giao diện admin
         Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
 
+        // Các route khác cho admin
         Route::prefix('products')
             ->as('products.')
             ->group(function () {
@@ -67,6 +68,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::get('{id}/edit', [CategoryController::class, 'edit'])->name('edit');
                 Route::put('update/{id}', [CategoryController::class, 'update'])->name('update');
                 Route::delete('destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+                Route::get('category-by-product/{id}', [CategoryController::class, 'categoryByProduct'])->name('categoryByProduct');
             });
     });
 

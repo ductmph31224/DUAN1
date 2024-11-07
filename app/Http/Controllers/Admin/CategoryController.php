@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -94,5 +95,12 @@ class CategoryController extends Controller
         }
         $category->delete();
         return redirect()->route('admins.categories.index')->with('success', 'Xóa Danh Mục Thành Công!');
+    }
+    public function categoryByProduct(string $id)
+    {
+
+        $category = Product::where('category_id', $id)->get();
+
+        return view('admins.product.categoryByProduct', compact('category'));
     }
 }
