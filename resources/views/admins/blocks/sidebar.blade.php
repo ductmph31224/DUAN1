@@ -28,30 +28,30 @@
                     <li>
                         <a class='tp-link' href='#'>
                             <i data-feather="users"></i>
-                            <span> Users </span>
+                            <span> Người Dùng </span>
                         </a>
                      </li>
-               
-             
-                <li class="menu-title">Pages</li>
+
+
+                <li class="menu-title">Trang Web</li>
                 <li>
                     <a class='tp-link' href='{{route('admins.categories.index')}}'>
                         <i data-feather="package"></i>
-                        <span> Category </span>
+                        <span> Danh Mục </span>
                     </a>
                 </li>
                 <li>
                     <a class='tp-link' href='{{route('admins.products.index')}}'>
                         <i data-feather="align-center"></i>
-                        <span> Product </span>
+                        <span> Sản Phẩm </span>
                     </a>
-                </li>  
+                </li>
                 <li>
                     <a class='tp-link' href='#'>
                         <i data-feather="shopping-bag"></i>
-                        <span> Don hang </span>
+                        <span> Đơn Hàng </span>
                     </a>
-                </li>              
+                </li>
             </ul>
         </div>
         <!-- End Sidebar -->
