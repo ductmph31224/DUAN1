@@ -18,14 +18,14 @@
         <div class="container-xxl">
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Các Sản Phẩm</h4>
+                    <h4 class="fs-18 fw-semibold m-0">Product</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
-                            <h5 class="card-title mb-0 align-content-center">Danh Sách Sản Phẩm</h5>
+                            <h5 class="card-title mb-0 align-content-center">Danh Mục Sản Phẩm Này</h5>
                             <a href="{{ route('admins.products.create') }}" class="btn btn-success">
                                 <i data-feather="plus-square"></i> Thêm Mới
                             </a>
@@ -56,7 +56,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($listProduct as $item)
+                                        @foreach ($category as $item)
                                             <tr>
                                                 <th scope="row">{{ $loop->iteration }}</th>
                                                 <td>{{ $item->ma_san_pham }}</td>
