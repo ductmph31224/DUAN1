@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function indexAdmin(){
+    public function indexAdmin()
+    {
         return view('admin.index');
     }
 }

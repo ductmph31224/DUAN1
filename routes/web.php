@@ -46,7 +46,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
     ->group(function () {
         // Giao diện admin
         Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
-        // Các route khác cho admin
+
         Route::prefix('products')
             ->as('products.')
             ->group(function () {

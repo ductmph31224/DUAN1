@@ -43,26 +43,25 @@
             {{$item->trang_thai == 1 ? 'Hiển Thị' : 'Ẩn'}}
         </td>
         <td>{{$item->mo_ta}}</td>
-        <td>
-
-            <a href="{{route('admins.categories.edit', $item->id)}}">
-                <i class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i>
+        <td class="d-flex justify-content-start align-items-center">
+            <!-- Sửa -->
+            <a href="{{route('admins.categories.edit', $item->id)}}" class="btn btn-outline-primary btn-sm me-2">
+                <i class="mdi mdi-pencil text-muted fs-22"></i>
             </a>
 
-
-            <form action="{{route('admins.categories.destroy', $item->id)}}"
-                method="POST" class="d-inline">
+            <!-- Xóa -->
+            <form action="{{route('admins.categories.destroy', $item->id)}}" method="POST" class="d-inline me-2">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="border-0 bg-white " onclick="return confirm('Bạn Có Chắc Chắn Muốn Xóa?')">
-                    <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                    <i class="mdi mdi-delete text-muted fs-22"></i>
                 </button>
             </form>
 
-
-           <button type="button" class="border-0 bg-white">
-            <i class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1"></i>
-        </button>
+            <!-- Xem -->
+            <button type="button" class="btn btn-outline-info btn-sm">
+                <i class="mdi mdi-eye text-muted fs-22"></i>
+            </button>
         </td>
     </tr>
     @endforeach

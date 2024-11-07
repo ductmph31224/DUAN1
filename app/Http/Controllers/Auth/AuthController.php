@@ -21,7 +21,7 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6|max:10'
-        ],[
+        ], [
             'email.required' => 'Vui lòng nhập email.',
             'email.email' => 'Email không đúng định dạng.',
             'password.required' => 'Vui lòng nhập mật khẩu.',
@@ -91,9 +91,8 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Đăng ký thành công! Bạn đã đăng nhập.');
     }
-    public function ShowFormMyAcc(){
+    public function ShowFormMyAcc()
+    {
         return view('client.layouts.partials.my-account');
     }
-
-
 }
