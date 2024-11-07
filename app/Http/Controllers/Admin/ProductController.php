@@ -12,6 +12,7 @@ use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class ProductController extends Controller
 {
     /**
