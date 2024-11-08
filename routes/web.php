@@ -84,14 +84,3 @@ Route::get('My-acc/doi-mk',[ProfileController::class,'editPass'])->name('doimatk
 Route::put('My-acc/update-pass/{user}', [ProfileController::class, 'updatePass'])->name('update-pass');
 Route::get('My-acc/profile',[ProfileController::class,'profile'])->name('profile');
 Route::put('My-acc/update-profile/{user}', [ProfileController::class, 'updateProfile'])->name('update-profile');
-
-
-
-
-
-
-
-
-
-
-

@@ -16,7 +16,7 @@ class PublisherSeeder extends Seeder
         //
         for ($i = 0; $i < 5; $i++) {
             DB::table('publishers')->insert([
-                'name'=> fake()->text(20),
+                'name'=> fake()->text(15),
                 'address'=> fake()->address(),
                 'phone'=> fake()->phoneNumber(),
             ]);

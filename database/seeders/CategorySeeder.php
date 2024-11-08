@@ -16,7 +16,7 @@ class CategorySeeder extends Seeder
         //
          for ($i = 0; $i < 5; $i++) {
             DB::table('categories')->insert([
-                'name'=> fake()->text(20),
+                'name'=> fake()->text(15),
                 'trang_thai'=> rand(0, 1),
                 'mo_ta'=> fake()->text(150),
             ]);
