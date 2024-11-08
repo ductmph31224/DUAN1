@@ -158,35 +158,27 @@
                                             <div class="myaccount-content">
                                                 <h5>Tài khoản chi tiết</h5>
                                                 <div class="account-details-form">
-                                                    <form action="#">
-
+                                                    <div class="single-input-item">
+                                                        <h6>Họ và Tên: <span>{{ $user->name }}</span></h6>
+                                                    </div>
+                                                    <div class="single-input-item">
+                                                        <h6>Email: <span>{{ $user->email }}</span></h6>
+                                                    </div>
+                                                    <div class="single-input-item">
+                                                        <h6>Số điện thoại : <span>{{ $user->phone }}</span></h6>
+                                                    </div>
+                                                    <div class="single-input-item">
+                                                        <h6>Địa chỉ: <span>{{ $user->address }}</span></h6>
+                                                    </div>
+                                                    <div class="d-flex">
                                                         <div class="single-input-item">
-                                                            <label for="display-name" class="required"> Họ và Tên
-                                                            </label>
-                                                            <input type="text" id="display-name"
-                                                                placeholder="Họ và Tên " />
+                                                            <a class="btn btn-sqr" href="{{ route('doimatkhau') }}">Thay đổi mật khẩu</a>
                                                         </div>
                                                         <div class="single-input-item">
-                                                            <label for="email" class="required">Email </label>
-                                                            <input type="email" id="email"
-                                                                placeholder="Địa chỉ Email " />
+                                                            <a class="btn btn-sqr" href="{{route('profile')}}">Thay đổi thông tin</a>
                                                         </div>
-                                                        <div class="single-input-item">
-                                                            <label for="email" class="required">Địa chỉ  </label>
-                                                            <input type="email" id="email"
-                                                                placeholder="Địa chỉ Email " />
-                                                        </div>
-                                                        <div class="single-input-item">
-                                                            <label for="email" class="required">Số điện thoại</label>
-                                                            <input type="email" id="email"
-                                                                placeholder="Địa chỉ Email " />
-                                                        </div>
-                                                        <div class="single-input-item">
-                                                            <a class="btn btn-sqr" href="{{route('myacc')}}">Thay đổi mật khẩu</a>
-                                                        </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
-
                                             </div>
                                         </div> <!-- Single Tab Content End -->
                                     </div>

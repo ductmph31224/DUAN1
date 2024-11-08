@@ -91,7 +91,8 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Đăng ký thành công! Bạn đã đăng nhập.');
     }
     public function ShowFormMyAcc(){
-        return view('client.layouts.partials.my-account');
+        $user = Auth::user();
+        return view('client.layouts.partials.my-account', compact('user'));
     }
 
 

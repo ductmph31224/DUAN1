@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Client\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Client\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
     // Giao diện admin
    //Route người dùng
    Route::resource('users', AdminUserController::class);
+   Route::put('My-acc/update-profile',[AdminUserController::class,'update'])->name('doithongtin');
     Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
     // Các route khác cho admin
     Route::prefix('products')
@@ -72,6 +74,19 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
         Route::delete('destroy/{id}',[CategoryController::class,'destroy'])->name('destroy');
     });
 });
+
+// route::get('My-acc/doi-mk',function(){
+//     return view('client.layouts.partials.change-account');
+
+// });
+Route::resource('acc', ProfileController::class);
+Route::get('My-acc/doi-mk',[ProfileController::class,'editPass'])->name('doimatkhau');
+Route::put('My-acc/update-pass/{user}', [ProfileController::class, 'updatePass'])->name('update-pass');
+Route::get('My-acc/profile',[ProfileController::class,'profile'])->name('profile');
+Route::put('My-acc/update-profile/{user}', [ProfileController::class, 'updateProfile'])->name('update-profile');
+
+
+
 
 
 
