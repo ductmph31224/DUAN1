@@ -69,7 +69,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="border-0 bg-white "
-                                                            onclick="return comfirm('bạn muốn xóa')">
+                                                            onclick="return confirm('bạn muốn xóa')">
                                                             <i
                                                                 class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                         </button>
