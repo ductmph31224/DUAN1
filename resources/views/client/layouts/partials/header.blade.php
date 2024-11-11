@@ -12,7 +12,20 @@
                             <ul>
                                 <li><a href="{{route('ShowFormMyAcc')}}">Tài Khoản Của Tôi</a></li>
                                 <li><a href="">Thanh toán</a></li>
-                                <li><a href="{{route('login')}}">đăng nhập</a></li>
+                                <li><a @if (Auth::check())
+                                   
+                                    <span>Xin chào, {{ Auth::user()->name }} | </span>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                @else
+                                    <!-- Nếu người dùng chưa đăng nhập -->
+                                    <a href="{{ route('login') }}">Đăng nhập</a>
+                                @endif
+                                </a></li>
+
                             </ul>
                         </div>
                     </div>
