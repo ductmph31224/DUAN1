@@ -11,9 +11,19 @@ use Illuminate\Validation\Rule;
 class AdminUserController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $search = $request->input('search');
+
+        $users = User::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%')
+                             ->orWhere('email', 'like', '%' . $search . '%')
+                             ->orWhere('phone', 'like', '%' . $search . '%')
+                            ->orWhere('address', 'like', '%' . $search . '%');
+            })
+            ->paginate(10);
+
         return view('admins.user.index', compact('users'));
     }
 
@@ -85,4 +95,5 @@ class AdminUserController extends Controller
         $user->delete();
         return redirect()->route('admins.users.index')->with('success', 'User deleted successfully.');
     }
+
 }

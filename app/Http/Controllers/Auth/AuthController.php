@@ -47,7 +47,7 @@ class AuthController extends Controller
     public function UseLogout()
     {
         Auth::logout();
-        return redirect()->route('index');
+        return redirect()->route('login');
     }
     // đăng ký tài khoản user
     //showform đăng ký

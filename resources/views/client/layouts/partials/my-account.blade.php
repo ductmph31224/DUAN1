@@ -52,7 +52,7 @@
                                             Địa chỉ</a>
                                         <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i> Tài khoản
                                             chi tiết</a>
-                                        <a href=""><i class="fa fa-sign-out"></i> Đăng xuất</a>
+                                        <a href="{{route('logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a>
                                     </div>
                                 </div>
                                 <!-- My Account Tab Menu End -->
@@ -65,8 +65,8 @@
                                             <div class="myaccount-content">
                                                 <h5>Tổng quan</h5>
                                                 <div class="welcome">
-                                                    <p>Xin chào, <strong>Đức</strong> ( Nếu không phải <strong>Đức
-                                                            !</strong><a href="" class="logout">
+                                                    <p>Xin chào, <strong>{{ $user->name }}</strong> ( Nếu không phải <strong>{{ $user->name }}
+                                                            !</strong><a href="{{route('logout')}}" class="logout">
                                                             Đăng xuất</a>)</p>
                                                 </div>
                                                 <p class="mb-0">Từ bảng điều khiển tài khoản của bạn. bạn có thể dễ dàng
@@ -142,13 +142,10 @@
                                             <div class="myaccount-content">
                                                 <h5>Địa chỉ thanh toán</h5>
                                                 <address>
-                                                    <p><strong>Erik Jhonson</strong></p>
-                                                    <p>1355 Market St, Suite 900 <br>
-                                                        San Francisco, CA 94103</p>
-                                                    <p>Mobile: (123) 456-7890</p>
+                                                    <p><strong>{{ $user->name }}</strong></p>
+                                                    <p>{{ $user->address }}</p>
+                                                    <p>Mobile: {{ $user->phone }}</p>
                                                 </address>
-                                                <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                    Edit Address</a>
                                             </div>
                                         </div>
                                         <!-- Single Tab Content End -->
@@ -159,7 +156,7 @@
                                                 <h5>Tài khoản chi tiết</h5>
                                                 <div class="account-details-form">
                                                     <div class="single-input-item">
-                                                        <h6>Họ và Tên: <span>{{ $user->name }}</span></h6>
+                                                        <h6 >Họ và Tên: <span>{{ $user->name }}</span></h6>
                                                     </div>
                                                     <div class="single-input-item">
                                                         <h6>Email: <span>{{ $user->email }}</span></h6>

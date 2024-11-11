@@ -20,7 +20,7 @@ use App\Http\Controllers\Client\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/logout',[AuthController::class,'UseLogout'])->name('logout');
 //route đang ky, login
 //route login
 Route::get('/login', [AuthController::class, 'ShowFormLogin'])->name('login'); // Hiển thị form đăng nhập

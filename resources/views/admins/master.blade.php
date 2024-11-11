@@ -23,6 +23,12 @@
 
     <!-- Icons -->
     <link href="{{ asset('admins/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        .flex-grow-1{
+            display: flex;
+            justify-content:space-between;
+        };
+    </style>
 </head>
 
 <!-- body start -->
@@ -43,7 +49,7 @@
 
         <div class="content-page">
             <!-- content -->
-            @yield('content')         
+            @yield('content')
             <!-- Footer Start -->
             @include('admins.blocks.footer')
             <!-- end Footer -->

@@ -5,6 +5,13 @@
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
                     <h4 class="fs-18 fw-semibold m-0">Users</h4>
+                    <form action="{{ route('admins.users.index') }}" method="GET" class="d-flex justify-content-center mb-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm người dùng" value="{{ request('search') }}">
+                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
             <div class="row">
@@ -33,7 +40,7 @@
                                     <tbody>
                                         @foreach ($users as $item)
                                             <tr>
-                                                <th scope="row">{{ $item->id }}</th>
+                                                <th scope="row">{{ $loop->iteration }}</th>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->phone }}</td>
                                                 <td>{{ $item->email }}</td>
@@ -43,12 +50,13 @@
                                                 <td>
                                                     <a href="{{ route('admins.users.edit', $item) }}"><i
                                                             class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
-                                                    <form action="{{ route('admins.users.destroy', $item) }}" method="POST"
-                                                        class="d-inline"
-                                                       >
+                                                    <form action="{{ route('admins.users.destroy', $item) }}"
+                                                        method="POST" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit"  onclick="return confirm('Bạn có chắc chắn muốn xóa mục này không?')" class="border-0 bg-white">
+                                                        <button type="submit"
+                                                            onclick="return confirm('Bạn có chắc chắn muốn xóa mục này không?')"
+                                                            class="border-0 bg-white">
                                                             <i
                                                                 class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
                                                         </button>
