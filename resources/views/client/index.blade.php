@@ -10,8 +10,8 @@
                             <a href="#"><img src="/client/img/banner/1.png" alt="banner" /></a>
                         </div>
                         <div class="banner-text">
-                            <h4>Free shipping item</h4>
-                            <p>For all orders over $500</p>
+                            <h4>Đồng giá phí ship</h4>
+                            <p>Phí ship chỉ với 20000 VNĐ</p>
                         </div>
                     </div>
                 </div>
@@ -21,8 +21,8 @@
                             <a href="#"><img src="/client/img/banner/2.png" alt="banner" /></a>
                         </div>
                         <div class="banner-text">
-                            <h4>Money back guarantee</h4>
-                            <p>100% money back guarante</p>
+                            <h4>Đảm bảo hoàn tiền</h4>
+                            <p>Hoàn tiền 100% với tất cả sản phẩm lỗi</p>
                         </div>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                             <a href="#"><img src="/client/img/banner/3.png" alt="banner" /></a>
                         </div>
                         <div class="banner-text">
-                            <h4>Cash on delivery</h4>
-                            <p>Lorem ipsum dolor consecte</p>
+                            <h4>Thanh toán khi nhận hàng</h4>
+                            <p>Kiểm tra hàng trước khi thanh toán</p>
                         </div>
                     </div>
                 </div>
@@ -43,8 +43,8 @@
                             <a href="#"><img src="/client/img/banner/4.png" alt="banner" /></a>
                         </div>
                         <div class="banner-text">
-                            <h4>Help & Support</h4>
-                            <p>Call us : + 0123.4567.89</p>
+                            <h4>Hỗ trợ và Giúp đỡ</h4>
+                            <p>Liên hệ : + 0123.4567.89</p>
                         </div>
                     </div>
                 </div>
@@ -2412,44 +2412,46 @@
         </div>
     </div>
     <!-- recent-post-area-end -->
-    <!-- social-group-area-start -->
-    <div class="social-group-area ptb-60">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="section-title-3">
-                        <h3>Latest Tweets</h3>
-                    </div>
-                    <div class="twitter-content">
-                        <div class="twitter-icon">
-                            <a href="#"><i class="fa fa-twitter"></i></a>
+
+        <!-- social-group-area-start -->
+        <div class="social-group-area ptb-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="section-title-3">
+                            <h3>Latest Tweets</h3>
                         </div>
-                        <div class="twitter-text">
-                            <p>
-                                Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
-                                Mirum notare quam
-                            </p>
-                            <a href="#">koparion</a>
+                        <div class="twitter-content">
+                            <div class="twitter-icon">
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </div>
+                            <div class="twitter-text">
+                                <p>
+                                    Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+                                    Mirum notare quam
+                                </p>
+                                <a href="#">koparion</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="section-title-3">
-                        <h3>Stay Connected</h3>
-                    </div>
-                    <div class="link-follow">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fa fa-flickr"></i></a></li>
-                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="section-title-3">
+                            <h3>Stay Connected</h3>
+                        </div>
+                        <div class="link-follow">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+                                <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
 @endsection

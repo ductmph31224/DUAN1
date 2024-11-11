@@ -16,12 +16,11 @@ class AuthController extends Controller
     }
     public function Login(Request $request)
     {
-        // dd($request); die;
-        // Thực hiện xác thực đầu vào
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6|max:10'
-        ],[
+        ], [
             'email.required' => 'Vui lòng nhập email.',
             'email.email' => 'Email không đúng định dạng.',
             'password.required' => 'Vui lòng nhập mật khẩu.',
@@ -35,7 +34,7 @@ class AuthController extends Controller
 
             $userRole = Auth::user()->role;
 
-            if ($userRole === 'admin') {
+            if ($userRole == 'admin') {
                 return redirect()->route('indexAdmin');
             }
             return redirect()->route('index');
@@ -91,9 +90,8 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Đăng ký thành công! Bạn đã đăng nhập.');
     }
-    public function ShowFormMyAcc(){
+    public function ShowFormMyAcc()
+    {
         return view('client.layouts.partials.my-account');
     }
-
-
 }
