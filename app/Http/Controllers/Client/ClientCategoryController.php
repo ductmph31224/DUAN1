@@ -53,6 +53,7 @@ class ClientCategoryController extends Controller
     public function byCategory(string $id)
     {
         $category = Product::where('category_id', $id)->get();
-        return view('client.layouts.partials.byCategory', compact('category'));
+        $namecategory = Category::find($id);
+        return view('client.layouts.partials.byCategory', compact('category', 'namecategory'));
     }
 }

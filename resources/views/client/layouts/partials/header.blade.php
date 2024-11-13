@@ -99,11 +99,12 @@
                                     <li><a href="">Thể loại<i class="fa fa-angle-down"></i></a>
 
                                         <div class="mega-menu">
+
                                             <span>
-                                                <a href="">Tình cảm</a>
-                                                <a href="">Trinh thám</a>
-                                                <a href="">Khoa học viễn tưởng</a>
-                                                <a href="">Huyền bí /Kinh dị</a>
+                                                @foreach ($categories as $item)
+                                                <a href="{{Route('byCategory', $item->id)}}">{{$item->name}}</a>
+                                                @endforeach
+
                                             </span>
                                         </div>
                                     </li>

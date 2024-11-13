@@ -11,71 +11,79 @@
         .table .d-flex .btn {
             margin: 0 5px;
         }
+        .product-img img {
+    width: 100%;
+    height: 250px; /* Chiều cao cố định cho tất cả hình ảnh, bạn có thể điều chỉnh tùy ý */
+    object-fit: cover; /* Giúp hình ảnh giữ tỷ lệ mà không bị biến dạng */
+    border-radius: 8px; /* Tùy chọn: Bo tròn các góc ảnh */
+}
     </style>
 
     <div class="content">
-        <div class="container-xxl">
-            <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
-                <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Product</h4>
-                </div>
-            </div>
+         <div class="new-book-area pb-100">
+        <div class="container">
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <h5 class="card-title mb-0 align-content-center">Danh Mục Sản Phẩm Này</h5>
-                        </div><!-- end card header -->
-
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                @if (session('success'))
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        {{ session('success') }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                        </button>
-                                    </div>
-                                @endif
-                                <table class="table table-striped mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">STT</th>
-                                            <th scope="col">Mã sản phẩm</th>
-                                            <th scope="col">Tên sản phẩm</th>
-                                            <th scope="col">Hình ảnh</th>
-                                            <th scope="col">Tình trạng</th>
-                                            <th scope="col">Số lượng</th>
-                                            <th scope="col">ID Danh Mục</th>
-                                            <th scope="col">Giá sản phẩm</th>
-                                            <th scope="col">Giá khuyến mại</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($category as $item)
-                                            <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
-                                                <td>{{ $item->ma_san_pham }}</td>
-                                                <td>{{ $item->ten_san_pham }}</td>
-                                                <td>
-                                                    <img src="{{ Storage::url($item->image) }}" alt="" width="100px">
-                                                </td>
-                                                <td class="{{ $item->so_luong == 0 ? 'text-danger' : 'text-success' }}">
-                                                    {{ $item->so_luong == 0 ? 'Hết hàng' : 'Còn hàng' }}
-                                                </td>
-                                                <td>{{ $item->so_luong }}</td>
-                                                <td>{{ $item->category->name }}</td>
-                                                <td>{{ number_format($item->gia_san_pham, 0, '', '.') }} đ</td>
-                                                <td>{{ number_format($item->gia_khuyen_mai, 0, '', '.') }} đ</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <div class="col-lg-12">
+                    <div class="section-title bt text-center pt-100 mb-30 section-title-res">
+                        <h2>{{$namecategory->name}}</h2>
                     </div>
                 </div>
             </div>
+            <div class="tab-active owl-carousel">
+                @foreach ($category as $item)
+                    <div class="tab-total">
+                        <div class="product-wrapper">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="{{ Storage::url($item->image) }}" alt="book" class="primary" />
+                                </a>
+                                <div class="quick-view">
+                                    <a class="action-view" href="#" data-bs-target="#productModal"
+                                        data-bs-toggle="modal" title="Quick View">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                                <div class="product-flag">
+                                    <ul>
+                                        <li><span class="sale">new</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-details text-center">
+                                <div class="product-rating">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                                <h4><a href="#">{{ $item->ten_san_pham}}</a></h4>
+                                <div class="product-price">
+                                    <ul>
+                                        <li>{{number_format($item->gia_khuyen_mai, 0, ',', '.')}}đ</li>
+                                        <li class="old-price">{{number_format($item->gia_san_pham, 0, ',', '.')}}đ</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-link">
+                                <div class="product-button">
+                                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </div>
+                                <div class="add-to-link">
+                                    <ul>
+                                        <li><a href="product-details.html" title="Details"><i
+                                                    class="fa fa-external-link"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
+    </div>
 @endsection
+
