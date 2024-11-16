@@ -22,7 +22,6 @@
                             <a href="{{ route('admins.users.create') }}" class="btn btn-success"><i
                                     data-feather="plus-square"></i>Thêm mới</a>
                         </div><!-- end card header -->
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped mb-0">
@@ -64,7 +63,6 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
