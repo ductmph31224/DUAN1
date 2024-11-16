@@ -35,7 +35,8 @@ route::get('/Khoi-phuc-mat-khau', [ForgotPasswordController::class, 'ShowFormFor
 route::post('checkform', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('sendResetLinkEmail');
 // route nội dung email
 //route::get('email',[ForgotPasswordController::class,'resesst'])->name('resesst');
-
+// logou tài khaoanr
+route::post('logout',[AuthController::class,'UseLogout'])->name('logout');
 //show form thông tin tài khoản
 route::get('My-acc', [AuthController::class, 'ShowFormMyAcc'])->name('ShowFormMyAcc');
 
@@ -45,24 +46,27 @@ Route::get('by-category/{id}', [ClientCategoryController::class, 'byCategory'])-
 
 //route admin
 Route::middleware(['auth', 'isAdmin'])->prefix('admins')
-    ->as('admins.')
-    ->group(function () {
-        // Giao diện admin
-        //Route người dùng
-        Route::resource('users', AdminUserController::class);
-        Route::put('My-acc/update-profile', [AdminUserController::class, 'update'])->name('doithongtin');
-        Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
-        // Các route khác cho admin
-        Route::prefix('products')
-            ->as('products.')
-            ->group(function () {
-                Route::get('/', [ProductController::class, 'index'])->name('index');
-                Route::get('create', [ProductController::class, 'create'])->name('create');
-                Route::post('store', [ProductController::class, 'store'])->name('store');
-                Route::get('{id}/edit', [ProductController::class, 'edit'])->name('edit');
-                Route::put('update/{id}', [ProductController::class, 'update'])->name('update');
-                Route::delete('destroy/{id}', [ProductController::class, 'destroy'])->name('destroy');
-            });
+
+->as('admins.')
+->group( function () {
+    // route trang chủ index
+    // Giao diện admin
+   //Route người dùng
+   Route::resource('users', AdminUserController::class);
+   Route::put('My-acc/update-profile',[AdminUserController::class,'update'])->name('doithongtin');
+    Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
+    // Các route khác cho admin
+    Route::prefix('products')
+    ->as('products.')
+    ->group(function(){
+        Route::get('/',[ProductController::class,'index'])->name('index');
+        Route::get('create',[ProductController::class,'create'])->name('create');
+        Route::post('store',[ProductController::class,'store'])->name('store');
+        Route::get('{id}/edit',[ProductController::class,'edit'])->name('edit');
+        Route::put('update/{id}',[ProductController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[ProductController::class,'destroy'])->name('destroy');
+    });
+
 
         Route::prefix('categories')
             ->as('categories.')
