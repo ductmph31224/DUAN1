@@ -194,9 +194,13 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a class='dropdown-item notify-item' href='auth-logout.html'>
+                        <a class='dropdown-item notify-item' >
                             <i class="mdi mdi-location-exit fs-16 align-middle"></i>
-                            <span>Logout</span>
+                          <form action="{{route('logout')}} " method="POST">
+                            @csrf
+                          <button class="btn btn-primary">logout</button>
+
+                          </form>
                         </a>
 
                     </div>

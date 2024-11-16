@@ -34,7 +34,8 @@ route::get('/Khoi-phuc-mat-khau', [ForgotPasswordController::class, 'ShowFormFor
 route::post('checkform',[ForgotPasswordController::class,'sendResetLinkEmail'])->name('sendResetLinkEmail');
 // route nội dung email
 //route::get('email',[ForgotPasswordController::class,'resesst'])->name('resesst');
-
+// logou tài khaoanr
+route::post('logout',[AuthController::class,'UseLogout'])->name('logout');
 //show form thông tin tài khoản
 route::get('My-acc',[AuthController::class,'ShowFormMyAcc'])->name('ShowFormMyAcc');
 
@@ -46,6 +47,7 @@ Route::get('/',[UserController::class,'indexUser'] )->name('index');
 Route::middleware(['auth', 'isAdmin'])->prefix('admins')
 ->as('admins.')
 ->group( function () {
+    // route trang chủ index
     // Giao diện admin
    //Route người dùng
    Route::resource('users', AdminUserController::class);
