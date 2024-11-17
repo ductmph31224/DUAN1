@@ -85,6 +85,10 @@ class AuthorController extends Controller
         if (!Author::find($id)) {
             return redirect()->route('admins.authors.index')->with('error', 'Tác giả không tồn tại');
         }
+         if (Author::find($id)->products->count() > 0) {
+            return redirect()->route('admins.authors.index')
+            ->with('error', 'Publisher được sử dụng trong các sản phẩm. Bạn không thể xóa nó.');
+        }
         Author::find($id)->delete();
         return redirect()->route('admins.authors.index')->with('success', 'Xóa tác giả thành công');
     }

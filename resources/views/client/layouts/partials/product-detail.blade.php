@@ -66,7 +66,7 @@
                                     <div class="product-info-price">
                                         <div class="price-final">                                            
                                             <span>{{number_format($product->gia_khuyen_mai, 0, ',', '.')}} đ</span>
-                                            <span class="old-price">{{number_format($product->gia_khuyen_mai, 0, ',', '.')}} đ</span>
+                                            <span class="old-price">{{number_format($product->gia_san_pham, 0, ',', '.')}} đ</span>
                                         </div>
                                     </div>
                                     <div class="product-add-form">
@@ -463,7 +463,7 @@
 												<div class="product-price">
 													<ul>														
 														<li>{{number_format($item->gia_khuyen_mai, 0, ',', '.')}} đ</li>
-                                                <li>{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
+                                                        <li class="old-price">{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
 													</ul>
 												</div>
 											</div>
@@ -486,11 +486,11 @@
                                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                                 </ul>
                                             </div>
-                                            <h4><a href="{{route('detailProduct',$item1->id)}}">Voyage Yoga Bag</a></h4>
+                                            <h4><a href="{{route('detailProduct',$item1->id)}}">{{$item1->ten_san_pham}}</a></h4>
                                             <div class="product-price">
                                                 <ul>
                                                 <li>{{number_format($item1->gia_khuyen_mai, 0, ',', '.')}} đ</li>
-                                                <li>{{number_format($item1->gia_san_pham, 0, ',', '.')}} đ</li>
+                                                <li class="old-price">{{number_format($item1->gia_san_pham, 0, ',', '.')}} đ</li>
                                                 </ul>
                                             </div>
                                         </div>

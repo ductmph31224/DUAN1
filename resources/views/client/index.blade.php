@@ -987,13 +987,13 @@
                                 <div class="product-price">
                                     <ul>
                                        <li>{{number_format($item->gia_khuyen_mai, 0, ',', '.')}} đ</li>
-                                        <li>{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
+                                        <li class="old-price">{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to
+                                    <a href="" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to
                                         cart</a>
                                 </div>
                                 <div class="add-to-link">
@@ -1008,7 +1008,7 @@
                         <!-- single-product-start -->
                         <div class="product-wrapper">
                             <div class="product-img">
-                                <a href="#">
+                                <a href="{{ route('detailProduct', $item->id) }}">
                                     <img src="{{ Storage::url($item->image) }}" alt="book" class="primary" />
                                 </a>
 
@@ -1032,7 +1032,7 @@
                                 <div class="product-price">
                                     <ul>
                                         <li>{{number_format($item->gia_khuyen_mai, 0, ',', '.')}} đ</li>
-                                        <li>{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
+                                        <li class="old-price">{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
                                     </ul>
                                 </div>
                             </div>
