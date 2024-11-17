@@ -47,6 +47,18 @@
                     </a>
                 </li>
                 <li>
+                    <a class='tp-link' href='{{route('admins.authors.index')}}'>
+                        <i data-feather="user"></i>
+                        <span> Tác giả </span>
+                    </a>
+                </li>
+                <li>
+                    <a class='tp-link' href='{{route('admins.publishers.index')}}'>
+                        <i data-feather="book"></i>
+                        <span> Nhà xuất bản </span>
+                    </a>
+                </li>
+                <li>
                     <a class='tp-link' href='#'>
                         <i data-feather="shopping-bag"></i>
                         <span> Đơn Hàng </span>
