@@ -9,7 +9,7 @@
                         <ul>
                             <li><a href="#">Trang chủ</a></li>
                             <li><a href="#" class="active">tài khoản của tôi</a></li>
-                            <li><a href="#" class="active">thay đổi mật khẩu </a></li>
+                            <li><a href="#" class="active">thay đổi thông tin  </a></li>
                         </ul>
                     </div>
                 </div>
@@ -73,41 +73,39 @@
                                                     </div>
                                                 @endif
                                                 <div class="account-details-form">
-                                                    <form action="{{ route('update-pass', $user) }}" method="POST">
+                                                    <form action="{{ route('update-profile', ['user' => $user->id]) }}" method="POST">
                                                         @csrf
-                                                        @method('PUT')
-                                                        <fieldset>
-                                                            <legend>Thay đổi mật khẩu</legend>
-                                                            <div class="single-input-item">
-                                                                <label for="currentpwd" class="required">Mật khẩu cũ
-                                                                </label>
-                                                                <input type="password" name="currentpwd" id="currentpwd"
-                                                                    placeholder="Mật khẩu cũ " />
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="newpwd" class="required">Mật khẩu
-                                                                            mới
-                                                                        </label>
-                                                                        <input type="password" name="newpwd" id="newpwd"
-                                                                            placeholder="Mật khẩu mới " />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="newpwd_confirmation" class="required">Xác
-                                                                            nhận mật khẩu
-                                                                        </label>
-                                                                        <input type="password" name="newpwd_confirmation" id="newpwd_confirmation"
-                                                                            placeholder="Xác nhận mật khẩu " />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </fieldset>
-                                                        <div class="single-input-item">
-                                                            <button type="submit" class="btn btn-sqr">Lưu thay đổi</button>
+                                                        @method('PUT') <!-- Sử dụng phương thức PUT cho cập nhật -->
+                                                        <div class="mb-3">
+                                                            <label for="name" class="form-label">Họ và Tên</label>
+                                                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}"  required>
+                                                            @error('name')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
+                                                        <div class="mb-3">
+                                                            <label for="email" class="form-label">Email</label>
+                                                            <input type="email" class="form-control" id="email" name="email" value="{{ old('name', $user->email) }}"  required>
+                                                            @error('email')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="address" class="form-label">Địa chỉ</label>
+                                                            <input type="text" class="form-control" id="address" name="address" value="{{ old('name', $user->address) }}"  required>
+                                                            @error('address')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="phone" class="form-label">Số điện thoại</label>
+                                                            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('name', $user->phone) }}"  required>
+                                                            @error('phone')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                                                     </form>
                                                 </div>
                                             </div>

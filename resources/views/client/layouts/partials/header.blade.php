@@ -10,9 +10,19 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="account-area text-end">
                             <ul>
-                                <li><a href="{{route('ShowFormMyAcc')}}">Tài Khoản Của Tôi</a></li>
+                                <li><a href="{{ route('ShowFormMyAcc') }}">Tài Khoản Của Tôi</a></li>
                                 <li><a href="">Thanh toán</a></li>
-                                <li><a href="{{route('login')}}">đăng nhập</a></li>
+                                <li><a @if (Auth::check()) <span>Xin chào, {{ Auth::user()->name }} | </span>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                @else
+                                    <!-- Nếu người dùng chưa đăng nhập -->
+                                    <a href="{{ route('login') }}">Đăng nhập</a> @endif
+                                        </a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -26,11 +36,17 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-5 col-12">
                         <div class="header-search">
-                            <form action="#">
-                                <input type="text" placeholder="Tìm kiếm..." />
-                                <a href="#"><i class="fa fa-search"></i></a>
+                            <form action="{{route('searchProducts')}}" method="GET" class="input-group">
+                                @csrf
+                                <input type="text" name="search" value="{{ old('search') }}" class="form-control"
+                                    placeholder="Nhập Tên Tìm kiếm..." aria-label="search"
+                                    aria-describedby="button-search">
+                                <button class="btn btn-warning" type="submit" id="button-search">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </form>
                         </div>
+
                     </div>
                     <div class="col-lg-6 col-md-4 col-12">
                         <div class="logo-area text-center logo-xs-mrg">
@@ -94,7 +110,7 @@
                         <div class="menu-area">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="{{route('index')}}  ">Trang chủ</a>
+                                    <li class="active"><a href="{{ route('index') }}  ">Trang chủ</a>
                                     </li>
                                     <li><a href="">Thể loại<i class="fa fa-angle-down"></i></a>
 
@@ -110,8 +126,7 @@
                                     <li><a href="">Bán chạy nhất<i class="fa fa-angle-down"></i></a>
 
                                     </li>
-                                    <li><a href="">Mới phát hành<i
-                                                class="fa fa-angle-down"></i></a>
+                                    <li><a href="">Mới phát hành<i class="fa fa-angle-down"></i></a>
                                     </li>
                                     <li><a href="#">blog<i class="fa fa-angle-down"></i></a>
                                         <div class="sub-menu sub-menu-2">
@@ -154,4 +169,3 @@
             </div>
         </div>
         <!-- main-menu-area-end -->
-

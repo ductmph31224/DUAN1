@@ -26,7 +26,7 @@
 
                 <li class="menu-title">Menu</li>
                     <li>
-                        <a class='tp-link' href='#'>
+                        <a class='tp-link' href='{{route('admins.users.index')}}'>
                             <i data-feather="users"></i>
                             <span> Người Dùng </span>
                         </a>

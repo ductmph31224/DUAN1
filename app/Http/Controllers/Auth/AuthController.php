@@ -34,8 +34,8 @@ class AuthController extends Controller
 
             $userRole = Auth::user()->role;
 
-            if ($userRole == 'admin') {
-                return redirect()->route('indexAdmin');
+            if ($userRole === 'admin') {
+                return redirect()->route('admins.indexAdmin');
             }
             return redirect()->route('index');
         }
@@ -90,8 +90,9 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Đăng ký thành công! Bạn đã đăng nhập.');
     }
-    public function ShowFormMyAcc()
-    {
-        return view('client.layouts.partials.my-account');
+
+    public function ShowFormMyAcc(){
+        $user = Auth::user();
+        return view('client.layouts.partials.my-account', compact('user'));
     }
 }
