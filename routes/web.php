@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Client\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\search\searchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +33,10 @@ Route::Post('/dang-ky',[AuthController::class,'dangky'])->name('dangkyUser');
 //route khôi phục mật khẩu
 route::get('/Khoi-phuc-mat-khau', [ForgotPasswordController::class, 'ShowFormForpassWork'])->name('khoiphucmatkhau');
 route::post('checkform',[ForgotPasswordController::class,'sendResetLinkEmail'])->name('sendResetLinkEmail');
-// route nội dung email
-//route::get('email',[ForgotPasswordController::class,'resesst'])->name('resesst');
+// route show form khôi phục mật khẩu
+route::get('khôi-phuc-mat-khau-moi',[ForgotPasswordController::class,'ShowFormResetPasswoek'])->name('ShowFormResetPasswoek');
+route::post('check-form-khoi-phuc',[ForgotPasswordController::class,'passwordupdate'])->name('passwordupdate');
+
 // logou tài khaoanr
 route::post('logout',[AuthController::class,'UseLogout'])->name('logout');
 //show form thông tin tài khoản
@@ -41,6 +44,9 @@ route::get('My-acc',[AuthController::class,'ShowFormMyAcc'])->name('ShowFormMyAc
 
 // route user
 Route::get('/',[UserController::class,'indexUser'] )->name('index');
+// route tìm kiếm
+route::get('searchProducts',[searchController::class,'searchProducts'])->name('searchProducts');
+// route trả kết quả tìm kiếm
 
 
 //route admin
@@ -82,6 +88,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
 //     return view('client.layouts.partials.change-account');
 
 // });
+
+
+
 Route::resource('acc', ProfileController::class);
 Route::get('My-acc/doi-mk',[ProfileController::class,'editPass'])->name('doimatkhau');
 Route::put('My-acc/update-pass/{user}', [ProfileController::class, 'updatePass'])->name('update-pass');

@@ -32,7 +32,7 @@
                         <div class="login-form">
                             <div class="single-login">
                                 <label>Địa Chỉ Email<span>*</span></label>
-                                <input type="email" />
+                                <input type="email" name="email" />
                             </div>
                             @if ($errors->any())
                                 <div>
@@ -42,7 +42,7 @@
                                 </div>
                             @endif
                             <div class="single-login single-login-2">
-                                <button type="submit">Xác Nhận Qua Email</button>
+                                <button type="submit" class="custom-button">Xác Nhận Qua Email</button>
                             </div>
                             <p>Bạn đã nhớ mật khẩu chưa? <a href="{{ route('login') }}">Đăng Nhập Tại Đây</a></p>
                         </div>
