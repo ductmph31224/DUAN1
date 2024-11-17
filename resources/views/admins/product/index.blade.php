@@ -59,8 +59,8 @@
                                                 <td>{{ $item->category->name }}</td>
                                                 {{-- <td>{{$item->publisher->name}}</td>
                                                 <td>{{$item->author->name}}</td> --}}
-                                                <td>{{ number_format($item->gia_san_pham, 0, '', '.') }} đ</td>
-                                                <td>{{ number_format($item->gia_khuyen_mai, 0, '', '.') }} đ</td>
+                                                <td>{{number_format($item->gia_san_pham, 0, ',', '.') }} đ</td>
+                                                <td>{{number_format($item->gia_khuyen_mai, 0, ',', '.') }} đ</td>
                                                 <td>
                                                     <a href="{{ route('admins.products.edit', $item->id) }}"><i
                                                             class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>

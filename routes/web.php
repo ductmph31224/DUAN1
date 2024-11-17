@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Client\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
@@ -70,6 +72,29 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::delete('destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
                 Route::get('category-by-product/{id}', [CategoryController::class, 'categoryByProduct'])->name('categoryByProduct');
             });
+        
+        Route::prefix('authors')
+            ->as('authors.')
+            ->group(function () {
+                Route::get('/', [AuthorController::class, 'index'])->name('index');
+                Route::get('create', [AuthorController::class, 'create'])->name('create');
+                Route::post('store', [AuthorController::class, 'store'])->name('store');
+                Route::get('{id}/edit', [AuthorController::class, 'edit'])->name('edit');
+                Route::put('update/{id}', [AuthorController::class, 'update'])->name('update');
+                Route::delete('destroy/{id}', [AuthorController::class, 'destroy'])->name('destroy');
+            });
+
+        Route::prefix('publishers')
+            ->as('publishers.')
+            ->group(function () {
+                Route::get('/', [PublisherController::class, 'index'])->name('index');
+                Route::get('create', [PublisherController::class, 'create'])->name('create');
+                Route::post('store', [PublisherController::class, 'store'])->name('store');
+                Route::get('{id}/edit', [PublisherController::class, 'edit'])->name('edit');
+                Route::put('update/{id}', [PublisherController::class, 'update'])->name('update');
+                Route::delete('destroy/{id}', [PublisherController::class, 'destroy'])->name('destroy');
+            });
     });
 
 // Route::view('/checkout','client.layouts.partials.forgot-password');
+route::get('product/detail/{id}', [UserController::class, 'detailProduct'])->name('detailProduct');
