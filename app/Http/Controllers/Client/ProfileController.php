@@ -16,7 +16,7 @@ class ProfileController extends Controller
         return view('admins.user.edit', compact('user'));
     }
 
-    public function update(Request $request,User $user)
+    public function update(Request $request, User $user)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -54,10 +54,11 @@ class ProfileController extends Controller
         // Validate dữ liệu từ form
         $request->validate([
             'currentpwd' => 'required|string|min:6',
-            'newpwd' => 'required|string|min:6|confirmed',  // Sử dụng xác nhận mật khẩu (password confirmation)
+            'newpwd' => 'required|string|min:6|confirmed',  // Sử dụng xác nhận mật khẩu
         ]);
 
         // Lấy người dùng đã đăng nhập
+        /** @var User $user */
         $user = Auth::user();
 
         // Kiểm tra xem người dùng đã đăng nhập chưa
@@ -78,11 +79,13 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', 'Mật khẩu đã được cập nhật thành công.');
     }
 
-    public function profile(){
+    public function profile()
+    {
         $user = Auth::user();
-        return view('client.layouts.partials.change-profile',compact('user'));
+        return view('client.layouts.partials.change-profile', compact('user'));
     }
-    public function updateProfile(Request $request,User $user){
+    public function updateProfile(Request $request, User $user)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => [
@@ -106,4 +109,3 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', 'User updated successfully.');
     }
 }
-

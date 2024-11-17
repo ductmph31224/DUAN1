@@ -93,6 +93,10 @@ class CategoryController extends Controller
         if (!$category) {
             return redirect()->route('admins.categories.index')->with('error', 'Danh Mục Không Tồn Tại!');
         }
+        if (Category::find($id)->products->count() > 0) {
+            return redirect()->route('admins.categories.index')
+                ->with('error', 'Category được sử dụng trong các sản phẩm. Bạn không thể xóa nó.');
+        }
         $category->delete();
         return redirect()->route('admins.categories.index')->with('success', 'Xóa Danh Mục Thành Công!');
     }

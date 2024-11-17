@@ -26,6 +26,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session('error'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
