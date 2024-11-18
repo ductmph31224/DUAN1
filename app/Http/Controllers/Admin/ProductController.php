@@ -86,11 +86,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
-        //
         $param = $request->except('_token', '_method');
         $product = Product::find($id);
+
         if ($request->hasFile('image')) {
             if ($product->image && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
@@ -99,45 +99,50 @@ class ProductController extends Controller
         } else {
             $param['image'] = $product->image;
         }
-        // xử lý album
-        $currentImages = $product->imageProduct->pluck('id')->toArray();
-        $arrayCombine = array_combine($currentImages, $currentImages);
-        foreach ($arrayCombine as $key => $values) {
-            //tìm kiếm id hình ảnh trong mảng hình ảnh mới đẩy lên
-            //nếu ko tồn tại id -> người dùng đã xóa hình ảnh đó
-            if (!array_key_exists($key, $request->list_hinh_anh)) {
-                $imageProduct = image_product::query()->find($key);
-                //xóa hình ảnh đó
-                if ($imageProduct->image && Storage::disk('public')->exists($imageProduct->image)) {
-                    Storage::disk('public')->delete($imageProduct->image);
-                    $imageProduct->delete();
+
+        // Xử lý album nếu có hình ảnh trong list_hinh_anh
+        if ($request->has('list_hinh_anh') && is_array($request->list_hinh_anh)) {
+            $currentImages = $product->imageProduct->pluck('id')->toArray();
+            $arrayCombine = array_combine($currentImages, $currentImages);
+
+            foreach ($arrayCombine as $key => $values) {
+                // Kiểm tra hình ảnh hiện tại có còn trong danh sách mới không
+                if (!array_key_exists($key, $request->list_hinh_anh)) {
+                    $imageProduct = image_product::find($key);
+                    // Xóa hình ảnh nếu tồn tại
+                    if ($imageProduct && $imageProduct->image && Storage::disk('public')->exists($imageProduct->image)) {
+                        Storage::disk('public')->delete($imageProduct->image);
+                        $imageProduct->delete();
+                    }
                 }
             }
-        }
-        // trường hợp thêm hoặc sửa
-        foreach ($request->list_hinh_anh as $key => $image) {
-            if (!array_key_exists($key, $arrayCombine)) {
-                if ($request->hasFile("list_hinh_anh.$key")) {
+
+            // Trường hợp thêm hoặc sửa hình ảnh album
+            foreach ($request->list_hinh_anh as $key => $image) {
+                if (!array_key_exists($key, $arrayCombine)) {
+                    if ($request->hasFile("list_hinh_anh.$key")) {
+                        $path = $image->store('uploads/albumproduct/id-' . $id, 'public');
+                        $product->imageProduct()->create([
+                            'product_id' => $id,
+                            'image' => $path
+                        ]);
+                    }
+                } else if (is_file($image) && $request->hasFile("list_hinh_anh.$key")) {
+                    $imageProduct = image_product::find($id);
+                    if ($imageProduct && Storage::disk('public')->exists($imageProduct->image)) {
+                        Storage::disk('public')->delete($imageProduct->image);
+                    }
                     $path = $image->store('uploads/albumproduct/id-' . $id, 'public');
-                    $product->imageProduct()->create([
-                        'product_id' => $id,
+                    $imageProduct->update([
                         'image' => $path
                     ]);
                 }
-            } else if (is_file($image) && $request->hasFile("list_hinh_anh.$key")) {
-                $imageProduct = image_product::find($id);
-                if ($imageProduct && Storage::disk('public')->exists($imageProduct->image)) {
-                    Storage::disk('public')->delete($imageProduct->image);
-                }
-                $path = $image->store('uploads/albumproduct/id-' . $id, 'public');
-                $imageProduct->update([
-                    'image' => $path
-                ]);
             }
         }
+
         $product->update($param);
 
-        return redirect()->route('admins.products.index')->with('success', 'sửa thành công');
+        return redirect()->route('admins.products.index')->with('success', 'Sửa Thành Công');
     }
 
     /**
@@ -158,6 +163,6 @@ class ProductController extends Controller
             Storage::disk('public')->deleteDirectory($path);
         }
         $product->delete();
-        return redirect()->route('admins.products.index')->with('success', 'xóa thành công');
+        return redirect()->route('admins.products.index')->with('success', 'Xóa Thành Công');
     }
 }
