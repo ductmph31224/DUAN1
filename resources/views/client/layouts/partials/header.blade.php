@@ -56,8 +56,8 @@
                     <div class="col-lg-3 col-md-3 col-12">
                         <div class="my-cart">
                             <ul>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i>Giỏ Hàng</a>
-                                    <div class="mini-cart-sub">
+                                <li><a href="{{route('listCart')}}"><i class="fa fa-shopping-cart"></i>Giỏ Hàng</a>
+                                    {{-- <div class="mini-cart-sub">
                                         <div class="cart-product">
                                             <div class="single-cart">
                                                 <div class="cart-img">
@@ -93,7 +93,7 @@
                                             <a class="view-cart" href="">Xem giỏ hàng</a>
                                             <a href="">Thanh toán</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </li>
                             </ul>
                         </div>

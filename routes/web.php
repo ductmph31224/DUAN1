@@ -3,16 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AuthorController;
-use App\Http\Controllers\Admin\AdminUserController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\PublisherController;
+use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\UserController;
+use App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\search\searchController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Client\ClientCategoryController;
-use App\Http\Controllers\Client\ProfileController;
-use App\Http\Controllers\search\searchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ route::post('checkform',[ForgotPasswordController::class,'sendResetLinkEmail'])-
 route::get('khôi-phuc-mat-khau-moi',[ForgotPasswordController::class,'ShowFormResetPasswoek'])->name('ShowFormResetPasswoek');
 route::post('check-form-khoi-phuc',[ForgotPasswordController::class,'passwordupdate'])->name('passwordupdate');
 
-
+route::get('ShowFormForpassWork',[ForgotPasswordController::class,'ShowFormForpassWork'])->name('khoiphucmatkhau');
 // logou tài khaoanr
 route::post('logout',[AuthController::class,'UseLogout'])->name('logout');
 //show form thông tin tài khoản
@@ -60,6 +61,12 @@ Route::get('/',[UserController::class,'indexUser'] )->name('index');
 // route tìm kiếm
 route::get('searchProducts',[searchController::class,'searchProducts'])->name('searchProducts');
 // route trả kết quả tìm kiếm
+
+// route cart
+Route::get('list-cart',[CartController::class,'listCart'])->name('listCart');
+Route::post('add-to-cart',[CartController::class,'addCart'])->name('addCart');
+Route::post('update-to-cart',[CartController::class,'updateCart'])->name('updateCart');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 
 //route admin
@@ -97,9 +104,6 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::delete('destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
                 Route::get('category-by-product/{id}', [CategoryController::class, 'categoryByProduct'])->name('categoryByProduct');
             });
-
-    });
-
         
         Route::prefix('authors')
             ->as('authors.')

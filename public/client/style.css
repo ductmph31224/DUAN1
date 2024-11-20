@@ -5127,7 +5127,21 @@ nav.menu .cr-dropdown ul {
     width: auto;
     transition: .3s;
 }
-
+.product-add-form form button {
+    background: #333 none repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 0;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 28px;
+    text-transform: uppercase;
+    width: auto;
+    transition: .3s;
+}
 .product-add-form form .quality-button {
     float: left;
     margin-right: 10px;
