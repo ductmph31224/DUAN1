@@ -1040,8 +1040,15 @@
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                    <a href="" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to
-                                        cart</a>
+                                     <form action="{{route('addCart')}}" method="POST">
+                                            @csrf
+                                             <input type="hidden" id="quantity" name="quantity" value="1" >
+                                             <input type="hidden" name="id" value="{{ $item->id }}">
+                                                <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
+                                                <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
+                                                <input type="hidden" name="image" value="{{ $item->image }}">
+                                            <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add tocart</button>
+                                        </form>
                                 </div>
                                 <div class="add-to-link">
                                     <ul>
