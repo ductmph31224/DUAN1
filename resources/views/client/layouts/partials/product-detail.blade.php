@@ -1,5 +1,8 @@
 @extends('client.layouts.master')
 @section('content')
+<style>
+    
+</style>
     <!-- breadcrumbs-area-start -->
     <div class="breadcrumbs-area mb-70">
         <div class="container">
@@ -70,11 +73,18 @@
                                         </div>
                                     </div>
                                     <div class="product-add-form">
-                                        <form action="#">
+                                        <form action="{{route('addCart')}}" method="POST">
+                                            @csrf
                                             <div class="quality-button">
-                                                <input class="qty" type="number" value="1">
+                                                <button type="button" class="btn-quantity decrease">-</button>
+                                                <input type="text" id="quantity" name="quantity" value="1" readonly>
+                                                <button type="button" class="btn-quantity increase">+</button>
                                             </div>
-                                            <a href="#">Add to cart</a>
+                                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                                <input type="hidden" name="ten_san_pham" value="{{ $product->ten_san_pham }}">
+                                                <input type="hidden" name="price" value="{{ $product->gia_khuyen_mai }}">
+                                                <input type="hidden" name="image" value="{{ $product->image }}">
+                                            <button type="submit">Add to cart</button>
                                         </form>
                                     </div>
                                     <div class="product-social-links">
@@ -519,4 +529,27 @@
         </div>
     </div>
     <!-- product-main-area-end -->
+@endsection
+@section('js')
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const decreaseBtn = document.querySelector('.decrease');
+        const increaseBtn = document.querySelector('.increase');
+        const quantityInput = document.getElementById('quantity');
+
+        // Nút giảm số lượng
+        decreaseBtn.addEventListener('click', function () {
+            let currentValue = parseInt(quantityInput.value) || 1;
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        // Nút tăng số lượng
+        increaseBtn.addEventListener('click', function () {
+            let currentValue = parseInt(quantityInput.value) || 1;
+            quantityInput.value = currentValue + 1;
+        });
+    });
+</script>
 @endsection
