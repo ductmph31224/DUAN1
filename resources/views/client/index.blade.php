@@ -1,6 +1,17 @@
 @extends('client.layouts.master')
 
 @section('content')
+    <style>    
+        .product-img img {
+            width: 100%;
+            height: 250px;
+            /* Chiều cao cố định cho tất cả hình ảnh, bạn có thể điều chỉnh tùy ý */
+            object-fit: cover;
+            /* Giúp hình ảnh giữ tỷ lệ mà không bị biến dạng */
+            border-radius: 8px;
+            /* Tùy chọn: Bo tròn các góc ảnh */
+        }
+    </style>
     <div class="banner-area banner-res-large pt-30 pb-5">
         <div class="container">
             <div class="row">
@@ -117,7 +128,7 @@
                                     <a href="{{ route('detailProduct', $item->id) }}">
                                         <img src="{{ Storage::url($item->image) }}" alt="book" class="primary" />
                                     </a>
-                                     {{-- <div class="quick-view">
+                                    {{-- <div class="quick-view">
                                     <a class="action-view" href="#" data-bs-target="#productModal"
                                         data-bs-toggle="modal" title="Quick View">
                                         <i class="fa fa-search-plus"></i>
@@ -142,15 +153,23 @@
                                     <h4><a href="{{ route('detailProduct', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
                                     <div class="product-price">
                                         <ul>
-                                            <li>{{number_format($item->gia_khuyen_mai, 0, ',', '.')}} đ</li>
-                                        <li>{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
+                                            <li>{{ number_format($item->gia_khuyen_mai, 0, ',', '.') }} đ</li>
+                                            <li class="old-price">{{ number_format($item->gia_san_pham, 0, ',', '.') }} đ</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="product-link">
                                     <div class="product-button">
-                                        <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to
-                                            cart</a>
+                                        <form action="{{route('addCart')}}" method="POST">
+                                            @csrf
+                                             <input type="hidden" id="quantity" name="quantity" value="1" >
+                                             <input type="hidden" name="id" value="{{ $item->id }}">
+                                                <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
+                                                <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
+                                                <input type="hidden" name="image" value="{{ $item->image }}">
+                                            <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add tocart</button>
+                                        </form>
+                                       
                                     </div>
                                     <div class="add-to-link">
                                         <ul>
@@ -820,10 +839,11 @@
                 <div class="col-lg-4 col-md-12 col-12">
                     <div class="bestseller-active owl-carousel">
                         <div class="bestseller-total">
-                           
-                               <div class="single-bestseller mb-25">
+
+                            <div class="single-bestseller mb-25">
                                 <div class="bestseller-img">
-                                    <a href="{{route('detailProduct',$product_2->id)}}"><img src="{{ Storage::url($product_2->image) }}" alt="book" /></a>
+                                    <a href="{{ route('detailProduct', $product_2->id) }}"><img
+                                            src="{{ Storage::url($product_2->image) }}" alt="book" /></a>
                                     <div class="product-flag">
                                         <ul>
                                             <li><span class="sale">new</span></li>
@@ -832,18 +852,25 @@
                                     </div>
                                 </div>
                                 <div class="bestseller-text text-center">
-                                    <h3> <a href="{{route('detailProduct',$product_2->id)}}">{{$product_2->ten_san_pham}}</a></h3>
+                                    <h3> <a
+                                            href="{{ route('detailProduct', $product_2->id) }}">{{ $product_2->ten_san_pham }}</a>
+                                    </h3>
                                     <div class="price">
                                         <ul>
-                                            <li><span class="new-price">{{number_format($product_2->gia_khuyen_mai, 0, ',', '.')}} đ</span></li>
-                                            <li><span class="old-price">{{number_format($product_2->gia_san_pham, 0, ',', '.')}} đ</span></li>
+                                            <li><span
+                                                    class="new-price">{{ number_format($product_2->gia_khuyen_mai, 0, ',', '.') }}
+                                                    đ</span></li>
+                                            <li><span
+                                                    class="old-price">{{ number_format($product_2->gia_san_pham, 0, ',', '.') }}
+                                                    đ</span></li>
                                         </ul>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="single-bestseller">
                                 <div class="bestseller-img">
-                                    <a href="{{route('detailProduct',$product_1->id)}}"><img src="{{ Storage::url($product_1->image) }}" alt="book" /></a>
+                                    <a href="{{ route('detailProduct', $product_1->id) }}"><img
+                                            src="{{ Storage::url($product_1->image) }}" alt="book" /></a>
                                     <div class="product-flag">
                                         <ul>
                                             <li><span class="sale">new</span></li>
@@ -851,11 +878,17 @@
                                     </div>
                                 </div>
                                 <div class="bestseller-text text-center">
-                                    <h3> <a href="{{route('detailProduct',$product_1->id)}}">{{$product_1->ten_san_pham}}</a></h3>
+                                    <h3> <a
+                                            href="{{ route('detailProduct', $product_1->id) }}">{{ $product_1->ten_san_pham }}</a>
+                                    </h3>
                                     <div class="price">
                                         <ul>
-                                             <li><span class="new-price">{{number_format($product_1->gia_khuyen_mai, 0, ',', '.')}} đ</span></li>
-                                            <li><span class="old-price">{{number_format($product_1->gia_san_pham, 0, ',', '.')}} đ</span></li>
+                                            <li><span
+                                                    class="new-price">{{ number_format($product_1->gia_khuyen_mai, 0, ',', '.') }}
+                                                    đ</span></li>
+                                            <li><span
+                                                    class="old-price">{{ number_format($product_1->gia_san_pham, 0, ',', '.') }}
+                                                    đ</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -864,7 +897,8 @@
                         <div class="bestseller-total">
                             <div class="single-bestseller mb-25">
                                 <div class="bestseller-img">
-                                    <a href="{{route('detailProduct',$product_3->id)}}"><img src="{{ Storage::url($product_3->image) }}" alt="book" /></a>
+                                    <a href="{{ route('detailProduct', $product_3->id) }}"><img
+                                            src="{{ Storage::url($product_3->image) }}" alt="book" /></a>
                                     <div class="product-flag">
                                         <ul>
                                             <li><span class="sale">new</span></li>
@@ -872,18 +906,25 @@
                                     </div>
                                 </div>
                                 <div class="bestseller-text text-center">
-                                    <h3> <a href="{{route('detailProduct',$product_3->id)}}">{{$product_3->ten_san_pham}}</a></h3>
+                                    <h3> <a
+                                            href="{{ route('detailProduct', $product_3->id) }}">{{ $product_3->ten_san_pham }}</a>
+                                    </h3>
                                     <div class="price">
                                         <ul>
-                                             <li><span class="new-price">{{number_format($product_3->gia_khuyen_mai, 0, ',', '.')}} đ</span></li>
-                                            <li><span class="old-price">{{number_format($product_3->gia_san_pham, 0, ',', '.')}} đ</span></li>
+                                            <li><span
+                                                    class="new-price">{{ number_format($product_3->gia_khuyen_mai, 0, ',', '.') }}
+                                                    đ</span></li>
+                                            <li><span
+                                                    class="old-price">{{ number_format($product_3->gia_san_pham, 0, ',', '.') }}
+                                                    đ</span></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="single-bestseller">
                                 <div class="bestseller-img">
-                                    <a href="{{route('detailProduct',$product_4->id)}}"><img src="{{ Storage::url($product_4->image) }}" alt="book" /></a>
+                                    <a href="{{ route('detailProduct', $product_4->id) }}"><img
+                                            src="{{ Storage::url($product_4->image) }}" alt="book" /></a>
                                     <div class="product-flag">
                                         <ul>
                                             <li><span class="sale">new</span></li>
@@ -892,11 +933,17 @@
                                     </div>
                                 </div>
                                 <div class="bestseller-text text-center">
-                                    <h3> <a href="{{route('detailProduct',$product_4->id)}}">{{$product_4->ten_san_pham}}</a></h3>
+                                    <h3> <a
+                                            href="{{ route('detailProduct', $product_4->id) }}">{{ $product_4->ten_san_pham }}</a>
+                                    </h3>
                                     <div class="price">
                                         <ul>
-                                             <li><span class="new-price">{{number_format($product_4->gia_khuyen_mai, 0, ',', '.')}} đ</span></li>
-                                            <li><span class="old-price">{{number_format($product_4->gia_san_pham, 0, ',', '.')}} đ</span></li>
+                                            <li><span
+                                                    class="new-price">{{ number_format($product_4->gia_khuyen_mai, 0, ',', '.') }}
+                                                    đ</span></li>
+                                            <li><span
+                                                    class="old-price">{{ number_format($product_4->gia_san_pham, 0, ',', '.') }}
+                                                    đ</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -986,15 +1033,22 @@
                                 <h4><a href="{{ route('detailProduct', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
                                 <div class="product-price">
                                     <ul>
-                                       <li>{{number_format($item->gia_khuyen_mai, 0, ',', '.')}} đ</li>
-                                        <li class="old-price">{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
+                                        <li>{{ number_format($item->gia_khuyen_mai, 0, ',', '.') }} đ</li>
+                                        <li class="old-price">{{ number_format($item->gia_san_pham, 0, ',', '.') }} đ</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                    <a href="" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to
-                                        cart</a>
+                                     <form action="{{route('addCart')}}" method="POST">
+                                            @csrf
+                                             <input type="hidden" id="quantity" name="quantity" value="1" >
+                                             <input type="hidden" name="id" value="{{ $item->id }}">
+                                                <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
+                                                <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
+                                                <input type="hidden" name="image" value="{{ $item->image }}">
+                                            <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add tocart</button>
+                                        </form>
                                 </div>
                                 <div class="add-to-link">
                                     <ul>
@@ -1031,15 +1085,22 @@
                                 <h4><a href="{{ route('detailProduct', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
                                 <div class="product-price">
                                     <ul>
-                                        <li>{{number_format($item->gia_khuyen_mai, 0, ',', '.')}} đ</li>
-                                        <li class="old-price">{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
+                                        <li>{{ number_format($item->gia_khuyen_mai, 0, ',', '.') }} đ</li>
+                                        <li class="old-price">{{ number_format($item->gia_san_pham, 0, ',', '.') }} đ</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to
-                                        cart</a>
+                                     <form action="{{route('addCart')}}" method="POST">
+                                            @csrf
+                                             <input type="hidden" id="quantity" name="quantity" value="1" >
+                                             <input type="hidden" name="id" value="{{ $item->id }}">
+                                                <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
+                                                <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
+                                                <input type="hidden" name="image" value="{{ $item->image }}">
+                                            <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add tocart</button>
+                                        </form>
                                 </div>
                                 <div class="add-to-link">
                                     <ul>

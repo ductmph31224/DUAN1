@@ -8,7 +8,7 @@
                     <div class="breadcrumbs-menu">
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <li><a href="#" class="active">cart</a></li>
+                            <li><a href="#" class="active">Giỏ Hàng</a></li>
                         </ul>
                     </div>
                 </div>
@@ -34,60 +34,70 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <form action="#">
+                    <form action="{{ route('updateCart') }}" method="POST">
+                        @csrf
                         <div class="table-content table-responsive mb-15 border-1">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th class="product-thumbnail">Image</th>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
-                                        <th class="product-remove">Remove</th>
+                                        <th class="product-thumbnail">Ảnh</th>
+                                        <th class="product-name">Sản Phẩm</th>
+                                        <th class="product-price">Giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-subtotal">Tổng cộng</th>
+                                        <th class="product-remove">Xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="product-thumbnail"><a href="#"><img src="img/cart/1.jpg"
-                                                    alt="man" /></a></td>
-                                        <td class="product-name"><a href="#">Vestibulum suscipit</a></td>
-                                        <td class="product-price"><span class="amount">£165.00</span></td>
-                                        <td class="product-quantity"><input type="number" value="1"></td>
-                                        <td class="product-subtotal">£165.00</td>
-                                        <td class="product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-thumbnail"><a href="#"><img src="img/cart/2.jpg"
-                                                    alt="man" /></a></td>
-                                        <td class="product-name"><a href="#">Vestibulum dictum magna</a></td>
-                                        <td class="product-price"><span class="amount">£50.00</span></td>
-                                        <td class="product-quantity"><input type="number" value="1"></td>
-                                        <td class="product-subtotal">£50.00</td>
-                                        <td class="product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                    </tr>
+                                    @foreach ($cart as $key => $item)
+                                        <tr>
+                                            <td class="product-thumbnail"><a href="#"><img
+                                                        src="{{ Storage::url($item['image']) }}" alt="man" /></a></td>
+                                            <td class="product-name"><a href="#">{{ $item['ten_san_pham'] }}</a></td>
+                                            <td class="product-price"><span
+                                                    class="amount">{{ number_format($item['price'], 0, ',', '.') }} đ</span>
+                                            </td>
+                                            <td class="product-quantity">
+                                                <input type="number" name="quantity[{{ $key }}]"
+                                                    value="{{ $item['quantity'] }}" min="1">
+                                            </td>
+                                            <td class="product-subtotal">
+                                                {{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }} đ</td>
+                                            <td class="product-remove">
+                                                <form action="{{ route('cart.remove', $key) }}" 
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE') <!-- Chỉ định phương thức DELETE -->
+                                                    <button type="submit" class="product-remove"><i
+                                                            class="fa fa-times"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
+                        <button type="submit" class="btn btn-primary">Update Cart</button>
                     </form>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-6 col-12">
-                    <div class="buttons-cart mb-30">
+                    {{-- <div class="buttons-cart mb-30">
                         <ul>
                             <li><a href="#">Update Cart</a></li>
                             <li><a href="#">Continue Shopping</a></li>
                         </ul>
-                    </div>
-                    <div class="coupon">
+                    </div> --}}
+                    {{-- <div class="coupon">
                         <h3>Coupon</h3>
                         <p>Enter your coupon code if you have one.</p>
                         <form action="#">
                             <input type="text" placeholder="Coupon code">
                             <a href="#">Apply Coupon</a>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="cart_totals">
@@ -97,33 +107,21 @@
                                 <tr class="cart-subtotal">
                                     <th>Subtotal</th>
                                     <td>
-                                        <span class="amount">£215.00</span>
+                                        <span class="amount">{{ number_format($subtotal, 0, ',', '.') }} đ</span>
                                     </td>
                                 </tr>
                                 <tr class="shipping">
                                     <th>Shipping</th>
                                     <td>
-                                        <ul id="shipping_method">
-                                            <li>
-                                                <input type="radio">
-                                                <label>
-                                                    Flat Rate:
-                                                    <span class="amount">£7.00</span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <input type="radio">
-                                                <label> Free Shipping </label>
-                                            </li>
-                                        </ul>
-                                        <a href="#">Calculate Shipping</a>
+                                        <span class="amount">{{ number_format($shipping, 0, ',', '.') }} đ</span>
                                     </td>
                                 </tr>
                                 <tr class="order-total">
                                     <th>Total</th>
                                     <td>
                                         <strong>
-                                            <span class="amount">£215.00</span>
+                                            <span class="amount"><span
+                                                    class="amount">{{ number_format($total, 0, ',', '.') }} đ</span></span>
                                         </strong>
                                     </td>
                                 </tr>
