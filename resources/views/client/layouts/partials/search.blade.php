@@ -8,11 +8,11 @@
                 @foreach ($products as $product)
                     <div class="col-md-4">
                         <div class="card mb-3">
-                            <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->ten_san_pham }}">
+                            <img src="{{ Storage::url($product->image) }}" class="card-img-top" alt="{{ $product->ten_san_pham }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->ten_san_pham }}</h5>
                                 <p class="card-text">{{ $product->mo_ta }}</p>
-                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Chi tiết</a>
+                                {{-- <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Chi tiết</a> --}}
                             </div>
                         </div>
                     </div>

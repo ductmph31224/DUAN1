@@ -12,7 +12,7 @@
                             <ul>
                                 <li><a href="{{ route('ShowFormMyAcc') }}">Tài Khoản Của Tôi</a></li>
                                 <li><a href="">Thanh toán</a></li>
-                                <li><a @if (Auth::check()) <span> Xin chào, {{ Auth::user()->name }} | </span>
+                                <li><a @if (Auth::check()) <span>Xin chào, {{ Auth::user()->name }} | </span>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -56,8 +56,8 @@
                     <div class="col-lg-3 col-md-3 col-12">
                         <div class="my-cart">
                             <ul>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i>Giỏ Hàng</a>
-                                    <div class="mini-cart-sub">
+                                <li><a href="{{route('listCart')}}"><i class="fa fa-shopping-cart"></i>Giỏ Hàng</a>
+                                    {{-- <div class="mini-cart-sub">
                                         <div class="cart-product">
                                             <div class="single-cart">
                                                 <div class="cart-img">
@@ -93,7 +93,7 @@
                                             <a class="view-cart" href="">Xem giỏ hàng</a>
                                             <a href="">Thanh toán</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </li>
                             </ul>
                         </div>

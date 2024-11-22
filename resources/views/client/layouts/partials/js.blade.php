@@ -23,3 +23,4 @@
 <script src="/client/js/plugins.js"></script>
 <!-- main js -->
 <script src="/client/js/main.js"></script>
+@yield('js')
