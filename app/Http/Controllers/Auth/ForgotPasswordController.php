@@ -10,40 +10,64 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
 class ForgotPasswordController extends Controller
 {
-    public function ShowFormForpassWork(){
+    public function ShowFormForpassWork()
+    {
         return view('client.layouts.partials.forgot-password');
     }
     public function sendResetLinkEmail(Request $req)
     {
-        // Xác thực đầu vào
+
         $req->validate([
             'email' => 'required|email|exists:users,email',
         ], [
-            'email.required' => 'Bạn Không Được Để Trống!',
-            'email.email' => 'Bạn Nhập Đúng Email!',
-            'email.exists' => "Email Không Khớp!",
+            'email.required' => 'Bạn không được để trống!',
+            'email.email' => 'Vui lòng nhập đúng định dạng email!',
+            'email.exists' => "Email không khớp!",
         ]);
 
-        // Tạo một token ngẫu nhiên
-        $token = Str::random(50);
-
-        // Lưu token vào bảng users hoặc bảng password_resets
-        User::where('email', $req->email)->update(['reset_token' => $token]);
-
-        // Gửi email cài đặt lại mật khẩu
         $email = $req->email;
-        Mail::send('emails.reset', ['token' => $token], function ($message) use ($email) {
+        Mail::send('client.layouts.partials.resets', ['email' => $email], function ($message) use ($email) {
             $message->to($email);
-            $message->subject('Yêu Cầu Đặt Lại Mật Khẩu Mới');
+            $message->subject('Yêu cầu đặt lại mật khẩu mới');
         });
 
-        return redirect()->back()->with('status', 'Đã Gửi Email Tới tài khoản của bạn');
+        return redirect()->route('index')->with('status', 'Đã gửi email tới tài khoản của bạn');
     }
-    // public function resesst(){
-    //     view('client.layouts.partials.resets');
-    // }
+
+    public function ShowFormResetPasswoek()
+    {
+        return view('client.layouts.partials.resetpasswork');
+    }
+
+    public function passwordupdate(request $req)
+    {
+
+        $req->validate([
+            'password' => 'required|string|confirmed|min:6',
+            'email' => 'required|email'
+        ], [
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
+            'password.confirmed' => 'Mật khẩu xác nhận không khớp.',
+            'email.required' =>'email Không Được Bỏ Trống !',
+            'email.email' => 'Bạn Không Nhập Đúng Email!'
+
+        ]);
+        // tìm người dùng dựa trên email
+        $user = User::where('email', $req->email)->first();
+        // chech người dùng
+        if (!$user) {
+            return redirect()->back()->with('secsse', 'không có người dungg này!');
+        }
+        // cập nhật người dùng
+        $user->password = hash::make($req->password);
+        $user->save();
+        return redirect()->route('login')->with('secs', 'cập nhật mật khẩu thành công!');
+    }
+
 }
