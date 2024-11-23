@@ -7,8 +7,8 @@
                 <div class="col-lg-12">
                     <div class="breadcrumbs-menu">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#" class="active">cart</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('listCart')}}" class="active">cart</a></li>
                         </ul>
                     </div>
                 </div>
@@ -34,52 +34,49 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <form action="{{ route('updateCart') }}" method="POST">
-                        @csrf
-                        <div class="table-content table-responsive mb-15 border-1">
-                            <table>
-                                <thead>
+                    <div class="table-content table-responsive mb-15 border-1">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Image</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-remove">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($cart as $key => $item)
                                     <tr>
-                                        <th class="product-thumbnail">Image</th>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
-                                        <th class="product-remove">Remove</th>
+                                        <td class="product-thumbnail"><a href="#"><img
+                                                    src="{{ Storage::url($item['image']) }}" alt="man" /></a></td>
+                                        <td class="product-name"><a href="#">{{ $item['ten_san_pham'] }}</a></td>
+                                        <td class="product-price"><span
+                                                class="amount">{{ number_format($item['price'], 0, ',', '.') }} đ</span>
+                                        </td>
+                                        <td class="product-quantity">
+                                            <input type="number" name="quantity[{{ $key }}]" class="quantity"
+                                                value="{{ $item['quantity'] }}" min="1"
+                                                data-price="{{ $item['price'] }}" data-key="{{ $key }}">
+                                        </td>
+                                        <td class="product-subtotal" id="subtotal-{{ $key }}">
+                                            {{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }} đ</td>
+                                        <td class="product-remove">
+                                            <form action="{{ route('cart.remove', $key) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('DELETE') <!-- Chỉ định phương thức DELETE -->
+                                                <button type="submit" class="product-remove"><i
+                                                        class="fa fa-times"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($cart as $key => $item)
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img
-                                                        src="{{ Storage::url($item['image']) }}" alt="man" /></a></td>
-                                            <td class="product-name"><a href="#">{{ $item['ten_san_pham'] }}</a></td>
-                                            <td class="product-price"><span
-                                                    class="amount">{{ number_format($item['price'], 0, ',', '.') }} đ</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                <input type="number" name="quantity[{{ $key }}]"
-                                                    value="{{ $item['quantity'] }}" min="1">
-                                            </td>
-                                            <td class="product-subtotal">
-                                                {{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }} đ</td>
-                                            <td class="product-remove">
-                                                <form action="{{ route('cart.remove', $key) }}" method="POST"
-                                                    style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE') <!-- Chỉ định phương thức DELETE -->
-                                                    <button type="submit" class="product-remove"><i
-                                                            class="fa fa-times"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update Cart</button>
-                    </form>
                 </div>
             </div>
             <div class="row">
@@ -101,34 +98,8 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="cart_totals">
-                        <h2>Cart Totals</h2>
-                        <table>
-                            <tbody>
-                                <tr class="cart-subtotal">
-                                    <th>Subtotal</th>
-                                    <td>
-                                        <span class="amount">{{ number_format($subtotal, 0, ',', '.') }} đ</span>
-                                    </td>
-                                </tr>
-                                <tr class="shipping">
-                                    <th>Shipping</th>
-                                    <td>
-                                        <span class="amount">{{ number_format($shipping, 0, ',', '.') }} đ</span>
-                                    </td>
-                                </tr>
-                                <tr class="order-total">
-                                    <th>Total</th>
-                                    <td>
-                                        <strong>
-                                            <span class="amount"><span
-                                                    class="amount">{{ number_format($total, 0, ',', '.') }} đ</span></span>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                         <div class="wc-proceed-to-checkout">
-                            <a href="#">Proceed to Checkout</a>
+                            <a href="{{ route('checkout') }}">Mua hàng</a>
                         </div>
                     </div>
                 </div>
@@ -136,4 +107,55 @@
         </div>
     </div>
     <!-- cart-main-area-end -->
+@endsection
+@section('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.quantity').on('input', function() {
+                let quantity = $(this).val(); // Số lượng mới
+                if (quantity < 1) {
+                    // Nếu người dùng nhập giá trị nhỏ hơn 1, reset lại thành 1
+                    $(this).val(1);
+                    quantity = 1;
+                }
+                let price = $(this).data('price'); // Giá sản phẩm
+                let key = $(this).data('key'); // Key của sản phẩm trong cart
+
+                // Tính lại tổng giá cho sản phẩm này
+                let subtotal = quantity * price;
+
+                // Định dạng số tiền
+                let formattedSubtotal = new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(subtotal);
+
+                // Cập nhật giá trị tổng giá trên giao diện
+                $('#subtotal-' + key).text(formattedSubtotal);
+            });
+        });
+    </script>
+    <script>
+        $('.quantity').on('change', function() {
+            let quantity = $(this).val();
+            let key = $(this).data('key');
+
+            $.ajax({
+                url: '{{ route('updateCart') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    key: key,
+                    quantity: quantity
+                },
+                success: function(response) {
+                    alert('Cập nhật giỏ hàng thành công!');
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra!');
+                }
+            });
+        });
+    </script>
 @endsection

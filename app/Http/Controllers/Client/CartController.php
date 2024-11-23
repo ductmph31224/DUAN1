@@ -11,16 +11,7 @@ class CartController extends Controller
     //
     public function listCart(){
         $cart = session()->get('cart', []);
-       
-        $subtotal = 0;
-        $total= 0;
-        foreach($cart as $item ){
-            $subtotal += $item['price'] * $item['quantity'];
-        }
-        $shipping = 30000;
-        $total = $subtotal + $shipping;
-      
-        return view('client.layouts.partials.cart', compact('cart','total','subtotal','shipping'));
+        return view('client.layouts.partials.cart', compact('cart'));
     }
     public function addCart(Request $request){
         $request->validate([
@@ -51,21 +42,21 @@ class CartController extends Controller
    
     public function updateCart(Request $request){
         
-     $cart = session()->get('cart', []);
-     
+      $cart = session()->get('cart', []);
         
-        // Cập nhật số lượng cho từng sản phẩm
-        foreach ($request->quantity as $key => $quantity) {
-            if (isset($cart[$key])) {
-                $cart[$key]['quantity'] = $quantity;
-            }
-        }
+    $key = $request->input('key');
+    $quantity = $request->input('quantity');
+        if ($quantity < 1) {
+        return response()->json(['error' => 'Số lượng không hợp lệ'], 400);
+    }
+    if (isset($cart[$key])) {
+        $cart[$key]['quantity'] = $quantity;
+        $cart[$key]['subtotal'] = $cart[$key]['price'] * $quantity;
+    }
 
-        // Lưu lại giỏ hàng đã cập nhật vào session
-        session()->put('cart', $cart);
+    session()->put('cart', $cart);
 
-        // Redirect lại giỏ hàng
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
+    return response()->json(['success' => true]);
     }
      public function remove(String $id)
     {
@@ -81,4 +72,16 @@ class CartController extends Controller
 
         return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
     }
+    public function checkout(){
+        $cart = session()->get('cart', []);
+        $subtotal = 0;
+        $total= 0;
+        foreach($cart as $item ){
+            $subtotal += $item['price'] * $item['quantity'];
+        }
+        $shipping = 30000;
+        $total = $subtotal + $shipping;
+        return view('client.layouts.partials.checkout',compact('cart','total','subtotal','shipping'));
+    }
 }
+    
