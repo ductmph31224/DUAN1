@@ -34,52 +34,46 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <form action="{{ route('updateCart') }}" method="POST">
-                        @csrf
-                        <div class="table-content table-responsive mb-15 border-1">
-                            <table>
-                                <thead>
+                    <div class="table-content table-responsive mb-15 border-1">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Ảnh</th>
+                                    <th class="product-name">Sản Phẩm</th>
+                                    <th class="product-price">Giá</th>
+                                    <th class="product-quantity">Số lượng</th>
+                                    <th class="product-subtotal">Tổng cộng</th>
+                                    <th class="product-remove">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($cart as $key => $item)
                                     <tr>
-                                        <th class="product-thumbnail">Ảnh</th>
-                                        <th class="product-name">Sản Phẩm</th>
-                                        <th class="product-price">Giá</th>
-                                        <th class="product-quantity">Số lượng</th>
-                                        <th class="product-subtotal">Tổng cộng</th>
-                                        <th class="product-remove">Xóa</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($cart as $key => $item)
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img
-                                                        src="{{ Storage::url($item['image']) }}" alt="man" /></a></td>
-                                            <td class="product-name"><a href="#">{{ $item['ten_san_pham'] }}</a></td>
-                                            <td class="product-price"><span
-                                                    class="amount">{{ number_format($item['price'], 0, ',', '.') }} đ</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                <input type="number" name="quantity[{{ $key }}]"
-                                                    value="{{ $item['quantity'] }}" min="1">
-                                            </td>
-                                            <td class="product-subtotal">
-                                                {{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }} đ</td>
-                                            <td class="product-remove">
-                                                <form action="{{ route('cart.remove', $key) }}" 
-                                                    style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE') <!-- Chỉ định phương thức DELETE -->
-                                                    <button type="submit" class="product-remove"><i
-                                                            class="fa fa-times"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                        <td class="product-thumbnail"><a href="#"><img
+                                                    src="{{ Storage::url($item['image']) }}" alt="man" /></a></td>
+                                        <td class="product-name"><a href="#">{{ $item['ten_san_pham'] }}</a></td>
+                                        <td class="product-price"><span
+                                                class="amount">{{ number_format($item['price'], 0, ',', '.') }} đ</span>
+                                        </td>
+                                        <td class="product-quantity">
+                                            <input type="number" name="quantity[{{ $key }}]"
+                                                value="{{ $item['quantity'] }}" min="1">
+                                        </td>
+                                        <td class="product-subtotal">
+                                            {{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }} đ</td>
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update Cart</button>
-                    </form>
+                                <td class="product-remove">
+                                    <form action="{{ route('cart.remove', $item['id']) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE') <!-- Chỉ định phương thức DELETE -->
+                                        <button type="submit" class="product-remove"><i class="fa fa-times"></i></button>
+                                    </form>
+                                </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -128,7 +122,7 @@
                             </tbody>
                         </table>
                         <div class="wc-proceed-to-checkout">
-                            <a href="#">Proceed to Checkout</a>
+                            <a href="{{ route('formShowdondathang') }}">Thanh Toán</a>
                         </div>
                     </div>
                 </div>
