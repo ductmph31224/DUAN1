@@ -26,6 +26,9 @@ use App\Http\Controllers\Client\ClientCategoryController;
 |
 */
 
+
+
+ Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 //route đang ky, login
 //route login
 Route::get('/login', [AuthController::class, 'ShowFormLogin'])->name('login'); // Hiển thị form đăng nhập
@@ -66,7 +69,10 @@ route::get('searchProducts',[searchController::class,'searchProducts'])->name('s
 Route::get('list-cart',[CartController::class,'listCart'])->name('listCart');
 Route::post('add-to-cart',[CartController::class,'addCart'])->name('addCart');
 Route::post('update-to-cart',[CartController::class,'updateCart'])->name('updateCart');
-Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+
+// route thanh toán
+route::get('formShowdondathang',[CartController::class,'formShowdondathang'])->name('formShowdondathang');
 
 
 //route admin
@@ -104,7 +110,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::delete('destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
                 Route::get('category-by-product/{id}', [CategoryController::class, 'categoryByProduct'])->name('categoryByProduct');
             });
-        
+
         Route::prefix('authors')
             ->as('authors.')
             ->group(function () {

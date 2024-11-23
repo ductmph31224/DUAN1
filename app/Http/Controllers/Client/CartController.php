@@ -11,7 +11,7 @@ class CartController extends Controller
     //
     public function listCart(){
         $cart = session()->get('cart', []);
-       
+
         $subtotal = 0;
         $total= 0;
         foreach($cart as $item ){
@@ -19,7 +19,7 @@ class CartController extends Controller
         }
         $shipping = 30000;
         $total = $subtotal + $shipping;
-      
+
         return view('client.layouts.partials.cart', compact('cart','total','subtotal','shipping'));
     }
     public function addCart(Request $request){
@@ -34,7 +34,7 @@ class CartController extends Controller
         'quantity' => $request->quantity,
         'image' => $request->image,
     ];
-    
+
     // Lấy giỏ hàng hiện tại từ session
     $cart = session()->get('cart', []);
     // Kiểm tra sản phẩm đã tồn tại trong giỏ chưa
@@ -45,15 +45,15 @@ class CartController extends Controller
     }
     // Cập nhật giỏ hàng vào session
     session()->put('cart', $cart);
-    
+
     return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
     }
-   
+
     public function updateCart(Request $request){
-        
+
      $cart = session()->get('cart', []);
-     
-        
+
+
         // Cập nhật số lượng cho từng sản phẩm
         foreach ($request->quantity as $key => $quantity) {
             if (isset($cart[$key])) {
@@ -69,16 +69,21 @@ class CartController extends Controller
     }
      public function remove(String $id)
     {
-        $cart = session()->get('cart', []);
+        // Lấy giỏ hàng từ session (hoặc trả về mảng rỗng nếu không có giỏ hàng)
+    $cart = session()->get('cart', []);
 
-        // Xóa sản phẩm khỏi giỏ hàng
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-        }
+    // Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
+    if (isset($cart[$id])) {
+        unset($cart[$id]); // Xóa sản phẩm khỏi giỏ hàng
+        session()->put('cart', $cart); // Lưu lại giỏ hàng vào session
 
-        // Lưu lại giỏ hàng đã cập nhật vào session
-         session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng!');
+    }
 
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
+    // Nếu sản phẩm không tồn tại trong giỏ hàng
+    return redirect()->back()->with('error', 'Sản phẩm không tồn tại trong giỏ hàng!');
+    }
+    public function formShowdondathang(){
+        return view('client.layouts.partials.mua');
     }
 }
