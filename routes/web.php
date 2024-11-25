@@ -69,10 +69,9 @@ route::get('searchProducts',[searchController::class,'searchProducts'])->name('s
 Route::get('list-cart',[CartController::class,'listCart'])->name('listCart');
 Route::post('add-to-cart',[CartController::class,'addCart'])->name('addCart');
 Route::post('update-to-cart',[CartController::class,'updateCart'])->name('updateCart');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('checkout',[CartController::class,'checkout'])->name('checkout');
 
-
-// route thanh toán
-route::get('formShowdondathang',[CartController::class,'formShowdondathang'])->name('formShowdondathang');
 
 
 //route admin
