@@ -7,8 +7,10 @@
                 <div class="col-lg-12">
                     <div class="breadcrumbs-menu">
                         <ul>
+
                             <li><a href="{{route('index')}}">Home</a></li>
                             <li><a href="{{route('listCart')}}" class="active">cart</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -38,12 +40,14 @@
                         <table>
                             <thead>
                                 <tr>
+
                                     <th class="product-thumbnail">Image</th>
                                     <th class="product-name">Product</th>
                                     <th class="product-price">Price</th>
                                     <th class="product-quantity">Quantity</th>
                                     <th class="product-subtotal">Total</th>
                                     <th class="product-remove">Remove</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,6 +81,7 @@
                         </table>
                     </div>
 
+
                 </div>
             </div>
             <div class="row">
@@ -93,13 +98,14 @@
                         <form action="#">
                             <input type="text" placeholder="Coupon code">
                             <a href="#">Apply Coupon</a>
-                        </form>
-                    </div> --}}
+                        </form>                    </div> --}}
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="cart_totals">
                         <div class="wc-proceed-to-checkout">
+
                             <a href="{{ route('checkout') }}">Mua hàng</a>
+
                         </div>
                     </div>
                 </div>

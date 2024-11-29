@@ -1,7 +1,7 @@
 @extends('client.layouts.master')
 
 @section('content')
-    <style>    
+    <style>
         .product-img img {
             width: 100%;
             height: 250px;
@@ -169,7 +169,7 @@
                                                 <input type="hidden" name="image" value="{{ $item->image }}">
                                             <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add tocart</button>
                                         </form>
-                                       
+
                                     </div>
                                     <div class="add-to-link">
                                         <ul>

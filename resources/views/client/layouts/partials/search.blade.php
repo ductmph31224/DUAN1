@@ -2,7 +2,6 @@
 @section('content')
     <div class="container">
         <h2>Kết quả tìm kiếm cho: "{{ $search }}"</h2>
-
         @if ($products->count() > 0)
             <div class="row">
                 @foreach ($products as $product)
