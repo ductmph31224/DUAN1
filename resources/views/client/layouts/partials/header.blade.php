@@ -11,7 +11,7 @@
                         <div class="account-area text-end">
                             <ul>
                                 <li><a href="{{ route('ShowFormMyAcc') }}">Tài Khoản Của Tôi</a></li>
-                                <li><a href="">Thanh toán</a></li>
+                                {{-- <li><a href="">Thanh toán</a></li> --}}
                                 <li><a @if (Auth::check()) <span>Xin chào, {{ Auth::user()->name }} | </span>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
 
