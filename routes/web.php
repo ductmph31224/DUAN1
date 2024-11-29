@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminQrController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\UserController;
 use App\Http\Controllers\Admin\AuthorController;
@@ -11,9 +12,11 @@ use App\Http\Controllers\search\searchController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\OderController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Client\ClientCategoryController;
+use App\Http\Controllers\zalopay\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +74,19 @@ Route::post('add-to-cart',[CartController::class,'addCart'])->name('addCart');
 Route::post('update-to-cart',[CartController::class,'updateCart'])->name('updateCart');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('checkout',[CartController::class,'checkout'])->name('checkout');
+// route đặt hàng
+route::get('dat-hang',[OderController::class,'process'])->name('dathang');
+// thanh toán online zalopay
+// Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+Route::get('/payment/create/', [AdminQrController::class, 'showTest'])->name('payment.create');
+// route::get('toggleVisibility',[AdminQrController::class, 'toggleVisibility'])->name('toggleVisibility');
 
+// Route::get('/payment/callback', [PaymentController::class, 'callback'])->name('payment.callback');
+// Route::post('/payment/notify', [PaymentController::class, 'notify'])->name('payment.notify');
+
+
+
+// Route::post('/payment/notify', [PaymentController::class, 'paymentNotify'])->name('payment.notify');
 
 
 //route admin
@@ -130,6 +145,31 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::get('{id}/edit', [PublisherController::class, 'edit'])->name('edit');
                 Route::put('update/{id}', [PublisherController::class, 'update'])->name('update');
                 Route::delete('destroy/{id}', [PublisherController::class, 'destroy'])->name('destroy');
+             });
+        Route::prefix('orders')
+            ->as('orders.')
+            ->group(function () {
+
+                Route::get('/', [OderController::class, 'index'])->name('index');
+                Route::get('{id}/edit',[OderController::class, 'edit'])->name('edit');
+                Route::put('update/{id}',[OderController::class, 'update'])->name('update');
+                Route::delete('destroy/{id}', [OderController::class, 'destroy'])->name('destroy');
+
+            });
+            Route::prefix('anh')
+            ->as('anh.')
+            ->group(function () {
+
+                Route::get('/', [AdminQrController::class, 'showlist'])->name('index');
+                Route::get('create', [AdminQrController::class, 'them'])->name('create');
+                Route::post('createa', [AdminQrController::class, 'store'])->name('store');
+                Route::post('/qr-images/toggle/{id}', [AdminQrController::class, 'updateStatus'])->name('toggleVisibility');
+                route::get('toggleVisibility/{id}',[AdminQrController::class, 'formedit'])->name('edit');
+
+                // Route::get('{id}/edit',[OderController::class, 'edit'])->name('edit');
+                // Route::put('update/{id}',[OderController::class, 'update'])->name('update');
+                // Route::delete('destroy/{id}', [OderController::class, 'destroy'])->name('destroy');
+
             });
 
 });
@@ -141,7 +181,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
 // });
 
 
+Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
 
+});
 
 // Route::view('/checkout','client.layouts.partials.forgot-password');
 route::get('product/detail/{id}', [UserController::class, 'detailProduct'])->name('detailProduct');
@@ -150,4 +192,5 @@ Route::get('My-acc/doi-mk', [ProfileController::class, 'editPass'])->name('doima
 Route::put('My-acc/update-pass/{user}', [ProfileController::class, 'updatePass'])->name('update-pass');
 Route::get('My-acc/profile', [ProfileController::class, 'profile'])->name('profile');
 Route::put('My-acc/update-profile/{user}', [ProfileController::class, 'updateProfile'])->name('update-profile');
+
 

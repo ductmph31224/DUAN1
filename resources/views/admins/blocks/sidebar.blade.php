@@ -59,12 +59,21 @@
                     </a>
                 </li>
                 <li>
-                    <a class='tp-link' href='#'>
+                    <a class='tp-link' href='{{route('admins.orders.index')}}'>
                         <i data-feather="shopping-bag"></i>
                         <span> Đơn Hàng </span>
                     </a>
                 </li>
+
             </ul>
+           <ul>
+            <li>
+                <a class='tp-link' href='{{route('admins.anh.index')}}'>
+                    <i data-feather="shopping-bag"></i>
+                    <span> Mã QR Thanh Toán </span>
+                </a>
+            </li>
+           </ul>
         </div>
         <!-- End Sidebar -->
 

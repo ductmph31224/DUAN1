@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('phone_nguoi_nhan');
             $table->string('email_nguoi_nhan');
             $table->string('address_nguoi_nhan');
-            $table->double('tien_hang');
+            $table->double('tien_hang')->nullable();  // Cho phép giá trị null
             $table->double('tien_ship')->nullable();
             $table->double('tong_tien');
             $table->text('ghi_chu')->nullable();
             $table->string('trang_thai_don_hang');
-            $table->string('trang_thai_thanh_toan')->nullable();
+            $table->enum('trang_thai_thanh_toan', ['COD', 'Online'])->nullable();
+
             $table->timestamps();
         });
     }

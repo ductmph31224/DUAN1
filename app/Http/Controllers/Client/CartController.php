@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Session;
 
 class CartController extends Controller
@@ -51,37 +52,46 @@ class CartController extends Controller
     return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
     }
 
-    public function updateCart(Request $request){
+    public function updateCart(Request $request)
+    {
+        // Lấy giỏ hàng hiện tại từ session
+        $cart = session()->get('cart', []);
 
-
-     $cart = session()->get('cart', []);
-
-
-        // Cập nhật số lượng cho từng sản phẩm
-        foreach ($request->quantity as $key => $quantity) {
-            if (isset($cart[$key])) {
-                $cart[$key]['quantity'] = $quantity;
+        // Nếu $request->quantity là mảng, xử lý cập nhật nhiều sản phẩm
+        if (is_array($request->quantity)) {
+            foreach ($request->quantity as $key => $quantity) {
+                if (isset($cart[$key])) {
+                    // Kiểm tra số lượng hợp lệ
+                    if ($quantity < 1) {
+                        return response()->json(['error' => 'Số lượng không hợp lệ'], 400);
+                    }
+                    $cart[$key]['quantity'] = $quantity;
+                    $cart[$key]['subtotal'] = $cart[$key]['price'] * $quantity;
+                }
             }
         }
 
+        // Nếu $request->key và $request->quantity không phải mảng, xử lý cập nhật đơn lẻ
+        if ($request->has('key') && $request->has('quantity')) {
+            $key = $request->input('key');
+            $quantity = $request->input('quantity');
 
-      $cart = session()->get('cart', []);
+            if ($quantity < 1) {
+                return response()->json(['error' => 'Số lượng không hợp lệ'], 400);
+            }
+            if (isset($cart[$key])) {
+                $cart[$key]['quantity'] = $quantity;
+                $cart[$key]['subtotal'] = $cart[$key]['price'] * $quantity;
+            }
+        }
 
-    $key = $request->input('key');
-    $quantity = $request->input('quantity');
-        if ($quantity < 1) {
-        return response()->json(['error' => 'Số lượng không hợp lệ'], 400);
+        // Lưu lại giỏ hàng vào session
+        session()->put('cart', $cart);
+
+        // Trả về kết quả
+        return response()->json(['success' => true, 'cart' => $cart]);
     }
-    if (isset($cart[$key])) {
-        $cart[$key]['quantity'] = $quantity;
-        $cart[$key]['subtotal'] = $cart[$key]['price'] * $quantity;
-    }
 
-
-    session()->put('cart', $cart);
-
-    return response()->json(['success' => true]);
-    }
      public function remove(String $id)
     {
         // Lấy giỏ hàng từ session (hoặc trả về mảng rỗng nếu không có giỏ hàng)
