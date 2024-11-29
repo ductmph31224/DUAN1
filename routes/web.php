@@ -76,17 +76,12 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('car
 Route::get('checkout',[CartController::class,'checkout'])->name('checkout');
 // route đặt hàng
 route::get('dat-hang',[OderController::class,'process'])->name('dathang');
-// thanh toán online zalopay
-// Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
-Route::get('/payment/create/', [AdminQrController::class, 'showTest'])->name('payment.create');
-// route::get('toggleVisibility',[AdminQrController::class, 'toggleVisibility'])->name('toggleVisibility');
+// thanh toán online
 
-// Route::get('/payment/callback', [PaymentController::class, 'callback'])->name('payment.callback');
-// Route::post('/payment/notify', [PaymentController::class, 'notify'])->name('payment.notify');
-
-
-
-// Route::post('/payment/notify', [PaymentController::class, 'paymentNotify'])->name('payment.notify');
+Route::get('/payment/create/{order_id}', [AdminQrController::class, 'showTest'])->name('payment.create');
+// router xác nhận
+Route::post('/order/cancel/{orderId}', [AdminQrController::class, 'cancelOrder'])->name('ordercancel');
+Route::post('/order/confirm/{orderId}', [AdminQrController::class, 'confirmPayment'])->name('orderconfirm');
 
 
 //route admin

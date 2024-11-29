@@ -72,7 +72,7 @@ class OderController extends Controller
         } else {
         //     // Chuyển hướng đến trang thanh toán online
         //     // return redirect()->route('payment.online', ['order_id' => $order->id]);
-            return redirect()->route('payment.create');
+            return redirect()->route('payment.create',['order_id' => $order->id]);
          }
     }
     public function index(){
