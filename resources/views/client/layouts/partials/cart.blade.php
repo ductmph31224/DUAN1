@@ -7,8 +7,8 @@
                 <div class="col-lg-12">
                     <div class="breadcrumbs-menu">
                         <ul>
-                            <li><a href="{{route('index')}}">Home</a></li>
-                            <li><a href="{{route('listCart')}}" class="active">cart</a></li>
+                            <li><a href="{{ route('index') }}">Home</a></li>
+                            <li><a href="{{ route('listCart') }}" class="active">cart</a></li>
                         </ul>
                     </div>
                 </div>
@@ -149,12 +149,12 @@
                     key: key,
                     quantity: quantity
                 },
-                success: function(response) {
-                    alert('Cập nhật giỏ hàng thành công!');
-                },
-                error: function() {
-                    alert('Có lỗi xảy ra!');
-                }
+                // success: function(response) {
+                //     alert('Cập nhật giỏ hàng thành công!');
+                // },
+                // error: function() {
+                //     alert('Có lỗi xảy ra!');
+                // }
             });
         });
     </script>
