@@ -133,7 +133,9 @@ img {
     max-width: 100%;
     height: auto;
 }
-
+.banner {
+    height: 500px;
+}
 .fix {
     overflow: hidden;
 }

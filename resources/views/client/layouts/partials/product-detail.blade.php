@@ -1,7 +1,7 @@
 @extends('client.layouts.master')
 @section('content')
 <style>
-    
+
 </style>
     <!-- breadcrumbs-area-start -->
     <div class="breadcrumbs-area mb-70">
@@ -67,7 +67,7 @@
                                         </div>
                                     </div>
                                     <div class="product-info-price">
-                                        <div class="price-final">                                            
+                                        <div class="price-final">
                                             <span>{{number_format($product->gia_khuyen_mai, 0, ',', '.')}} đ</span>
                                             <span class="old-price">{{number_format($product->gia_san_pham, 0, ',', '.')}} đ</span>
                                         </div>
@@ -92,7 +92,7 @@
                                             <a href="#"><i class="fa fa-heart"></i></a>
                                             <a href="#"><i class="fa fa-pie-chart"></i></a>
                                             <a href="#"><i class="fa fa-envelope-o"></i></a>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -471,13 +471,13 @@
 												</div>
 												<h4><a href="{{route('detailProduct',$item->id)}}">{{$item->ten_san_pham}}</a></h4>
 												<div class="product-price">
-													<ul>														
+													<ul>
 														<li>{{number_format($item->gia_khuyen_mai, 0, ',', '.')}} đ</li>
                                                         <li class="old-price">{{number_format($item->gia_san_pham, 0, ',', '.')}} đ</li>
 													</ul>
 												</div>
 											</div>
-										</div>   
+										</div>
 									@endforeach
                                 </div>
                                 <div class="product-total-2">
@@ -506,7 +506,7 @@
                                         </div>
                                     </div>
 									@endforeach
-                                                                      
+
                                 </div>
                             </div>
                         </div>
