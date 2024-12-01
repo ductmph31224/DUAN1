@@ -66,21 +66,13 @@
     <!-- slider-area-start -->
     <div class="slider-area">
         <div class="slider-active owl-carousel">
-            <div class="single-slider pt-125 pb-130 bg-img" style="background-image:url(/client/img/slider/1.jpg);">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="slider-content slider-animated-1 text-center">
-                                <h1>Huge Sale</h1>
-                                <h2>koparion</h2>
-                                <h3>Now starting at £99.00</h3>
-                                <a href="#">Shop now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slider slider-h1-2 pt-215 pb-100 bg-img"
+            @foreach ($banner as $item)
+                
+                    <img class="banner" src="{{Storage::url($item->image)}}" alt="" >
+                
+            @endforeach
+
+            {{-- <div class="single-slider slider-h1-2 pt-215 pb-100 bg-img"
                 style="background-image:url(/client/img/slider/2.jpg);">
                 <div class="container">
                     <div class="slider-content slider-content-2 slider-animated-1">
@@ -90,7 +82,7 @@
                         <a href="#">Contact Us Today!</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- slider-area-end -->
@@ -154,20 +146,22 @@
                                     <div class="product-price">
                                         <ul>
                                             <li>{{ number_format($item->gia_khuyen_mai, 0, ',', '.') }} đ</li>
-                                            <li class="old-price">{{ number_format($item->gia_san_pham, 0, ',', '.') }} đ</li>
+                                            <li class="old-price">{{ number_format($item->gia_san_pham, 0, ',', '.') }} đ
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="product-link">
                                     <div class="product-button">
-                                        <form action="{{route('addCart')}}" method="POST">
+                                        <form action="{{ route('addCart') }}" method="POST">
                                             @csrf
-                                             <input type="hidden" id="quantity" name="quantity" value="1" >
-                                             <input type="hidden" name="id" value="{{ $item->id }}">
-                                                <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
-                                                <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
-                                                <input type="hidden" name="image" value="{{ $item->image }}">
-                                            <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add tocart</button>
+                                            <input type="hidden" id="quantity" name="quantity" value="1">
+                                            <input type="hidden" name="id" value="{{ $item->id }}">
+                                            <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
+                                            <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
+                                            <input type="hidden" name="image" value="{{ $item->image }}">
+                                            <button type="submit" title="Add to cart"><i
+                                                    class="fa fa-shopping-cart"></i>Add tocart</button>
                                         </form>
 
                                     </div>
@@ -1040,15 +1034,16 @@
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                     <form action="{{route('addCart')}}" method="POST">
-                                            @csrf
-                                             <input type="hidden" id="quantity" name="quantity" value="1" >
-                                             <input type="hidden" name="id" value="{{ $item->id }}">
-                                                <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
-                                                <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
-                                                <input type="hidden" name="image" value="{{ $item->image }}">
-                                            <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add tocart</button>
-                                        </form>
+                                    <form action="{{ route('addCart') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" id="quantity" name="quantity" value="1">
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                        <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
+                                        <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
+                                        <input type="hidden" name="image" value="{{ $item->image }}">
+                                        <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add
+                                            tocart</button>
+                                    </form>
                                 </div>
                                 <div class="add-to-link">
                                     <ul>
@@ -1092,15 +1087,16 @@
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                     <form action="{{route('addCart')}}" method="POST">
-                                            @csrf
-                                             <input type="hidden" id="quantity" name="quantity" value="1" >
-                                             <input type="hidden" name="id" value="{{ $item->id }}">
-                                                <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
-                                                <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
-                                                <input type="hidden" name="image" value="{{ $item->image }}">
-                                            <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add tocart</button>
-                                        </form>
+                                    <form action="{{ route('addCart') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" id="quantity" name="quantity" value="1">
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                        <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
+                                        <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
+                                        <input type="hidden" name="image" value="{{ $item->image }}">
+                                        <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add
+                                            tocart</button>
+                                    </form>
                                 </div>
                                 <div class="add-to-link">
                                     <ul>
