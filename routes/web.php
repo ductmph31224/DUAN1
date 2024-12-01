@@ -12,6 +12,7 @@ use App\Http\Controllers\search\searchController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\OderController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -92,8 +93,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
     // Giao diện admin
    //Route người dùng
    Route::resource('users', AdminUserController::class);
+   Route::get('statistical', [AdminController::class, 'statistical'])->name('statistical');
    Route::put('My-acc/update-profile',[AdminUserController::class,'update'])->name('doithongtin');
-    Route::get('/index', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
+   
     // Các route khác cho admin
     Route::prefix('products')
     ->as('products.')
@@ -141,6 +143,17 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::put('update/{id}', [PublisherController::class, 'update'])->name('update');
                 Route::delete('destroy/{id}', [PublisherController::class, 'destroy'])->name('destroy');
              });
+
+        Route::prefix('banner')
+            ->as('banner.')
+            ->group(function () {
+                Route::get('/', [BannerController::class, 'index'])->name('index');
+                Route::get('create', [BannerController::class, 'create'])->name('create');
+                Route::post('store', [BannerController::class, 'store'])->name('store');
+                Route::get('{id}/edit', [BannerController::class, 'edit'])->name('edit');
+                Route::put('update/{id}', [BannerController::class, 'update'])->name('update');
+                Route::delete('destroy/{id}', [BannerController::class, 'destroy'])->name('destroy');
+            });
         Route::prefix('orders')
             ->as('orders.')
             ->group(function () {
