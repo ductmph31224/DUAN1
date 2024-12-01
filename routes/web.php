@@ -161,10 +161,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::post('/qr-images/toggle/{id}', [AdminQrController::class, 'updateStatus'])->name('toggleVisibility');
                 route::get('toggleVisibility/{id}',[AdminQrController::class, 'formedit'])->name('edit');
 
-                // Route::get('{id}/edit',[OderController::class, 'edit'])->name('edit');
-                // Route::put('update/{id}',[OderController::class, 'update'])->name('update');
-                // Route::delete('destroy/{id}', [OderController::class, 'destroy'])->name('destroy');
-
+               
             });
 
 });
