@@ -173,6 +173,29 @@
             </div>
         </div>
     </div>
+    <!-- banner-area-end -->
+    <!-- slider-area-start -->
+    <div class="slider-area">
+        <div class="slider-active owl-carousel">
+            @foreach ($banner as $item)
+
+                    <img class="banner" src="{{Storage::url($item->image)}}" alt="" >
+
+            @endforeach
+
+            {{-- <div class="single-slider slider-h1-2 pt-215 pb-100 bg-img"
+                style="background-image:url(/client/img/slider/2.jpg);">
+                <div class="container">
+                    <div class="slider-content slider-content-2 slider-animated-1">
+                        <h1>We can help get your</h1>
+                        <h2>Books in Order</h2>
+                        <h3>and Accessories</h3>
+                        <a href="#">Contact Us Today!</a>
+                    </div>
+                </div>
+            </div> --}}
+        </div>
+    </div>
     <!-- slider-area-end -->
     <!-- product-area-start -->
     <div class="new-book-area pb-100">

@@ -65,10 +65,11 @@
                                             <div class="myaccount-content">
                                                 <h5>Tổng quan</h5>
                                                 <div class="welcome">
-                                                    <p>Xin chào, <strong>{{ $user->name }}</strong> ( Nếu không phải
-                                                        <strong>{{ $user->name }}
-                                                            !</strong><a href="{{ route('logout') }}" class="logout">
-                                                            Đăng xuất</a>)</p>
+                                                    <p>Xin chào, <strong>{{Auth::user()->name}}</strong> ( Nếu không phải <strong>{{Auth::user()->name}}
+                                                            !</strong> <form action="{{route('logout')}} " method="POST">
+                                                                @csrf
+                                                              <button class="btn btn-primary">logout</button>
+                                    )</p>
                                                 </div>
                                                 <p class="mb-0">Từ bảng điều khiển tài khoản của bạn. bạn có thể dễ dàng
                                                     kiểm tra &

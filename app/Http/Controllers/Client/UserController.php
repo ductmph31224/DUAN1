@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use Illuminate\Support\Facades\DB;
 use App\Models\OrderDetail;
 
@@ -33,7 +34,8 @@ class UserController extends Controller
             ->get(['id', 'ten_san_pham', 'gia_san_pham', 'gia_khuyen_mai', 'image']);  // Chọn các trường cần thiết
 
         // Truyền biến $newestProducts vào view
-        return view('client.index', compact('products', 'allProducts', 'product_2', 'product_1', 'product_3', 'product_4', 'topSellingProductsDetails', 'newestProducts'));
+        $banner = Banner::get();
+        return view('client.index', compact('products','allProducts','product_2','product_1','product_3','product_4', 'topSellingProductsDetails', 'newestProducts','banner') );
     }
 
 

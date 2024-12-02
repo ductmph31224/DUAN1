@@ -25,6 +25,12 @@
             <ul id="side-menu">
 
                 <li class="menu-title">Menu</li>
+                <li>
+                        <a class='tp-link' href='{{route('admins.statistical')}}'>
+                            <i data-feather="users"></i>
+                            <span> Thống kê </span>
+                        </a>
+                     </li>
                     <li>
                         <a class='tp-link' href='{{route('admins.users.index')}}'>
                             <i data-feather="users"></i>
@@ -56,6 +62,12 @@
                     <a class='tp-link' href='{{route('admins.publishers.index')}}'>
                         <i data-feather="book"></i>
                         <span> Nhà xuất bản </span>
+                    </a>
+                </li>
+                <li>
+                    <a class='tp-link' href='{{route('admins.banner.index')}}'>
+                        <i data-feather="book"></i>
+                        <span> Banner </span>
                     </a>
                 </li>
                 <li>
