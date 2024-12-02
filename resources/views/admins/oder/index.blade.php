@@ -49,7 +49,7 @@
                                             <th>Trạng thái đơn hàng</th>
                                             <th>Hình Thức Thanh Toán</th>
                                             <th>Ghi Chú</th>
-                                            <th>Xóa</th>
+                                            {{-- <th>Xóa</th> --}}
                                             <th>Cập NHật</th>
                                         </tr>
                                     </thead>
@@ -74,13 +74,13 @@
                                             <td>{{ $order->trang_thai_don_hang }}</td>
                                             <td>{{$order->trang_thai_thanh_toan}}</td>
                                             <td>{{$order->ghi_chu}}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <form action="{{route('admins.orders.destroy',$order->id)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Xóa</button>
                                                 </form>
-                                            </td>
+                                            </td> --}}
                                             <td>
                                                 <form action="{{route('admins.orders.edit',$order->id)}}">
                                                     <button type="submit" class="btn btn-outline-info btn-sm">cập  nhật</button>
