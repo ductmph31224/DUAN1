@@ -32,7 +32,7 @@ use App\Http\Controllers\zalopay\PaymentController;
 
 
 
- Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 //route đang ky, login
 //route login
 Route::get('/login', [AuthController::class, 'ShowFormLogin'])->name('login'); // Hiển thị form đăng nhập
@@ -45,14 +45,14 @@ Route::Post('/dang-ky', [AuthController::class, 'dangky'])->name('dangkyUser');
 // route nội dung email
 //route::get('email',[ForgotPasswordController::class,'resesst'])->name('resesst');
 
-route::post('checkform',[ForgotPasswordController::class,'sendResetLinkEmail'])->name('sendResetLinkEmail');
+route::post('checkform', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('sendResetLinkEmail');
 // route show form khôi phục mật khẩu
-route::get('khôi-phuc-mat-khau-moi',[ForgotPasswordController::class,'ShowFormResetPasswoek'])->name('ShowFormResetPasswoek');
-route::post('check-form-khoi-phuc',[ForgotPasswordController::class,'passwordupdate'])->name('passwordupdate');
+route::get('khôi-phuc-mat-khau-moi', [ForgotPasswordController::class, 'ShowFormResetPasswoek'])->name('ShowFormResetPasswoek');
+route::post('check-form-khoi-phuc', [ForgotPasswordController::class, 'passwordupdate'])->name('passwordupdate');
 
-route::get('ShowFormForpassWork',[ForgotPasswordController::class,'ShowFormForpassWork'])->name('khoiphucmatkhau');
+route::get('ShowFormForpassWork', [ForgotPasswordController::class, 'ShowFormForpassWork'])->name('khoiphucmatkhau');
 // logou tài khaoanr
-route::post('logout',[AuthController::class,'UseLogout'])->name('logout');
+route::post('logout', [AuthController::class, 'UseLogout'])->name('logout');
 //show form thông tin tài khoản
 route::get('My-acc', [AuthController::class, 'ShowFormMyAcc'])->name('ShowFormMyAcc');
 
@@ -64,19 +64,22 @@ Route::get('by-category/{id}', [ClientCategoryController::class, 'byCategory'])-
 
 
 
-Route::get('/',[UserController::class,'indexUser'] )->name('index');
+Route::get('/', [UserController::class, 'indexUser'])->name('index');
 // route tìm kiếm
-route::get('searchProducts',[searchController::class,'searchProducts'])->name('searchProducts');
+route::get('searchProducts', [searchController::class, 'searchProducts'])->name('searchProducts');
 // route trả kết quả tìm kiếm
 
 // route cart
-Route::get('list-cart',[CartController::class,'listCart'])->name('listCart');
-Route::post('add-to-cart',[CartController::class,'addCart'])->name('addCart');
-Route::post('update-to-cart',[CartController::class,'updateCart'])->name('updateCart');
+
+Route::get('list-cart', [CartController::class, 'listCart'])->name('listCart');
+Route::post('add-to-cart', [CartController::class, 'addCart'])->name('addCart');
+Route::post('update-to-cart', [CartController::class, 'updateCart'])->name('updateCart');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::get('checkout',[CartController::class,'checkout'])->name('checkout');
+Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
 // route đặt hàng
-route::get('dat-hang',[OderController::class,'process'])->name('dathang');
+route::get('dat-hang', [OderController::class, 'process'])->name('dathang');
+
+
 // thanh toán online
 
 Route::get('/payment/create/{order_id}', [AdminQrController::class, 'showTest'])->name('payment.create');
@@ -85,28 +88,33 @@ Route::post('/order/cancel/{orderId}', [AdminQrController::class, 'cancelOrder']
 Route::post('/order/confirm/{orderId}', [AdminQrController::class, 'confirmPayment'])->name('orderconfirm');
 
 
+
+
+
+
+
 //route admin
 Route::middleware(['auth', 'isAdmin'])->prefix('admins')
-->as('admins.')
-->group( function () {
-    // route trang chủ index
-    // Giao diện admin
-   //Route người dùng
-   Route::resource('users', AdminUserController::class);
-   Route::get('statistical', [AdminController::class, 'statistical'])->name('statistical');
-   Route::put('My-acc/update-profile',[AdminUserController::class,'update'])->name('doithongtin');
-   
-    // Các route khác cho admin
-    Route::prefix('products')
-    ->as('products.')
-    ->group(function(){
-        Route::get('/',[ProductController::class,'index'])->name('index');
-        Route::get('create',[ProductController::class,'create'])->name('create');
-        Route::post('store',[ProductController::class,'store'])->name('store');
-        Route::get('{id}/edit',[ProductController::class,'edit'])->name('edit');
-        Route::put('update/{id}',[ProductController::class,'update'])->name('update');
-        Route::delete('destroy/{id}',[ProductController::class,'destroy'])->name('destroy');
-    });
+    ->as('admins.')
+    ->group(function () {
+        // route trang chủ index
+        // Giao diện admin
+        //Route người dùng
+        Route::resource('users', AdminUserController::class);
+        Route::get('statistical', [AdminController::class, 'statistical'])->name('statistical');
+        Route::put('My-acc/update-profile', [AdminUserController::class, 'update'])->name('doithongtin');
+
+        // Các route khác cho admin
+        Route::prefix('products')
+            ->as('products.')
+            ->group(function () {
+                Route::get('/', [ProductController::class, 'index'])->name('index');
+                Route::get('create', [ProductController::class, 'create'])->name('create');
+                Route::post('store', [ProductController::class, 'store'])->name('store');
+                Route::get('{id}/edit', [ProductController::class, 'edit'])->name('edit');
+                Route::put('update/{id}', [ProductController::class, 'update'])->name('update');
+                Route::delete('destroy/{id}', [ProductController::class, 'destroy'])->name('destroy');
+            });
 
 
 
@@ -142,7 +150,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::get('{id}/edit', [PublisherController::class, 'edit'])->name('edit');
                 Route::put('update/{id}', [PublisherController::class, 'update'])->name('update');
                 Route::delete('destroy/{id}', [PublisherController::class, 'destroy'])->name('destroy');
-             });
+            });
 
         Route::prefix('banner')
             ->as('banner.')
@@ -159,12 +167,11 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
             ->group(function () {
 
                 Route::get('/', [OderController::class, 'index'])->name('index');
-                Route::get('{id}/edit',[OderController::class, 'edit'])->name('edit');
-                Route::put('update/{id}',[OderController::class, 'update'])->name('update');
+                Route::get('{id}/edit', [OderController::class, 'edit'])->name('edit');
+                Route::put('update/{id}', [OderController::class, 'update'])->name('update');
                 Route::delete('destroy/{id}', [OderController::class, 'destroy'])->name('destroy');
-
             });
-            Route::prefix('anh')
+        Route::prefix('anh')
             ->as('anh.')
             ->group(function () {
 
@@ -172,12 +179,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::get('create', [AdminQrController::class, 'them'])->name('create');
                 Route::post('createa', [AdminQrController::class, 'store'])->name('store');
                 Route::post('/qr-images/toggle/{id}', [AdminQrController::class, 'updateStatus'])->name('toggleVisibility');
-                route::get('toggleVisibility/{id}',[AdminQrController::class, 'formedit'])->name('edit');
-
-               
+                route::get('toggleVisibility/{id}', [AdminQrController::class, 'formedit'])->name('edit');
             });
-
-});
+    });
 
 
 // route::get('My-acc/doi-mk',function(){
@@ -186,8 +190,12 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
 // });
 
 
-Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
+Route::middleware(['Auth'])->prefix('user')->name('user.')->group(function () {
+    Route::prefix('cart')
+        ->as('cart.')
+        ->group(function () {
 
+        });
 });
 
 // Route::view('/checkout','client.layouts.partials.forgot-password');
@@ -197,5 +205,6 @@ Route::get('My-acc/doi-mk', [ProfileController::class, 'editPass'])->name('doima
 Route::put('My-acc/update-pass/{user}', [ProfileController::class, 'updatePass'])->name('update-pass');
 Route::get('My-acc/profile', [ProfileController::class, 'profile'])->name('profile');
 Route::put('My-acc/update-profile/{user}', [ProfileController::class, 'updateProfile'])->name('update-profile');
+
 
 
