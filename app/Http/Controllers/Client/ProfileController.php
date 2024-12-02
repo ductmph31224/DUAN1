@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -106,6 +107,6 @@ class ProfileController extends Controller
             'address' => $request->address,
         ]);
 
-        return redirect()->back()->with('success', 'User updated successfully.');
+        return redirect()->route('ShowFormMyAcc')->with('success', 'User updated successfully.');
     }
 }

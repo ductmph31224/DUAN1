@@ -55,6 +55,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Rufina:400,700');
 
 html,
+
 .single-register input {
 
     border-radius: 0; /* Bỏ bo góc */
@@ -7684,3 +7685,8 @@ p.lost-password a:hover {
 }
 
 /*------ end Compare Page Wrapper -----*/
+
+.box-content{
+    width: 70%;
+    margin: auto;
+}

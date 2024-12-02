@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,6 +94,8 @@ class AuthController extends Controller
 
     public function ShowFormMyAcc(){
         $user = Auth::user();
-        return view('client.layouts.partials.my-account', compact('user'));
+        $orders = Order::where('user_id', $user->id)->get(); // Lấy danh sách đơn hàng của user
+
+        return view('client.layouts.partials.my-account', compact('user','orders'));
     }
 }

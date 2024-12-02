@@ -52,7 +52,7 @@
                                             Địa chỉ</a>
                                         <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i> Tài khoản
                                             chi tiết</a>
-                                        <a href=""><i class="fa fa-sign-out"></i> Đăng xuất</a>
+                                        <a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Đăng xuất</a>
                                     </div>
                                 </div>
                                 <!-- My Account Tab Menu End -->
@@ -96,30 +96,17 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Aug 22, 2018</td>
-                                                                <td>Pending</td>
-                                                                <td>$3000</td>
-                                                                <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td>July 22, 2018</td>
-                                                                <td>Approved</td>
-                                                                <td>$200</td>
-                                                                <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>June 12, 2017</td>
-                                                                <td>On Hold</td>
-                                                                <td>$990</td>
-                                                                <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                                </td>
-                                                            </tr>
+                                                            @foreach ($orders as $order)
+                                                                <tr>
+                                                                    <td>{{ $order->ma_don_hang }}</td>
+                                                                    <td>{{$order->created_at}}</td>
+                                                                    <td>{{$order->trang_thai_don_hang}}</td>
+                                                                    <td>{{ $order->tien_hang}} VND</td>
+                                                                    <td><a href="cart.html" class="btn btn-sqr">View</a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -144,13 +131,10 @@
                                             <div class="myaccount-content">
                                                 <h5>Địa chỉ thanh toán</h5>
                                                 <address>
-                                                    <p><strong>Erik Jhonson</strong></p>
-                                                    <p>1355 Market St, Suite 900 <br>
-                                                        San Francisco, CA 94103</p>
-                                                    <p>Mobile: (123) 456-7890</p>
+                                                    <p><strong>{{ $user->name }}</strong></p>
+                                                    <p>{{ $user->address }}</p>
+                                                    <p>Mobile: {{ $user->phone }}</p>
                                                 </address>
-                                                <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                    Edit Address</a>
                                             </div>
                                         </div>
                                         <!-- Single Tab Content End -->
@@ -174,10 +158,12 @@
                                                     </div>
                                                     <div class="d-flex">
                                                         <div class="single-input-item">
-                                                            <a class="btn btn-sqr" href="{{ route('doimatkhau') }}">Thay đổi mật khẩu</a>
+                                                            <a class="btn btn-sqr" href="{{ route('doimatkhau') }}">Thay
+                                                                đổi mật khẩu</a>
                                                         </div>
                                                         <div class="single-input-item">
-                                                            <a class="btn btn-sqr" href="{{route('profile')}}">Thay đổi thông tin</a>
+                                                            <a class="btn btn-sqr" href="{{ route('profile') }}">Thay đổi
+                                                                thông tin</a>
                                                         </div>
                                                     </div>
                                                 </div>
