@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\OderController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Client\ClientCategoryController;
+use App\Http\Controllers\Client\ProPopulationController;
 use App\Http\Controllers\zalopay\PaymentController;
 
 /*
@@ -192,5 +193,7 @@ Route::get('My-acc/doi-mk', [ProfileController::class, 'editPass'])->name('doima
 Route::put('My-acc/update-pass/{user}', [ProfileController::class, 'updatePass'])->name('update-pass');
 Route::get('My-acc/profile', [ProfileController::class, 'profile'])->name('profile');
 Route::put('My-acc/update-profile/{user}', [ProfileController::class, 'updateProfile'])->name('update-profile');
+
+Route::get('top-10',[ProPopulationController::class,'index'])->name('productPopulation');
 
 

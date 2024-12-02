@@ -57,43 +57,7 @@
                         <div class="my-cart">
                             <ul>
                                 <li><a href="{{route('listCart')}}"><i class="fa fa-shopping-cart"></i>Giỏ Hàng</a>
-                                    {{-- <div class="mini-cart-sub">
-                                        <div class="cart-product">
-                                            <div class="single-cart">
-                                                <div class="cart-img">
-                                                    <a href="#"><img src="/client/img/product/1.jpg"
-                                                            alt="book" /></a>
-                                                </div>
-                                                <div class="cart-info">
-                                                    <h5><a href="#">Joust Duffle Bag</a></h5>
-                                                    <p>1 x £60.00</p>
-                                                </div>
-                                                <div class="cart-icon">
-                                                    <a href="#"><i class="fa fa-remove"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="single-cart">
-                                                <div class="cart-img">
-                                                    <a href="#"><img src="/client/img/product/3.jpg"
-                                                            alt="book" /></a>
-                                                </div>
-                                                <div class="cart-info">
-                                                    <h5><a href="#">Chaz Kangeroo Hoodie</a></h5>
-                                                    <p>1 x £52.00</p>
-                                                </div>
-                                                <div class="cart-icon">
-                                                    <a href="#"><i class="fa fa-remove"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="cart-totals">
-                                            <h5>Total <span>£12.00</span></h5>
-                                        </div>
-                                        <div class="cart-bottom">
-                                            <a class="view-cart" href="">Xem giỏ hàng</a>
-                                            <a href="">Thanh toán</a>
-                                        </div>
-                                    </div> --}}
+
                                 </li>
                             </ul>
                         </div>
@@ -106,13 +70,14 @@
         <div class="main-menu-area d-md-none d-none d-lg-block sticky-header-1" id="header-sticky">
             <div class="container">
                 <div class="row">
+                    <div class="box-content">
                     <div class="col-lg-12">
                         <div class="menu-area">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="{{ route('index') }}  ">Trang chủ</a>
+                                    <li class=""><a href="{{ route('index') }} ">Trang chủ</a>
                                     </li>
-                                    <li><a href="">Thể loại<i class="fa fa-angle-down"></i></a>
+                                    <li><a href="{{route('productPopulation')}}">Cửa hàng<i class="fa fa-angle-down"></i></a>
 
                                         <div class="mega-menu">
 
@@ -124,48 +89,25 @@
                                             </span>
                                         </div>
                                     </li>
-                                    <li><a href="">Bán chạy nhất<i class="fa fa-angle-down"></i></a>
 
-                                    </li>
-                                    <li><a href="">Mới phát hành<i class="fa fa-angle-down"></i></a>
-                                    </li>
-                                    <li><a href="#">blog<i class="fa fa-angle-down"></i></a>
-                                        <div class="sub-menu sub-menu-2">
-                                            <ul>
-                                                <li><a href="">blog</a></li>
-                                                <li><a href="">blog-details</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Trang<i class="fa fa-angle-down"></i></a>
-                                        <div class="sub-menu sub-menu-2">
-                                            <ul>
-                                                <li><a href="">shop</a></li>
-                                                <li><a href="">shop list view</a></li>
-                                                <li><a href="">product-details</a></li>
-                                                <li><a href="">product-affiliate</a></li>
-                                                <li><a href="">blog</a></li>
-                                                <li><a href="">blog-details</a></li>
-                                                <li><a href="">contact</a></li>
-                                                <li><a href="">about</a></li>
-                                                <li><a href=" ">Login</a></li>
-                                                <li><a href="">register</a></li>
-                                                <li><a href="">my-account</a></li>
-                                                <li><a href="">cart</a></li>
-                                                <li><a href="">compare</a></li>
-                                                <li><a href="">checkout</a></li>
-                                                <li><a href="">wishlist</a></li>
-                                                <li><a href="">404 Page</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
                                 </ul>
                             </nav>
                         </div>
                         <div class="safe-area">
-                            <a href="">Giảm giá</a>
+                            <a href="#">Liên hệ</a>
+
                         </div>
+                        <div class="safe-area">
+                            <a href="#">Chính sách</a>
+
+                        </div>
+                        <div class="safe-area">
+                            <a href="#">Chương trình</a>
+
+                        </div>
+
                     </div>
+                </div>
                 </div>
             </div>
         </div>
