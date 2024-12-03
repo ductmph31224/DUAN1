@@ -70,8 +70,8 @@ route::get('searchProducts',[searchController::class,'searchProducts'])->name('s
 // route trả kết quả tìm kiếm
 
 // route cart
-Route::get('list-cart',[CartController::class,'listCart'])->name('listCart');
-Route::post('add-to-cart',[CartController::class,'addCart'])->name('addCart');
+Route::get('list-cart',[CartController::class,'listCart'])->name('listCart')->middleware('auth');
+Route::post('add-to-cart',[CartController::class,'addCart'])->name('addCart')->middleware('auth');
 Route::post('update-to-cart',[CartController::class,'updateCart'])->name('updateCart');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('checkout',[CartController::class,'checkout'])->name('checkout');

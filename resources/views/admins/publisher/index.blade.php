@@ -88,6 +88,7 @@
                                 </table>
                             </div>
                         </div>
+                         {{ $listPublisher->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

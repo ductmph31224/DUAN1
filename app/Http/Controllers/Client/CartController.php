@@ -113,6 +113,9 @@ class CartController extends Controller
     }
     public function checkout(){
         $cart = session()->get('cart', []);
+        if (empty($cart)) {
+        return redirect()->route('listCart')->with('error', 'Giỏ hàng của bạn đang trống.');
+        }
         $subtotal = 0;
         $total= 0;
         foreach($cart as $item ){

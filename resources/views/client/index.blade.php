@@ -66,13 +66,26 @@
     <!-- slider-area-start -->
     <div class="slider-area">
         <div class="slider-active owl-carousel">
-            @foreach ($banner as $item)
+            {{-- @foreach ($banner as $item)
                 
                     <img class="banner" src="{{Storage::url($item->image)}}" alt="" >
                 
-            @endforeach
-
-            {{-- <div class="single-slider slider-h1-2 pt-215 pb-100 bg-img"
+            @endforeach --}}
+            <div class="single-slider pt-125 pb-130 bg-img" style="background-image:url(/client/img/slider/1.jpg);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="slider-content slider-animated-1 text-center">
+                                <h1>Huge Sale</h1>
+                                <h2>koparion</h2>
+                                <h3>Now starting at </h3>
+                                <a href="#">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider slider-h1-2 pt-215 pb-100 bg-img"
                 style="background-image:url(/client/img/slider/2.jpg);">
                 <div class="container">
                     <div class="slider-content slider-content-2 slider-animated-1">
@@ -82,7 +95,7 @@
                         <a href="#">Contact Us Today!</a>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
     <!-- slider-area-end -->
