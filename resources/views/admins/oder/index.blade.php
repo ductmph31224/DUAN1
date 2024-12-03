@@ -48,7 +48,9 @@
                                             <th>Tổng tiền</th>
                                             <th>Trạng thái đơn hàng</th>
                                             <th>Hình Thức Thanh Toán</th>
+                                            <th>Trạng Thái Thanh Toán</th>
                                             <th>Ghi Chú</th>
+                                            <th>Thời Gian Tạo Đơn Hàng</th>
                                             {{-- <th>Xóa</th> --}}
                                             <th>Cập NHật</th>
                                         </tr>
@@ -73,7 +75,9 @@
                                             <td>{{ number_format($order->tong_tien, 0, ',', '.') }} đ</td>
                                             <td>{{ $order->trang_thai_don_hang }}</td>
                                             <td>{{$order->trang_thai_thanh_toan}}</td>
+                                            <td>{{$order->payment_status}}</td>
                                             <td>{{$order->ghi_chu}}</td>
+                                            <td>{{$order->created_at}}</td>
                                             {{-- <td>
                                                 <form action="{{route('admins.orders.destroy',$order->id)}}" method="post">
                                                     @csrf
@@ -96,6 +100,10 @@
                 </div>
             </div>
         </div>
+        <div class="pagination-wrapper">
+            {{ $orders->links('pagination::bootstrap-5') }}
+        </div>
     </div>
+
 
 @endsection

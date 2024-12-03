@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 @section('content')
-<form action="{{route('dathang')}}" method="get">
+<form action="{{route('dathang')}}" method="post">
     @csrf
     <div class="row">
         <div class="col-lg-6 col-md-12 col-12">
@@ -87,7 +87,7 @@
 
                               <label>
                                     <input type="radio" name="payment_method" value="Online">
-                                    Thanh toán trực tuyến
+                                    Thanh toán trực tuyến qua 
                                 </label>
 
                         </div>
@@ -100,6 +100,10 @@
         </div>
     </div>
 </form>
+{{-- <form action="{{url('/payment/create')}}" method="post">
+    @csrf
+    <button type="submit" class="btn btn-danger">Thanh Toán chức năng </button>
+</form> --}}
 
     <!-- checkout-area-end -->
 @endsection

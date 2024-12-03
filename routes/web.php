@@ -18,7 +18,10 @@ use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Client\ClientCategoryController;
 use App\Http\Controllers\Client\ProPopulationController;
-use App\Http\Controllers\zalopay\PaymentController;
+use App\Http\Controllers\pa\PaymentController;
+use App\Http\Controllers\VNPayController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -78,12 +81,18 @@ Route::post('update-to-cart', [CartController::class, 'updateCart'])->name('upda
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
 // route đặt hàng
-route::get('dat-hang', [OderController::class, 'process'])->name('dathang');
+route::post('dat-hang', [OderController::class, 'process'])->name('dathang');
 
 
 // thanh toán online
 
-Route::get('/payment/create/{order_id}', [AdminQrController::class, 'showTest'])->name('payment.create');
+ Route::get('/payment/create/{order_id}', [PaymentController::class, 'createCheckoutSession'])->name('payment.create');
+ //route trả về
+ Route::get('/payment-success/{orderId}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment-cancel/{orderId}', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
+//Route::Post('/payment/create', [VNPayController::class, 'createPayment'])->name('paymentcreate1');
+
+// Route::get('/vnpay-return', [VNPayController::class, 'returnPayment'])->name('returnPayment');
 // router xác nhận
 Route::post('/order/cancel/{orderId}', [AdminQrController::class, 'cancelOrder'])->name('ordercancel');
 Route::post('/order/confirm/{orderId}', [AdminQrController::class, 'confirmPayment'])->name('orderconfirm');
