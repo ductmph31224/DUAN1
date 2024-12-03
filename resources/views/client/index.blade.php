@@ -91,9 +91,12 @@
             font-size: 1re;
         }
     </style>
-
     <!-- banner-area-end -->
     <!-- slider-area-start -->
+
+   
+
+
 
     <div class="banner-area banner-res-large pt-30 pb-5">
         <div class="container">
@@ -155,7 +158,7 @@
 
             @endforeach
 
-            
+
         </div>
     </div>
     <!-- slider-area-end -->
@@ -168,6 +171,8 @@
                         <h2>Sản phẩm bán chạy</h2>
                     </div>
                 </div>
+
+
             </div>
             <div class="row">
                 @foreach ($topSellingProductsDetails as $item)
@@ -179,6 +184,8 @@
                                     <a href="{{ route('detailProduct', $item->id) }}">
                                         <img src="{{ Storage::url($item->image) }}" alt="book" class="primary" />
                                     </a>
+
+
 
                                 </div>
                                 <div class="product-details text-center">
@@ -224,7 +231,9 @@
                             <!-- single-product-end -->
                         </div>
                     </div>
+
                 @endforeach
+
 
             </div>
         </div>
@@ -428,7 +437,7 @@
                                     </a>
                                     <div class="product-flag">
                                         <ul>
-                                            <li><span class="sale">new</span> </li>
+                                            <li><span class="sale">new</span></li>
                                             <li><span class="discount-percentage">-5%</span></li>
                                         </ul>
                                     </div>
@@ -481,6 +490,7 @@
     </div>
 
 
+
     <!-- new-book-area-start -->
     <!-- banner-static-area-start -->
     <div class="banner-static-area bg ptb-100">
@@ -499,6 +509,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="testimonial-area ptb-100 bg">
         <div class="container">
             <div class="row">
