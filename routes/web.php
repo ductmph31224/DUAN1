@@ -18,10 +18,7 @@ use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Client\ClientCategoryController;
 use App\Http\Controllers\Client\ProPopulationController;
-use App\Http\Controllers\pa\PaymentController;
-use App\Http\Controllers\VNPayController;
-
-
+use App\Http\Controllers\zalopay\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,33 +71,19 @@ route::get('searchProducts', [searchController::class, 'searchProducts'])->name(
 // route trả kết quả tìm kiếm
 
 // route cart
-
 Route::get('list-cart', [CartController::class, 'listCart'])->name('listCart');
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('addCart');
 Route::post('update-to-cart', [CartController::class, 'updateCart'])->name('updateCart');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
 // route đặt hàng
-route::post('dat-hang', [OderController::class, 'process'])->name('dathang');
-
-
+route::get('dat-hang', [OderController::class, 'process'])->name('dathang');
 // thanh toán online
 
- Route::get('/payment/create/{order_id}', [PaymentController::class, 'createCheckoutSession'])->name('payment.create');
- //route trả về
- Route::get('/payment-success/{orderId}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
-Route::get('/payment-cancel/{orderId}', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
-//Route::Post('/payment/create', [VNPayController::class, 'createPayment'])->name('paymentcreate1');
-
-// Route::get('/vnpay-return', [VNPayController::class, 'returnPayment'])->name('returnPayment');
+Route::get('/payment/create/{order_id}', [AdminQrController::class, 'showTest'])->name('payment.create');
 // router xác nhận
 Route::post('/order/cancel/{orderId}', [AdminQrController::class, 'cancelOrder'])->name('ordercancel');
 Route::post('/order/confirm/{orderId}', [AdminQrController::class, 'confirmPayment'])->name('orderconfirm');
-
-
-
-
-
 
 
 //route admin
@@ -180,6 +163,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::get('{id}/edit', [OderController::class, 'edit'])->name('edit');
                 Route::put('update/{id}', [OderController::class, 'update'])->name('update');
                 Route::delete('destroy/{id}', [OderController::class, 'destroy'])->name('destroy');
+                Route::put('My-acc/order-update/{id}', [OderController::class, 'updateForClient'])->name('updateClient');
             });
         Route::prefix('anh')
             ->as('anh.')
@@ -190,6 +174,11 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
                 Route::post('createa', [AdminQrController::class, 'store'])->name('store');
                 Route::post('/qr-images/toggle/{id}', [AdminQrController::class, 'updateStatus'])->name('toggleVisibility');
                 route::get('toggleVisibility/{id}', [AdminQrController::class, 'formedit'])->name('edit');
+
+                // Route::get('{id}/edit',[OderController::class, 'edit'])->name('edit');
+                // Route::put('update/{id}',[OderController::class, 'update'])->name('update');
+                // Route::delete('destroy/{id}', [OderController::class, 'destroy'])->name('destroy');
+
             });
     });
 
@@ -200,13 +189,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admins')
 // });
 
 
-Route::middleware(['Auth'])->prefix('user')->name('user.')->group(function () {
-    Route::prefix('cart')
-        ->as('cart.')
-        ->group(function () {
-
-        });
-});
+Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {});
 
 // Route::view('/checkout','client.layouts.partials.forgot-password');
 route::get('product/detail/{id}', [UserController::class, 'detailProduct'])->name('detailProduct');
@@ -216,7 +199,8 @@ Route::put('My-acc/update-pass/{user}', [ProfileController::class, 'updatePass']
 Route::get('My-acc/profile', [ProfileController::class, 'profile'])->name('profile');
 Route::put('My-acc/update-profile/{user}', [ProfileController::class, 'updateProfile'])->name('update-profile');
 
-Route::get('top-10',[ProPopulationController::class,'index'])->name('productPopulation');
+Route::get('top-10', [ProPopulationController::class, 'index'])->name('productPopulation');
 
-
-
+Route::get('/chinhsach', function () {
+    return view('client.layouts.partials.chinhsach');
+})->name('abc');

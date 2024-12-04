@@ -134,7 +134,7 @@
 
                         </div>
                         <div class="safe-area">
-                            <a href="#">Chính sách</a>
+                            <a href="{{route('abc')}}">Chính sách</a>
 
                         </div>
                         <div class="safe-area">

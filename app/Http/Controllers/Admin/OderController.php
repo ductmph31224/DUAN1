@@ -70,31 +70,23 @@ class OderController extends Controller
             $request->session()->forget('cart');
             return redirect()->route('index')->with('success', 'Đặt hàng thành công! Mã đơn hàng của bạn: ' . $orderCode);
         } else {
-
+            //     // Chuyển hướng đến trang thanh toán online
+            //     // return redirect()->route('payment.online', ['order_id' => $order->id]);
             return redirect()->route('payment.create', ['order_id' => $order->id]);
         }
     }
-
     public function index()
     {
-        // Lấy danh sách đơn hàng, sắp xếp theo thời gian tạo (mới nhất ở trên) và phân trang
-        $orders = Order::with('OrderDetail') // Eager loading để giảm số lượng truy vấn
-            ->orderBy('created_at', 'desc') // Sắp xếp theo cột 'created_at' mới nhất
-            ->paginate(10); // Số lượng đơn hàng trên mỗi trang
+        $orders = Order::with('OrderDetail')->get();
+        // dd($orders);
 
-        // Trả về view với danh sách đơn hàng
         return view('admins.oder.index', compact('orders'));
     }
-    public function edit($id)
+    public function edit(String $id)
     {
-        // Lấy thông tin đơn hàng
-        $order = Order::findOrFail($id);
-
-        // Trả về view edit và truyền dữ liệu đơn hàng
-        return view('admins.oder.edit', compact('order'));
+        $orders = Order::find($id);
+        return view('admins.oder.edit', compact('orders'));
     }
-
-
 
     public function update(Request $request, string $id)
     {
@@ -111,17 +103,10 @@ class OderController extends Controller
 
         // Kiểm tra logic chuyển trạng thái
         if ($currentStatus === 'Chờ xử lý') {
-            // Chuyển từ "Chờ xử lý" sang bất kỳ trạng thái nào khác, trừ "Chờ xử lý"
-            if (!in_array($newStatus, ['Đang Đóng Hàng', 'Đang vận chuyển', 'Đã giao hàng', 'Hoàn thành', 'Đã hủy'])) {
+            if (!in_array($newStatus, ['Đang Đóng Hàng', 'Đã hủy'])) {
                 return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
             }
-
-            // Chỉ khi ở trạng thái "Chờ xử lý" mới có thể hủy
-            if ($newStatus === 'Đã hủy' && $currentStatus !== 'Chờ xử lý') {
-                return redirect()->back()->with('error', "Chỉ có thể hủy đơn hàng khi trạng thái là \"Chờ xử lý\".");
-            }
-        }
-        if ($currentStatus === 'Đang Đóng Hàng') {
+        } elseif ($currentStatus === 'Đang Đóng Hàng') {
             if (!in_array($newStatus, ['Đang vận chuyển', 'Đã hủy'])) {
                 return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
             }
@@ -135,29 +120,16 @@ class OderController extends Controller
             }
         } elseif (in_array($currentStatus, ['Hoàn thành', 'Đã hủy'])) {
             return redirect()->back()->with('error', "Không thể thay đổi trạng thái \"$currentStatus\".");
-        } else {
-            // Sau khi chuyển khỏi "Chờ xử lý", không thể quay lại "Chờ xử lý"
-            if ($newStatus === 'Chờ xử lý') {
-                return redirect()->back()->with('error', "Không thể quay lại trạng thái \"$newStatus\" sau khi đã chuyển đi.");
-            }
-
-            // Kiểm tra trạng thái "Hoàn thành" và cập nhật "payment_status"
-            if ($newStatus === 'Hoàn thành') {
-                $order->update([
-                    'payment_status' => 'Đã thanh toán',
-                ]);
-            }
         }
 
-        // Nếu hợp lệ, cập nhật trạng thái và ghi chú route('admins.orders.index')
+        // Nếu hợp lệ, cập nhật trạng thái
         $order->update([
             'trang_thai_don_hang' => $newStatus,
             'ghi_chu' => $validated['ghi_chu'],
         ]);
 
-        return redirect()->back()->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
+        return redirect()->route('admins.orders.index')->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
     }
-
 
 
     public function destroy($id)
@@ -176,4 +148,24 @@ class OderController extends Controller
         // Không được phép xóa nếu trạng thái không hợp lệ
         return redirect()->route('admins.orders.index')->with('error', 'Chỉ có thể xóa đơn hàng có trạng thái "Đã hủy" hoặc "Chờ xử lý"!');
     }
+    public function updateForClient($id)
+    {
+        // Tìm đơn hàng
+        $order = Order::findOrFail($id);
+
+        // Kiểm tra trạng thái
+        if (in_array($order->trang_thai_don_hang, ['Chờ xử lý'])) {
+            // Cập nhật trạng thái đơn hàng thành "Đã hủy"
+            $order->trang_thai_don_hang = 'Đã hủy';
+            $order->save();
+
+
+            // Thông báo thành công
+            return redirect()->back()->with('success', 'Hủy đơn hàng thành công.');
+        }
+
+        // Nếu trạng thái không hợp lệ để hủy
+        return redirect()->back()->with('error', 'Không thể hủy đơn hàng.');
+    }
+
 }
