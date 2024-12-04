@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
+    'pagination' => [
+        'default' => 'bootstrap-5',
+    ],
 
     /*
     |--------------------------------------------------------------------------

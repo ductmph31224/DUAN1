@@ -21,7 +21,8 @@ class Order extends Model
         'tong_tien',
         'ghi_chu',
         'trang_thai_don_hang',
-        'trang_thai_thanh_toan'
+        'trang_thai_thanh_toan',
+        'payment_status',
     ];
 
     public function user()

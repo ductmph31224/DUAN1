@@ -69,7 +69,7 @@
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                    <form action="{{route('addCart')}}" method="POST">
+                                    <form action="{{route('user.cart.addCart')}}" method="POST">
                                             @csrf
                                              <input type="hidden" id="quantity" name="quantity" value="1" >
                                              <input type="hidden" name="id" value="{{ $item->id }}">

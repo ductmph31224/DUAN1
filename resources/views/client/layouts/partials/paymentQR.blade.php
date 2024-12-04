@@ -8,8 +8,8 @@
                 <div class="col-lg-12 text-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="/" class="text-primary">Trang chủ</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Thanh Toán</li>
+                            <li class="breadcrumb-item"><a href="{{route('index')}}" class="text-primary">Trang chủ </a></li>
+                            <li class="item" aria-current="page">| Thanh Toán</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="col-md-4">
                     <div class="card shadow-lg border-0" style="background-color: rgba(255, 255, 255, 0.9);">
                         <div class="card-header bg-primary text-white text-center">
-                            <h5 class="mb-0 fw-bold" style="font-size: 1.5rem;">Thông Tin Người Thanh Toán</h5>
+                            <h5 class="mb-0 fw-bold" style="font-size: 1.5rem;">Thông Tin Người Mua</h5>
                         </div>
                         <div class="card-body">
                             <p style="font-size: 1.2rem;"><strong>Họ tên:</strong> {{ Auth::user()->name }}</p>
@@ -43,6 +43,7 @@
                                         <!-- Hiển thị mã đơn hàng chỉ một lần -->
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <span><strong>Mã Đơn Hàng:</strong> {{ $order->ma_don_hang }}</span>
+                                           <li class="list-group-item d-flex justify-content-between align-items-center">Quý Khách Vui Lòng Nhập Mã Đơn Hàng Trong Nội Dung Chuyển Khoản.</li>
                                         </li>
 
                                         <!-- Hiển thị danh sách sản phẩm -->
@@ -156,3 +157,4 @@
         </div>
     </div>
 @endsection
+

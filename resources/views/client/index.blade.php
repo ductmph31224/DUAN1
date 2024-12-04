@@ -12,7 +12,7 @@
             background-position: center;
             /* Căn giữa hình ảnh */
             background-repeat: no-repeat;
-            /* Không lặp lại ảnh */ 
+            /* Không lặp lại ảnh */
         }
 
         @media (max-width: 768px) {
