@@ -70,81 +70,102 @@ class OderController extends Controller
             $request->session()->forget('cart');
             return redirect()->route('index')->with('success', 'Đặt hàng thành công! Mã đơn hàng của bạn: ' . $orderCode);
         } else {
-        //     // Chuyển hướng đến trang thanh toán online
-        //     // return redirect()->route('payment.online', ['order_id' => $order->id]);
-            return redirect()->route('payment.create',['order_id' => $order->id]);
-         }
+            //     // Chuyển hướng đến trang thanh toán online
+            //     // return redirect()->route('payment.online', ['order_id' => $order->id]);
+            return redirect()->route('payment.create', ['order_id' => $order->id]);
+        }
     }
-    public function index(){
+    public function index()
+    {
         $orders = Order::with('OrderDetail')->get();
         // dd($orders);
 
-        return view('admins.oder.index',compact('orders'));
+        return view('admins.oder.index', compact('orders'));
     }
-    public function edit(String $id){
+    public function edit(String $id)
+    {
         $orders = Order::find($id);
-        return view('admins.oder.edit',compact('orders'));
+        return view('admins.oder.edit', compact('orders'));
     }
 
     public function update(Request $request, string $id)
-{
-    $validated = $request->validate([
-        'trang_thai_don_hang' => 'required|in:Chờ xử lý,Đang Đóng Hàng,Đang vận chuyển,Đã giao hàng,Hoàn thành,Đã hủy',
-        'ghi_chu' => 'nullable|string|max:500',
-    ]);
+    {
+        $validated = $request->validate([
+            'trang_thai_don_hang' => 'required|in:Chờ xử lý,Đang Đóng Hàng,Đang vận chuyển,Đã giao hàng,Hoàn thành,Đã hủy',
+            'ghi_chu' => 'nullable|string|max:500',
+        ]);
 
-    // Lấy thông tin đơn hàng
-    $order = Order::findOrFail($id);
+        // Lấy thông tin đơn hàng
+        $order = Order::findOrFail($id);
 
-    $currentStatus = $order->trang_thai_don_hang; // Trạng thái hiện tại
-    $newStatus = $validated['trang_thai_don_hang']; // Trạng thái mới
+        $currentStatus = $order->trang_thai_don_hang; // Trạng thái hiện tại
+        $newStatus = $validated['trang_thai_don_hang']; // Trạng thái mới
 
-    // Kiểm tra logic chuyển trạng thái
-    if ($currentStatus === 'Chờ xử lý') {
-        if (!in_array($newStatus, ['Đang Đóng Hàng', 'Đã hủy'])) {
-            return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
+        // Kiểm tra logic chuyển trạng thái
+        if ($currentStatus === 'Chờ xử lý') {
+            if (!in_array($newStatus, ['Đang Đóng Hàng', 'Đã hủy'])) {
+                return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
+            }
+        } elseif ($currentStatus === 'Đang Đóng Hàng') {
+            if (!in_array($newStatus, ['Đang vận chuyển', 'Đã hủy'])) {
+                return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
+            }
+        } elseif ($currentStatus === 'Đang vận chuyển') {
+            if ($newStatus !== 'Đã giao hàng') {
+                return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
+            }
+        } elseif ($currentStatus === 'Đã giao hàng') {
+            if ($newStatus !== 'Hoàn thành') {
+                return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
+            }
+        } elseif (in_array($currentStatus, ['Hoàn thành', 'Đã hủy'])) {
+            return redirect()->back()->with('error', "Không thể thay đổi trạng thái \"$currentStatus\".");
         }
-    } elseif ($currentStatus === 'Đang Đóng Hàng') {
-        if (!in_array($newStatus, ['Đang vận chuyển', 'Đã hủy'])) {
-            return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
-        }
-    } elseif ($currentStatus === 'Đang vận chuyển') {
-        if ($newStatus !== 'Đã giao hàng') {
-            return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
-        }
-    } elseif ($currentStatus === 'Đã giao hàng') {
-        if ($newStatus !== 'Hoàn thành') {
-            return redirect()->back()->with('error', "Không thể chuyển từ trạng thái \"$currentStatus\" sang \"$newStatus\".");
-        }
-    } elseif (in_array($currentStatus, ['Hoàn thành', 'Đã hủy'])) {
-        return redirect()->back()->with('error', "Không thể thay đổi trạng thái \"$currentStatus\".");
+
+        // Nếu hợp lệ, cập nhật trạng thái
+        $order->update([
+            'trang_thai_don_hang' => $newStatus,
+            'ghi_chu' => $validated['ghi_chu'],
+        ]);
+
+        return redirect()->route('admins.orders.index')->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
     }
-
-    // Nếu hợp lệ, cập nhật trạng thái
-    $order->update([
-        'trang_thai_don_hang' => $newStatus,
-        'ghi_chu' => $validated['ghi_chu'],
-    ]);
-
-    return redirect()->route('admins.orders.index')->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
-}
 
 
     public function destroy($id)
-{
-    // Lấy thông tin đơn hàng
-    $order = Order::findOrFail($id);
+    {
+        // Lấy thông tin đơn hàng
+        $order = Order::findOrFail($id);
 
-    // Kiểm tra trạng thái đơn hàng
-    if (in_array($order->trang_thai_don_hang, ['Đã hủy', 'Chờ xử lý'])) {
-        // Thực hiện xóa
-        $order->delete();
+        // Kiểm tra trạng thái đơn hàng
+        if (in_array($order->trang_thai_don_hang, ['Đã hủy', 'Chờ xử lý'])) {
+            // Thực hiện xóa
+            $order->delete();
 
-        return redirect()->route('admins.orders.index')->with('success', 'Đơn hàng đã được xóa thành công!');
+            return redirect()->route('admins.orders.index')->with('success', 'Đơn hàng đã được xóa thành công!');
+        }
+
+        // Không được phép xóa nếu trạng thái không hợp lệ
+        return redirect()->route('admins.orders.index')->with('error', 'Chỉ có thể xóa đơn hàng có trạng thái "Đã hủy" hoặc "Chờ xử lý"!');
     }
+    public function updateForClient($id)
+    {
+        // Tìm đơn hàng
+        $order = Order::findOrFail($id);
 
-    // Không được phép xóa nếu trạng thái không hợp lệ
-    return redirect()->route('admins.orders.index')->with('error', 'Chỉ có thể xóa đơn hàng có trạng thái "Đã hủy" hoặc "Chờ xử lý"!');
-}
+        // Kiểm tra trạng thái
+        if (in_array($order->trang_thai_don_hang, ['Chờ xử lý'])) {
+            // Cập nhật trạng thái đơn hàng thành "Đã hủy"
+            $order->trang_thai_don_hang = 'Đã hủy';
+            $order->save();
+
+
+            // Thông báo thành công
+            return redirect()->back()->with('success', 'Hủy đơn hàng thành công.');
+        }
+
+        // Nếu trạng thái không hợp lệ để hủy
+        return redirect()->back()->with('error', 'Không thể hủy đơn hàng.');
+    }
 
 }

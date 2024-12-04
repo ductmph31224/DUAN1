@@ -26,8 +26,21 @@
                     </div>
                 </div>
             </div>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
         </div>
+
     </div>
+
     <!-- entry-header-area-end -->
     <!-- my account wrapper start -->
     <div class="my-account-wrapper mb-70">
@@ -46,8 +59,7 @@
                                             Tổng quan</a>
                                         <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
                                             Đơn hàng</a>
-                                        <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i>
-                                            Phương thức thanh toán</a>
+
                                         <a href="#address-edit" data-bs-toggle="tab"><i class="fa fa-map-marker"></i>
                                             Địa chỉ</a>
                                         <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i> Tài khoản
@@ -65,11 +77,14 @@
                                             <div class="myaccount-content">
                                                 <h5>Tổng quan</h5>
                                                 <div class="welcome">
-                                                    <p>Xin chào, <strong>{{Auth::user()->name}}</strong> ( Nếu không phải <strong>{{Auth::user()->name}}
-                                                            !</strong> <form action="{{route('logout')}} " method="POST">
-                                                                @csrf
-                                                              <button class="btn btn-primary">logout</button>
-                                    )</p>
+                                                    <p>Xin chào, <strong>{{ Auth::user()->name }}</strong> ( Nếu không
+                                                        phải <strong>{{ Auth::user()->name }}
+                                                            !</strong>
+                                                    <form action="{{ route('logout') }} " method="POST">
+                                                        @csrf
+                                                        <button class="btn btn-primary">logout</button>
+                                                        )</p>
+                                                    </form>
                                                 </div>
                                                 <p class="mb-0">Từ bảng điều khiển tài khoản của bạn. bạn có thể dễ dàng
                                                     kiểm tra &
@@ -99,14 +114,20 @@
                                                             @foreach ($orders as $order)
                                                                 <tr>
                                                                     <td>{{ $order->ma_don_hang }}</td>
-                                                                    <td>{{$order->created_at}}</td>
-                                                                    <td>{{$order->trang_thai_don_hang}}</td>
-                                                                    <td>{{ $order->tien_hang}} VND</td>
-                                                                    <td><a href="cart.html" class="btn btn-sqr">View</a>
+                                                                    <td>{{ $order->created_at }}</td>
+                                                                    <td>{{ $order->trang_thai_don_hang }}</td>
+                                                                    <td>{{ $order->tien_hang }} VND</td>
+                                                                    <td>
+                                                                        <form
+                                                                            action="{{ route('admins.orders.updateClient', $order->id) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            @method('PUT')
+                                                                            <button class="btn btn-danger">Hủy</button>
+                                                                        </form>
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
-
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -117,13 +138,7 @@
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                            <div class="myaccount-content">
-                                                <h5>Phương thức thanh toán</h5>
-                                                <p class="saved-message">Bạn không được lưu tài khoản thanh toán của
-                                                    mình ở đây</p>
-                                            </div>
-                                        </div>
+
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->

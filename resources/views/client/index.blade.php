@@ -2,6 +2,27 @@
 
 @section('content')
     <style>
+        .single-slider {
+            padding-top: 150px;
+            /* Tăng khoảng cách trên */
+            padding-bottom: 150px;
+            /* Tăng khoảng cách dưới */
+            background-size: cover;
+            /* Đảm bảo hình ảnh phủ hết vùng chứa */
+            background-position: center;
+            /* Căn giữa hình ảnh */
+            background-repeat: no-repeat;
+            /* Không lặp lại ảnh */ 
+        }
+
+        @media (max-width: 768px) {
+            .single-slider {
+                padding-top: 100px;
+                /* Điều chỉnh lại trên màn hình nhỏ hơn */
+                padding-bottom: 100px;
+            }
+        }
+
         .product-button {
             display: flex;
             justify-content: center;
@@ -96,31 +117,24 @@
     <!-- slider-area-start -->
     <div class="slider-area">
         <div class="slider-active owl-carousel">
-            <div class="single-slider pt-125 pb-130 bg-img" style="background-image:url(/client/img/slider/1.jpg);">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="slider-content slider-animated-1 text-center">
-                                <h1>Huge Sale</h1>
-                                <h2>koparion</h2>
+
+            @foreach ($banner as $item)
+                <div class="single-slider pt-125 pb-130 bg-img"
+                    style="background-image:url('{{ Storage::url($item->image) }}');">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="slider-content slider-animated-1 text-center">
+                                    <h1>{{ $item->title }}</h1>
+                                    {{-- <h2>koparion</h2>
                                 <h3>Now starting at £99.00</h3>
-                                <a href="#">Shop now</a>
+                                <a href="#">Shop now</a> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="single-slider slider-h1-2 pt-215 pb-100 bg-img"
-                style="background-image:url(/client/img/slider/2.jpg);">
-                <div class="container">
-                    <div class="slider-content slider-content-2 slider-animated-1">
-                        <h1>We can help get your</h1>
-                        <h2>Books in Order</h2>
-                        <h3>and Accessories</h3>
-                        <a href="#">Contact Us Today!</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <div class="banner-area banner-res-large pt-30 pb-5">
@@ -174,29 +188,7 @@
         </div>
     </div>
     <!-- banner-area-end -->
-    <!-- slider-area-start -->
-    <div class="slider-area">
-        <div class="slider-active owl-carousel">
-            @foreach ($banner as $item)
 
-                    <img class="banner" src="{{Storage::url($item->image)}}" alt="" >
-
-            @endforeach
-
-            {{-- <div class="single-slider slider-h1-2 pt-215 pb-100 bg-img"
-                style="background-image:url(/client/img/slider/2.jpg);">
-                <div class="container">
-                    <div class="slider-content slider-content-2 slider-animated-1">
-                        <h1>We can help get your</h1>
-                        <h2>Books in Order</h2>
-                        <h3>and Accessories</h3>
-                        <a href="#">Contact Us Today!</a>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
-    </div>
-    <!-- slider-area-end -->
     <!-- product-area-start -->
     <div class="new-book-area pb-100">
         <div class="container">
@@ -455,7 +447,7 @@
             </div>
 
             <div class="tab-active owl-carousel">
-                @if($newestProducts->isNotEmpty())
+                @if ($newestProducts->isNotEmpty())
                     @foreach ($newestProducts as $item)
                         <div class="tab-total">
                             <!-- single-product-start -->
@@ -481,11 +473,13 @@
                                             <li><a href="#"><i class="fa fa-star"></i></a></li>
                                         </ul>
                                     </div>
-                                    <h4><a href="{{ route('detailProduct', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
+                                    <h4><a href="{{ route('detailProduct', $item->id) }}">{{ $item->ten_san_pham }}</a>
+                                    </h4>
                                     <div class="product-price">
                                         <ul>
                                             <li>{{ number_format($item->gia_khuyen_mai, 0, ',', '.') }} đ</li>
-                                            <li class="old-price">{{ number_format($item->gia_san_pham, 0, ',', '.') }} đ</li>
+                                            <li class="old-price">{{ number_format($item->gia_san_pham, 0, ',', '.') }} đ
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -498,12 +492,14 @@
                                             <input type="hidden" name="ten_san_pham" value="{{ $item->ten_san_pham }}">
                                             <input type="hidden" name="price" value="{{ $item->gia_khuyen_mai }}">
                                             <input type="hidden" name="image" value="{{ $item->image }}">
-                                            <button type="submit" title="Add to cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            <button type="submit" title="Add to cart"><i
+                                                    class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
                                         </form>
                                     </div>
                                     <div class="add-to-link">
                                         <ul>
-                                            <li><a href="{{ route('detailProduct', $item->id) }}" title="Chi tiết"><i class="fa fa-external-link"></i></a></li>
+                                            <li><a href="{{ route('detailProduct', $item->id) }}" title="Chi tiết"><i
+                                                        class="fa fa-external-link"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
