@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Models;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'ma_san_pham',
         'ten_san_pham',
@@ -16,6 +17,7 @@ class Product extends Model
         'so_luong',
         'category_id',
         'publisher_id',
+        'author_id',
         'gia_san_pham',
         'gia_khuyen_mai',
         'mo_ta',
@@ -32,6 +34,10 @@ class Product extends Model
         return $this->belongsTo(Publisher::class);
     }
 
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
     public function reviews()
     {
         return $this->hasMany(Review::class);
@@ -40,5 +46,8 @@ class Product extends Model
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+    public function imageProduct(){
+        return $this->hasMany(image_product::class);
     }
 }

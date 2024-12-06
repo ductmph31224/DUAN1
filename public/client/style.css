@@ -55,6 +55,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Rufina:400,700');
 
 html,
+
 .single-register input {
 
     border-radius: 0; /* Bỏ bo góc */
@@ -133,7 +134,9 @@ img {
     max-width: 100%;
     height: auto;
 }
-
+.banner {
+    height: 500px;
+}
 .fix {
     overflow: hidden;
 }
@@ -5127,7 +5130,21 @@ nav.menu .cr-dropdown ul {
     width: auto;
     transition: .3s;
 }
-
+.product-add-form form button {
+    background: #333 none repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 0;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 28px;
+    text-transform: uppercase;
+    width: auto;
+    transition: .3s;
+}
 .product-add-form form .quality-button {
     float: left;
     margin-right: 10px;
@@ -7668,3 +7685,8 @@ p.lost-password a:hover {
 }
 
 /*------ end Compare Page Wrapper -----*/
+
+.box-content{
+    width: 70%;
+    margin: auto;
+}

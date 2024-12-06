@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,12 +17,11 @@ class AuthController extends Controller
     }
     public function Login(Request $request)
     {
-        // dd($request); die;
-        // Thực hiện xác thực đầu vào
+
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8'
-        ],[
+            'password' => 'required|min:6|max:10'
+        ], [
             'email.required' => 'Vui lòng nhập email.',
             'email.email' => 'Email không đúng định dạng.',
             'password.required' => 'Vui lòng nhập mật khẩu.',
@@ -36,7 +36,7 @@ class AuthController extends Controller
             $userRole = Auth::user()->role;
 
             if ($userRole === 'admin') {
-                return redirect()->route('indexAdmin');
+                return redirect()->route('admins.statistical');
             }
             return redirect()->route('index');
         }
@@ -91,9 +91,11 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Đăng ký thành công! Bạn đã đăng nhập.');
     }
+
     public function ShowFormMyAcc(){
-        return view('client.layouts.partials.my-account');
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)->get(); // Lấy danh sách đơn hàng của user
+
+        return view('client.layouts.partials.my-account', compact('user','orders'));
     }
-
-
 }
