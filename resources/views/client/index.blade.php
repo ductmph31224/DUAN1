@@ -93,7 +93,11 @@
     </style>
     <!-- banner-area-end -->
     <!-- slider-area-start -->
+
    
+
+
+
     <div class="banner-area banner-res-large pt-30 pb-5">
         <div class="container">
             <div class="row">
@@ -153,6 +157,7 @@
                     <img class="banner" src="{{Storage::url($item->image)}}" alt="" >
 
             @endforeach
+
 
         </div>
     </div>
