@@ -56,10 +56,12 @@ class PaymentController extends Controller
         }
     }
 
-    public function paymentSuccess($orderId)
+    public function paymentSuccess($orderId ,request $request)
     {
         // Tìm đơn hàng theo ID
         $order = Order::findOrFail($orderId);
+        // xóa giỏ hàng khi thanh toán rồi
+        $request->session()->forget('cart');
 
         // Cập nhật trạng thái thanh toán
         $order->update([
@@ -79,7 +81,7 @@ class PaymentController extends Controller
     }
 }
 
-// test thanh toán 
+// test thanh toán
 
 // 1. Thẻ cơ bản để thanh toán thành công
 // Số thẻ: 4242 4242 4242 4242
